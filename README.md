@@ -1,1 +1,0 @@
-# OrienteeringUkraine site
