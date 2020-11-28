@@ -9,13 +9,13 @@ using OrienteeringUkraine.Models;
 
 namespace OrienteeringUkraine.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : ControllerBase
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<HomeController> logger;
 
         public HomeController(ILogger<HomeController> logger)
         {
-            _logger = logger;
+            this.logger = logger;
         }
 
         public IActionResult Index()

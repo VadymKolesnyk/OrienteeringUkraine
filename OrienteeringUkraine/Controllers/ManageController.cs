@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OrienteeringUkraine.Controllers
 {
-    public class ManageController : Controller
+    public class ManageController : ControllerBase
     {
         public IActionResult Users()
         {

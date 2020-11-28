@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OrienteeringUkraine.Controllers
 {
-    public class EventController : Controller
+    public class EventController : ControllerBase
     {
         public IActionResult Applications()
         {
