@@ -1,4 +1,5 @@
 ﻿using OrienteeringUkraine.Data;
+using OrienteeringUkraine.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +12,7 @@ namespace OrienteeringUkraine
         public Task<bool> IsExistsLoginAsyns(string login);
         public Task<bool> IsValidAuthorizeAsyns(string login, string password);
         public Task AddNewUserAsync(AccountRegisterData data);
+        public HomeIndexModel GetEventsInfo(HomeIndexData data);
+       
     }
 }

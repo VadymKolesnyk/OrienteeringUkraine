@@ -1,4 +1,5 @@
-﻿@{
+﻿@model HomeIndexModel
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -6,3 +7,23 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+<p>CounyPages = @Model.CountPages</p>
+<p>CurrPage = @Model.CurrentPage</p>
+<table class="table-condensed">
+    @foreach (var item in Model.Events)
+    {
+        <tr>
+            <td>@item.Title</td>
+            <td>@item.EventDate</td>
+            <td>@item.Location</td>
+            <td>@item.Region</td>
+            <td>@item.Organizer</td>
+            <td>
+                <a href="~/Events/Applications/@item.Id">Заявки</a><br>
+                <a href="@item.ResultsLink">Results</a><br>
+                <a href="@item.InfoLink">Info</a>
+            </td>
+        </tr>
+    }
+</table>
