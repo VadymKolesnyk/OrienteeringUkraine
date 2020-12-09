@@ -5,29 +5,20 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using OrienteeringUkraine.Data;
 using OrienteeringUkraine.Models;
 
 namespace OrienteeringUkraine.Controllers
 {
     public class HomeController : ControllerBase
     {
-        private readonly ILogger<HomeController> logger;
+        public HomeController(IDataManager dataManager) : base(dataManager) { }
 
-        public HomeController(ILogger<HomeController> logger)
+        public IActionResult Index(HomeIndexData data)
         {
-            this.logger = logger;
+            var model = dataManager.GetEventsInfo(data);
+            return View(model);
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
     }
 }

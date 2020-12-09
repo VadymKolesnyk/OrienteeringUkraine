@@ -8,6 +8,10 @@ namespace OrienteeringUkraine.Controllers
 {
     public class AccountController : ControllerBase
     {
+        public AccountController(IDataManager dataManager): base(dataManager)
+        {
+
+        }
         public IActionResult Register()
         {
             return View();
