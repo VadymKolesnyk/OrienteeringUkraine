@@ -8,6 +8,10 @@ namespace OrienteeringUkraine.Controllers
 {
     public class EventController : ControllerBase
     {
+        public EventController(IDataManager dataManager) : base(dataManager)
+        {
+
+        }
         public IActionResult Applications()
         {
             return View();

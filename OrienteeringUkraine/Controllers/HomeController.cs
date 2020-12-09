@@ -11,11 +11,9 @@ namespace OrienteeringUkraine.Controllers
 {
     public class HomeController : ControllerBase
     {
-        private readonly ILogger<HomeController> logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IDataManager dataManager) : base(dataManager)
         {
-            this.logger = logger;
+            
         }
 
         public IActionResult Index()

@@ -8,6 +8,10 @@ namespace OrienteeringUkraine.Controllers
 {
     public class ManageController : ControllerBase
     {
+        public ManageController(IDataManager dataManager) : base(dataManager)
+        {
+
+        }
         public IActionResult Users()
         {
             return View();

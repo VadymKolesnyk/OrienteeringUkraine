@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace OrienteeringUkraine
 {
-    interface IDataManager
+    public interface IDataManager
     {
     }
 }
