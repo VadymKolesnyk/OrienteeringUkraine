@@ -6480,19 +6480,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Vadik\\.nuget\\packages\\": {}
+    "C:\\Users\\Катерина\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Vadik\\Google Диск\\Универ\\3 курс\\5 семестр\\ТРПЗ\\OrienteeringUkraine\\OrienteeringUkraine\\OrienteeringUkraine.csproj",
+      "projectUniqueName": "K:\\3 курс 1 семестр\\ТРПЗ\\OrienteeringUkraine\\OrienteeringUkraine\\OrienteeringUkraine.csproj",
       "projectName": "OrienteeringUkraine",
-      "projectPath": "C:\\Users\\Vadik\\Google Диск\\Универ\\3 курс\\5 семестр\\ТРПЗ\\OrienteeringUkraine\\OrienteeringUkraine\\OrienteeringUkraine.csproj",
-      "packagesPath": "C:\\Users\\Vadik\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Vadik\\Google Диск\\Универ\\3 курс\\5 семестр\\ТРПЗ\\OrienteeringUkraine\\OrienteeringUkraine\\obj\\",
+      "projectPath": "K:\\3 курс 1 семестр\\ТРПЗ\\OrienteeringUkraine\\OrienteeringUkraine\\OrienteeringUkraine.csproj",
+      "packagesPath": "C:\\Users\\Катерина\\.nuget\\packages\\",
+      "outputPath": "K:\\3 курс 1 семестр\\ТРПЗ\\OrienteeringUkraine\\OrienteeringUkraine\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Vadik\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Катерина\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -6506,8 +6506,8 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\Vadik\\Google Диск\\Универ\\3 курс\\5 семестр\\ТРПЗ\\OrienteeringUkraine\\DataLayer\\DataLayer.csproj": {
-              "projectPath": "C:\\Users\\Vadik\\Google Диск\\Универ\\3 курс\\5 семестр\\ТРПЗ\\OrienteeringUkraine\\DataLayer\\DataLayer.csproj"
+            "K:\\3 курс 1 семестр\\ТРПЗ\\OrienteeringUkraine\\DataLayer\\DataLayer.csproj": {
+              "projectPath": "K:\\3 курс 1 семестр\\ТРПЗ\\OrienteeringUkraine\\DataLayer\\DataLayer.csproj"
             }
           }
         }
