@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DataLayer;
+using OrienteeringUkraine.Data;
+
 namespace OrienteeringUkraine
 {
     public class EFDataManager : IDataManager
@@ -11,6 +13,21 @@ namespace OrienteeringUkraine
         public EFDataManager(EFContext db)
         {
             this.db = db;
+        }
+
+        public Task AddNewUserAsync(AccountRegisterData data)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> IsExistsLoginAsyns(string login)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> IsValidAuthorizeAsyns(string login, string password)
+        {
+            throw new NotImplementedException();
         }
     }
 }
