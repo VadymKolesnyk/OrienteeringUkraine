@@ -6,5 +6,8 @@ namespace DataLayer.Tables
 {
     public class Login
     {
+        public int UserId { get; set; }
+        public string UserLogin { get; set; }
+        public string HashedPassword { get; set; }
     }
 }
