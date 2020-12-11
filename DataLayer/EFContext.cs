@@ -10,5 +10,10 @@ namespace DataLayer
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Event> Events { get; set; }
+
+        public EFContext(DbContextOptions<EFContext> options) : base(options)
+        {
+
+        }
     }
 }
