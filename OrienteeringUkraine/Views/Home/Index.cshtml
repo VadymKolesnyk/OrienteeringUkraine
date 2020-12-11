@@ -3,27 +3,102 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="w-100 main-picture">
+    <div class="site-name"><h1>OrienteeringUkraine</h1></div>
 </div>
 
-<p>CounyPages = @Model.CountPages</p>
-<p>CurrPage = @Model.CurrentPage</p>
-<table class="table-condensed">
-    @foreach (var item in Model.Events)
-    {
-        <tr>
-            <td>@item.Title</td>
-            <td>@item.EventDate</td>
-            <td>@item.Location</td>
-            <td>@item.Region</td>
-            <td>@item.Organizer</td>
-            <td>
-                <a href="~/Events/Applications/@item.Id">Заявки</a><br>
-                <a href="@item.ResultsLink">Results</a><br>
-                <a href="@item.InfoLink">Info</a>
-            </td>
-        </tr>
-    }
-</table>
+<div class="container-content">
+
+    <div class="row search-row w-100">
+
+        <div class="col-1">Регион: </div>
+        <div class="col-2 select-list">
+            <select class="select-region">
+                <option class="region-option">АР Крым</option>
+                <option class="region-option">Винницкая область</option>
+                <option class="region-option">Волынская область</option>
+                <option class="region-option">Днепропетровская область</option>
+                <option class="region-option">Донецкая область</option>
+                <option class="region-option">Житомирская область</option>
+                <option class="region-option">Закарпатская область</option>
+                <option class="region-option">Запорожская область</option>
+                <option class="region-option">Ивано-Франковская область</option>
+                <option class="region-option">Киевская область</option>
+                <option class="region-option">Киев</option>
+                <option class="region-option">Кировоградская область</option>
+                <option class="region-option">Луганская область</option>
+                <option class="region-option">Львовская область</option>
+                <option class="region-option">Николаевская область</option>
+                <option class="region-option">Одесская область</option>
+                <option class="region-option">Полтавская область</option>
+                <option class="region-option">Ровенская область</option>
+                <option class="region-option">Севастополь</option>
+                <option class="region-option">Сумская область</option>
+                <option class="region-option">Тернопольская область</option>
+                <option class="region-option">Харьковская область</option>
+                <option class="region-option">Херсонская область</option>
+                <option class="region-option" selected>Хмельницкая область</option>
+                <option class="region-option">Черкасская область</option>
+                <option class="region-option">Черниговская область</option>
+                <option class="region-option">Черновицкая область</option>
+            </select>
+        </div>
+
+        <div class="col-1">Год: </div>
+        <div class="col-2 select-list">
+            <select class="select-region">
+                <option class="year-option" selected>2020</option>
+                <option class="year-option">2019</option>
+                <option class="year-option">2018</option>
+                <option class="year-option">2017</option>
+                <option class="year-option">2016</option>
+                <option class="year-option">2015</option>
+                <option class="year-option">2014</option>
+                <option class="year-option">2013</option>
+                <option class="year-option">2012</option>
+                <option class="year-option">2011</option>
+            </select>
+        </div>
+
+        <div class="col-1">Месяц: </div>
+        <div class="col-2 select-list">
+            <select class="select-month">
+                <option class="month-option">Январь</option>
+                <option class="month-option">Февраль</option>
+                <option class="month-option">Март</option>
+                <option class="month-option">Апрель</option>
+                <option class="month-option">Май</option>
+                <option class="month-option">Июнь</option>
+                <option class="month-option">Июль</option>
+                <option class="month-option">Август</option>
+                <option class="month-option">Сентябрь</option>
+                <option class="month-option">Октябрь</option>
+                <option class="month-option">Ноябрь</option>
+                <option class="month-option" selected>Декабрь</option>
+            </select>
+        </div>
+
+        <div class="col-3">
+            <button class="filter-button">Фильтровать</button>
+        </div>
+    </div>
+
+    <div class="row main-block w-100">
+
+        <div class="col-9 table-content"></div>
+
+        <div class="col-3 news-content">
+
+            <img class="new-year-picture" src="img/snowSHAR.jpg" alt="">
+            <span class="new-year-text">С наступающим 2021 годом!</span>
+
+            <img class="news-picture" src="img/5-best-websites-for-watching-news-1.png" alt="">
+            <img class="news-picture" src="img/5-best-websites-for-watching-news-1.png" alt="">
+
+        </div>
+
+
+
+    </div>
+
+</div>
