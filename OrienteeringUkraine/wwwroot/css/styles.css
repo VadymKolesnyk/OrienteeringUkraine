@@ -1,0 +1,178 @@
+*
+{
+    color: #ffffff;
+}
+
+.navbar
+{
+    background-color: rgb(51, 102, 0);
+}
+
+body
+{
+    background-image: url("../img/background-body_1.png");
+    min-height: 100vh;
+}
+
+.container-content
+{
+    padding: 0;
+    width: 1600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.header-cols 
+{
+    font-size: 24px;
+    text-align: right;
+}
+
+.header-cols a
+{   
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.main-picture
+{
+    background-image:  linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../img/main_picture.jpg");
+    background-size: contain;
+    height: 500px;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-picture h1
+{
+    font-size: 72px;
+}
+
+.search-row
+{
+    height: 50px;
+    background-color: #8b623e;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+.search-row .col-1
+{
+    font-size: 24px;
+    padding-bottom: 7px !important;
+}
+
+
+.select-list select
+{
+    color: #000000;
+    font-size: 14px;
+    background-color: #d9c4b5;
+    width: 200px;
+}
+
+.select-list select option
+{
+    color: #000000;
+    font-size: 14px;
+}
+
+.search-row .col-3
+{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+.filter-button
+{
+    width: 220px;
+    background-color: #563f3b;
+    font-size: 18px;
+    border-radius: 5px 10px 5px 10px;
+    margin: auto;
+}
+
+.main-block
+{
+    padding-top: 20px;
+    background-image:  linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+    height: 1000px;
+}
+
+.news-content 
+{   
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+
+}
+
+.news-content .new-year-picture
+{
+    width: 350px;
+    height: 352px;
+}
+
+.news-content .new-year-text
+{
+    font-size: 24px;
+}
+
+
+.news-content .news-picture
+{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 350px;
+    height: 194px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.footer-phrase
+{
+    background-color: #336600;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer-phrase h4
+{
+    font-size: 30px;
+}
+
+.footer-copyright
+{
+    background-color: #064400;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer-phrase h5
+{
+    font-size: 18px;
+}
