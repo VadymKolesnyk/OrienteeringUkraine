@@ -12,9 +12,13 @@ namespace OrienteeringUkraine.Controllers
         {
 
         }
-        public IActionResult Applications()
+        public IActionResult Applications(int id = 0)
         {
-            return View();
+            if (!dataManager.IsExistsEvent(id))
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            return View(dataManager.GetApplicationsById(id));
         }
         public IActionResult New()
         {
