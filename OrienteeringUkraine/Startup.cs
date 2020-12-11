@@ -15,10 +15,17 @@ namespace OrienteeringUkraine
 {
     public class Startup
     {
-       
+        private IConfigurationRoot confString;
+
+        public Startup(IHostEnvironment hostEnv)
+        {
+            confString = new ConfigurationBuilder().SetBasePath(hostEnv.ContentRootPath).AddJsonFile("dbsettings.json").Build();
+        }
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<EFContext>(options => options.UseSqlServer(confString.GetConnectionString("DefaultConnection")));
             services.AddControllersWithViews();
         }
 
