@@ -16,21 +16,6 @@ namespace OrienteeringUkraine
             this.db = db;
         }
 
-        public Task AddNewUserAsync(AccountRegisterData data)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> IsExistsLoginAsyns(string login)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> IsValidAuthorizeAsyns(string login, string password)
-        {
-            throw new NotImplementedException();
-        }
-
         public HomeIndexModel GetEventsInfo(HomeIndexData data)
         {
             throw new NotImplementedException();

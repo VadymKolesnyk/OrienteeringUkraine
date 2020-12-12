@@ -9,7 +9,7 @@ namespace OrienteeringUkraine.Controllers
     public abstract class ControllerBase : Controller
     {
         protected readonly IDataManager dataManager;
-        public ControllerBase(IDataManager dataManager)
+        protected ControllerBase(IDataManager dataManager)
         {
             this.dataManager = dataManager;
         }
