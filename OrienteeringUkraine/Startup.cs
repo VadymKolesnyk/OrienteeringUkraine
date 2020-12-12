@@ -55,6 +55,15 @@ namespace OrienteeringUkraine
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            this.FillDB(app);
+        }
+
+        public void FillDB(IApplicationBuilder app)
+        {
+            EFContext context = app.ApplicationServices.GetRequiredService<EFContext>();
+            
+            // TODO: add filling methods of every table in database if they are empty
         }
     }
 }
