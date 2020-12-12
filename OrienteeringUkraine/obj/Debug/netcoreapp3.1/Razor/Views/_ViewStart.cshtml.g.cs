@@ -27,7 +27,7 @@ using OrienteeringUkraine.Models;
 #line hidden
 #nullable disable
 #nullable restore
-#line 3 "C:\Users\Vadik\Google Диск\Универ\3 курс\5 семестр\ТРПЗ\OrienteeringUkraine\OrienteeringUkraine\Views\_ViewImports.cshtml"
+#line 3 "D:\OrienteeringUkraine\OrienteeringUkraine\Views\_ViewImports.cshtml"
 using OrienteeringUkraine.Data;
 
 #line default
