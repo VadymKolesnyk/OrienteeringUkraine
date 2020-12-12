@@ -56,14 +56,17 @@ namespace OrienteeringUkraine
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            this.FillDB(app);
+            this.SeedDB(app);
         }
 
-        public void FillDB(IApplicationBuilder app)
+        public void SeedDB(IApplicationBuilder app)
         {
-            EFContext context = app.ApplicationServices.GetRequiredService<EFContext>();
-            
-            // TODO: add filling methods of every table in database if they are empty
+            using (var serviceScope = app.ApplicationServices.CreateScope())
+            {
+                EFContext context = serviceScope.ServiceProvider.GetService<EFContext>();
+
+                // TODO: seed the database
+            }
         }
     }
 }
