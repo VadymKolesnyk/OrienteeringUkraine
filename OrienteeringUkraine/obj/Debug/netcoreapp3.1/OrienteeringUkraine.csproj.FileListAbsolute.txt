@@ -293,5 +293,7 @@ E:\OrienteeringUkraine\OrienteeringUkraine\bin\Debug\netcoreapp3.1\runtimes\win-
 E:\OrienteeringUkraine\OrienteeringUkraine\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.pdb
 E:\OrienteeringUkraine\OrienteeringUkraine\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
 E:\OrienteeringUkraine\OrienteeringUkraine\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+E:\OrienteeringUkraine\OrienteeringUkraine\bin\Debug\netcoreapp3.1\Humanizer.dll
+E:\OrienteeringUkraine\OrienteeringUkraine\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Design.dll
 E:\OrienteeringUkraine\OrienteeringUkraine\obj\Debug\netcoreapp3.1\OrienteeringUkraine.csproj.CoreCompileInputs.cache
 E:\OrienteeringUkraine\OrienteeringUkraine\obj\Debug\netcoreapp3.1\OrienteeringUkraine.MvcApplicationPartsAssemblyInfo.cache
