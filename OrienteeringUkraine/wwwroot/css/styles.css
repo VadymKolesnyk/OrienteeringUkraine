@@ -20,6 +20,7 @@ body {
 
 .navbar {
     background-color: rgb(51, 102, 0);
+    padding: .2rem 0 !important;
 }
 
     .navbar .container-xxl .col-2 {
@@ -28,13 +29,13 @@ body {
 
 .header-cols {
     /* font-size: 24px; */
-    font-size: 75%;
     text-align: right;
 }
 
     .header-cols a {
         color: #ffffff;
         text-decoration: none;
+        font-size: x-large;
     }
 
 /*^^^^^^^^^^^^^^main-picture^^^^^^^^^^^^^^*/
@@ -61,7 +62,7 @@ body {
 /*^^^^^^^^^^^^^^search-row^^^^^^^^^^^^^^*/
 
 .search-row {
-    height: 10vh;
+    height: 50px;
     background-color: #8b623e;
 }
 
@@ -138,9 +139,88 @@ body {
         height: auto;
     }
 
+/*^^^^^^^^^^^^^^^^^accordion^^^^^^^^^^^^^^^^^^^^^*/
+/* Style the buttons that are used to open and close the accordion panel */
+.accordion-wrapper {
+    height: 80%;
+}
 
+.accordion {
+    background-color: transparent;
+    cursor: pointer;
+    padding: 0;
+    width: 100%;
+    border: 3px solid white;
+    outline: none;
+    transition: 0.4s;
+}
 
+.button-date {
+    width: 20%;
+    height: 100%;
+    display: inline-block;
+    background-color: #8b623e;
+}
 
+.button-name {
+    height: 100%;
+    display: inline-block;
+    width: 80%;
+    text-align: center;
+}
+
+.accordion-panel-line .col-3 {
+    background-color: #8b623e;
+    border: 1px solid gray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+    .accordion-panel-line .col-3 a {
+        color: #ffffff;
+        text-decoration: none;
+        font-size: 50%;
+        width: 100%;
+        text-align: center;
+    }
+
+.accordion-panel-line .col-9 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+    .accordion-panel-line .col-9 span {
+        text-align: center;
+        font-size: 50%;
+    }
+
+/* Style the accordion panel. Note: hidden by default */
+.panel {
+    display: none;
+    overflow: hidden;
+}
+
+.col-9 nav {
+    height: 10%;
+}
+
+    .col-9 nav ul {
+        margin: 0 !important;
+    }
+
+.page-link {
+    background-color: #a78769 !important;
+    text-decoration: none !important;
+    color: white !important;
+    font-size: smaller !important;
+}
+
+.page-item.active .page-link {
+    border-color: white !important;
+    background-color: #8b623e !important;
+}
 
 
 
