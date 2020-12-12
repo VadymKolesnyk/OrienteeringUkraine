@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace OrienteeringUkraine.Data
 {
@@ -14,5 +15,15 @@ namespace OrienteeringUkraine.Data
         [DataType(DataType.Password)]
         [Compare("Password", ErrorMessage = "Пароль введен неверно")]
         public string ConfirmPassword { get; set; }
+        [Required(ErrorMessage = "Не указано имя")]
+        public string Name { get; set; }
+        [Required(ErrorMessage = "Не указана фамилия")]
+        public string Surname { get; set; }
+        public DateTime? Bithday { get; set; }
+        [Required(ErrorMessage = "Не указан регион")]
+        public int RegionId { get; set; }
+        
+        public int? ClubId { get; set; }
+
     }
 }

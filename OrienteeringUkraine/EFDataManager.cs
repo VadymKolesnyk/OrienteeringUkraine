@@ -21,6 +21,16 @@ namespace OrienteeringUkraine
             throw new NotImplementedException();
         }
 
+        public IEnumerable<Club> GetAllClubs()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Region> GetAllRegions()
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<AccountUser> GetUserAsync(string login)
         {
             throw new NotImplementedException();

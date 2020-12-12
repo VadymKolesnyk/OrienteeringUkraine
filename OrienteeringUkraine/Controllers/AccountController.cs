@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using OrienteeringUkraine.Data;
 using OrienteeringUkraine.Models;
 using System;
@@ -19,12 +20,21 @@ namespace OrienteeringUkraine.Controllers
         [HttpGet]
         public IActionResult Register()
         {
+            SetSelectLists();
             return View();
         }
+
+        private void SetSelectLists()
+        {
+            ViewBag.Regions = new SelectList(dataManager.GetAllRegions(), "Id", "Name");
+            ViewBag.Clubs = new SelectList(dataManager.GetAllClubs(), "Id", "Name");
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(AccountRegisterData data)
         {
+            SetSelectLists();
             if (ModelState.IsValid)
             {
                 var user = await dataManager.GetUserAsync(data.Login);

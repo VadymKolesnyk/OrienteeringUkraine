@@ -12,5 +12,7 @@ namespace OrienteeringUkraine
         public Task<AccountUser> GetUserAsync(string login);
         public Task<AccountUser> GetUserAsync(string login, string password);
         public Task AddNewUserAsync(AccountRegisterData data);
+        public IEnumerable<Region> GetAllRegions();
+        public IEnumerable<Club> GetAllClubs();
     }
 }
