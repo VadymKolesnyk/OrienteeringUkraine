@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DataLayer;
 using OrienteeringUkraine.Data;
+using OrienteeringUkraine.Models;
 
 namespace OrienteeringUkraine
 {
@@ -20,12 +21,12 @@ namespace OrienteeringUkraine
             throw new NotImplementedException();
         }
 
-        public Task<bool> IsExistsLoginAsyns(string login)
+        public Task<AccountUser> GetUserAsync(string login)
         {
             throw new NotImplementedException();
         }
 
-        public Task<bool> IsValidAuthorizeAsyns(string login, string password)
+        public Task<AccountUser> GetUserAsync(string login, string password)
         {
             throw new NotImplementedException();
         }

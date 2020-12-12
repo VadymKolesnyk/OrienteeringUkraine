@@ -1,4 +1,5 @@
 ﻿using OrienteeringUkraine.Data;
+using OrienteeringUkraine.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,31 +13,46 @@ namespace OrienteeringUkraine
         {
             public string Login { get; set; }
             public string Password { get; set; }
+            public string Role { get; set; }
         }
 
         private List<LoginInfo> logins = new List<LoginInfo>()
         {
-            new LoginInfo() { Login = "vadik", Password = "1234" },
-            new LoginInfo() { Login = "admin", Password = "admin" },
-            new LoginInfo() { Login = "katya", Password = "qwerty" }
+            new LoginInfo() { Login = "admin", Password = "admin", Role = "admin" },
+            new LoginInfo() { Login = "moderator", Password = "moderator", Role = "moderator" },
+            new LoginInfo() { Login = "organizator", Password = "organizator", Role = "organizator" },
+            new LoginInfo() { Login = "sportsmen", Password = "sportsmen", Role = "sportsmen" }
         };
 
         public async Task AddNewUserAsync(AccountRegisterData data)
         {
-            Console.WriteLine("-------------------");
-            Console.WriteLine(data.Login);
-            Console.WriteLine(data.Password);
-            Console.WriteLine("-------------------");
+            logins.Add(new LoginInfo()
+            {
+                Login = data.Login,
+                Password = data.Password,
+                Role = "sportsmen"
+            });
         }
 
-        public async Task<bool> IsExistsLoginAsyns(string login)
+
+        public async Task<AccountUser> GetUserAsync(string login)
         {
-            return false;
+            var user = await Task.Run(() => logins.FirstOrDefault((u => u.Login == login)));
+            return user == null ? null : new AccountUser()
+            {
+                Login = user.Login,
+                Role = user.Role
+            };
         }
 
-        public async Task<bool> IsValidAuthorizeAsyns(string login, string password)
+        public async Task<AccountUser> GetUserAsync(string login, string password)
         {
-            return await Task.Run(() => logins.FirstOrDefault((u => u.Login == login && u.Password == password))) != null;
+            var user = await Task.Run(() => logins.FirstOrDefault((u => u.Login == login && u.Password == password)));
+            return user == null ? null : new AccountUser()
+            {
+                Login = user.Login,
+                Role = user.Role
+            };
         }
     }
 }

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OrienteeringUkraine.Data;
+using OrienteeringUkraine.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,10 +27,11 @@ namespace OrienteeringUkraine.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (!await dataManager.IsExistsLoginAsyns(data.Login))
+                var user = await dataManager.GetUserAsync(data.Login);
+                if (user != null)
                 {
                     await dataManager.AddNewUserAsync(data); // добавляем пользователя в бд
-                    await Authenticate(data.Login); // аутентификация
+                    await Authenticate(user); // аутентификация
 
                     return RedirectToAction("Index", "Home");
                 }
@@ -39,12 +41,13 @@ namespace OrienteeringUkraine.Controllers
             return View(data);
         }
 
-        private async Task Authenticate(string login)
+        private async Task Authenticate(AccountUser user)
         {
             // создаем один claim
             var claims = new List<Claim>
             {
-                new Claim(ClaimsIdentity.DefaultNameClaimType, login)
+                new Claim(ClaimsIdentity.DefaultNameClaimType, user.Login),
+                new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Role)
             };
             // создаем объект ClaimsIdentity
             ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
@@ -62,9 +65,10 @@ namespace OrienteeringUkraine.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (await dataManager.IsValidAuthorizeAsyns(data.Login, data.Password))
+                var user = await dataManager.GetUserAsync(data.Login, data.Password);
+                if (user != null)
                 {
-                    await Authenticate(data.Login); // аутентификация
+                    await Authenticate(user); // аутентификация
 
                     if (Url.IsLocalUrl(returnUrl))
                         return Redirect(returnUrl);
