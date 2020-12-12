@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DataLayer;
+using DataLayer.Tables;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -65,7 +66,41 @@ namespace OrienteeringUkraine
             {
                 EFContext context = serviceScope.ServiceProvider.GetService<EFContext>();
 
-                // TODO: seed the database
+                if (!context.Regions.Any())
+                {
+                    context.Regions.AddRange(
+                        new Region { Name = "АР Крым" },
+                        new Region { Name = "Винницкая область" },
+                        new Region { Name = "Волынская область" },
+                        new Region { Name = "Днепропетровская область" },
+                        new Region { Name = "Донецкая область" },
+                        new Region { Name = "Житомирская область" },
+                        new Region { Name = "Закарпатская область" },
+                        new Region { Name = "Запорожская область" },
+                        new Region { Name = "Ивано-Франковская область" },
+                        new Region { Name = "Город Киев" },
+                        new Region { Name = "Киевская область" },
+                        new Region { Name = "Кировоградская область" },
+                        new Region { Name = "Луганская область" },
+                        new Region { Name = "Львовская область" },
+                        new Region { Name = "Николаевская область" },
+                        new Region { Name = "Одесская область" },
+                        new Region { Name = "Полтавская область" },
+                        new Region { Name = "Ровенская область" },
+                        new Region { Name = "Город Севастополоть" },
+                        new Region { Name = "Сумская область" },
+                        new Region { Name = "Тернопольская область" },
+                        new Region { Name = "Харьковская область" },
+                        new Region { Name = "Херсонская область" },
+                        new Region { Name = "Хмельницкая область" },
+                        new Region { Name = "Черкасская область" },
+                        new Region { Name = "Черниговская область" },
+                        new Region { Name = "Черновицкая область" }
+                        );
+
+                }
+
+                context.SaveChanges();
             }
         }
     }
