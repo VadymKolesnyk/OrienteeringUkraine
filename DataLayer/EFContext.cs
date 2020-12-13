@@ -13,7 +13,7 @@ namespace DataLayer
         public DbSet<Event> Events { get; set; }
         public DbSet<EventGroup> EventGroups { get; set; }
         public DbSet<Group> Groups { get; set; }
-        public DbSet<Login> Logins { get; set; }
+        public DbSet<LoginData> Logins { get; set; }
         public DbSet<Region> Regions { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<User> Users { get; set; }
