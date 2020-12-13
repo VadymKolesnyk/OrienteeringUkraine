@@ -871,6 +871,35 @@ namespace OrienteeringUkraine
 
                 }
 
+                if (!context.Applications.Any())
+                {
+                    Dictionary<int, List<int>> application = new Dictionary<int, List<int>>();
+
+                    for(int i = 1; i <= context.Users.Count<User>(); i ++)
+                    {
+                        application.Add(i, new List<int>());
+                    }
+
+                    Random rand = new Random();
+
+                    for (int i = 0; i < 13; i++)
+                    {
+                        for(int j = 0; j < 30; j++)
+                        {
+                            int eventGroupId = rand.Next(1, 157);
+                            int chipId = 0;
+                            if (rand.Next(0, 101) > 50)
+                                chipId = rand.Next(1000000, 10000000);
+                            int userId = rand.Next(1, 58);
+                            if(!application[userId].Contains(eventGroupId))
+                            {
+                                context.Applications.Add(new Application { EventGroupId = eventGroupId, ChipId = chipId, UserId = userId });
+                                application[userId].Add(eventGroupId);
+                            }
+
+                        }
+                    }
+                }
 
                 context.SaveChanges();
             }
