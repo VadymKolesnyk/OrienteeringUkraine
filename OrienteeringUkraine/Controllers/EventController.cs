@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using OrienteeringUkraine.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +32,17 @@ namespace OrienteeringUkraine.Controllers
         {
             SetSelectLists();
             return View();
+        }
+        [Authorize(Roles = "admin, moderator, organizer")]
+        [HttpPost]
+        public IActionResult New(EventNewData data)
+        {
+            SetSelectLists();
+            if (ModelState.IsValid)
+            {
+
+            }
+            return View(data);
         }
         public IActionResult Edit()
         {

@@ -212,5 +212,10 @@ namespace OrienteeringUkraine
                 Region = regions.FirstOrDefault(reg => user.RegionId == reg.Id)?.Name,
             };
         }
+
+        public void AddNewEvent(EventNewData data)
+        {
+            
+        }
     }
 }

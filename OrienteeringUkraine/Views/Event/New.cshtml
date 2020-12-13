@@ -1,7 +1,57 @@
-﻿
+﻿@model EventNewData
 @{
     ViewData["Title"] = "New";
 }
-
-<h1>New</h1>
+<h1>Добавление новых соревнований</h1>
+<form asp-action="New" asp-controller="Event" asp-anti-forgery="true">
+<div class="validation" asp-validation-summary="ModelOnly"></div>
+<div>
+    <div>
+        <label asp-for="Title">Введите название соревнований</label><br />
+        <input type="text" asp-for="Title" />
+        <span asp-validation-for="Title" />
+    </div>
+    <div>
+        <label asp-for="RegionId">Выберите регион</label><br />
+        <select asp-for="RegionId" asp-items="ViewBag.Regions"><option value=""></option></select>
+        <span asp-validation-for="RegionId" />
+    </div>
+    <div>
+        <label asp-for="Date">Введите дату проведения</label><br />
+        <input asp-for="Date" />
+        <span asp-validation-for="Date" />
+    </div>
+    <div>
+        <label asp-for="Location">Введите место проведения</label><br />
+        <input asp-for="Location" />
+    </div>
+    <div>
+        <label asp-for="InfoLink">Вставте ссылку на информацию</label><br />
+        <input type="text" asp-for="InfoLink" />
+        <span asp-validation-for="InfoLink" />
+    </div>
+    <div>
+        <label asp-for="ResultsLink">Вставте ссылку на результаты</label><br />
+        <input type="text" asp-for="ResultsLink" />
+        <span asp-validation-for="ResultsLink" />
+    </div>
+    <div>
+        <input type="submit" value="Регистрация" />
+    </div>
+</div>
+</form>
+@section scripts{
+    <script src="~/lib/jquery/dist/jquery.min.js"></script><!--подключение jquery-->
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}
+@section styles{
+    <style>
+        .input-validation-error {
+            background: crimson
+        }
+    </style>
+}
 

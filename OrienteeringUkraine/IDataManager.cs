@@ -15,8 +15,9 @@ namespace OrienteeringUkraine
         public Task AddNewUserAsync(AccountRegisterData data);
         public IEnumerable<Region> GetAllRegions();
         public IEnumerable<Club> GetAllClubs();
-
         public EventApplicationsModel GetApplicationsById(int id);
         public bool IsExistsEvent(int id);
+
+        public void AddNewEvent(EventNewData data);
     }
 }
