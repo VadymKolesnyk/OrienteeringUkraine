@@ -27,6 +27,8 @@ namespace OrienteeringUkraine
                 model.InfoLink = "http://orientsumy.com.ua/index.php?event=3044&inf=1";
                 model.ResultsLink = "http://orientsumy.com.ua/index.php?event=3044&inf=2";
                 model.Date = DateTime.Parse("2020-10-30");
+                model.OrganizerLogin = "organizer";
+                model.Organizer = "Сережа Переяславский";
             }
             else
             {
@@ -34,6 +36,8 @@ namespace OrienteeringUkraine
                 model.InfoLink = "http://orientsumy.com.ua/index.php?event=3086&inf=1";
                 model.ResultsLink = "http://orientsumy.com.ua/index.php?event=3086&inf=2";
                 model.Date = DateTime.Parse("2020-12-04");
+                model.OrganizerLogin = "organizer2";
+                model.Organizer = "Макс Гапонюк";
             }
             var groups = new[] { "Ж12", "Ж14", "М12", "М14" };
             Random random = new Random();
@@ -55,6 +59,8 @@ namespace OrienteeringUkraine
                 }
                 model.Applications.Add(item, applications);
             }
+            model.Region = "Хмельницкая";
+
             return model;
         }
 
@@ -84,8 +90,9 @@ namespace OrienteeringUkraine
         private List<LoginInfo> logins = new List<LoginInfo>()
         {
             new LoginInfo() { Login = "admin",     Password = "admin",     Role = "admin",     Name = "Саша",   Surname = "Дзюбчик",       RegionId = 22, Birthday = DateTime.Parse("2001-03-24")},
-            new LoginInfo() { Login = "moderator", Password = "moderator", Role = "moderator", Name = "Катя",   Surname = "Кубышка",       RegionId = 22, },
-            new LoginInfo() { Login = "organizer", Password = "organizer", Role = "organizer", Name = "Сережа", Surname = "Переясвавский", RegionId = 18, ClubId = 2},
+            new LoginInfo() { Login = "moderator", Password = "moderator", Role = "moderator", Name = "Катя",   Surname = "Кубышка",       RegionId = 18, },
+            new LoginInfo() { Login = "organizer", Password = "organizer", Role = "organizer", Name = "Сережа", Surname = "Переясвавский", RegionId = 15, ClubId = 2},
+            new LoginInfo() { Login = "organizer2",Password = "organizer2",Role = "organizer2",Name = "Макс",   Surname = "Гапонюк",      RegionId = 22, ClubId = 2},
             new LoginInfo() { Login = "sportsman", Password = "sportsman", Role = "sportsman", Name = "Вадик",  Surname = "Колесник",      RegionId = 15, ClubId = 1, Birthday = DateTime.Parse("2001-02-19")}
         };
 

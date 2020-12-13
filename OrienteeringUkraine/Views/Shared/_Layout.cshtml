@@ -19,7 +19,7 @@
         }
 
         body {
-            background-image: url("../img/background-body_1.png");
+            background-image: url("/img/background-body_1.png");
             min-height: 100vh;
         }
 
@@ -181,7 +181,7 @@
                     }
                     else
                     {
-                        <div class="col-2 header-cols"><a asp-area="" asp-controller="Account" asp-action="Login">Вход</a></div>
+                        <div class="col-2 header-cols"><a asp-area="" asp-controller="Account" asp-action="Login" asp-route-returnUrl="@($"{Context.Request.Path}{Context.Request.QueryString}")">Вход</a></div>
                         <div class="col-2 header-cols"><a asp-area="" asp-controller="Account" asp-action="Register">Регистрация</a></div>
                     }
 

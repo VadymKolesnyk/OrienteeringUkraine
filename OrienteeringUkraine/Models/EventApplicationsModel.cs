@@ -13,6 +13,10 @@ namespace OrienteeringUkraine.Models
         public string ResultsLink { get; set; }
         public string InfoLink { get; set; }
         public int Id { get; set; }
+        public string Organizer { get; set; }
+        public string OrganizerLogin { get; set; }
+        public string Region { get; set; }
+        public string Location { get; set; }
         public Dictionary<string,List<EventApplication>> Applications { get; set; }
     }
 }
