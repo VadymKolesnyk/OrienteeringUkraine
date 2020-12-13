@@ -1,18 +1,29 @@
-﻿@model AccountProfileModel
+﻿@model AccountUserModel
 
 @{
     ViewData["Title"] = "Profile";
+    string login = Context.Request.Query["login"];
 }
 
 <h1>Profile</h1>
 
+<p>Login   = @Model.Login</p>
+<br />
+<p>Name    = @Model.Name</p>
+<br />
+<p>Surname = @Model.Surname</p>
+<br />
+<p>Role    = @Model.Role</p>
+<br />
+<p>ДР      = @Model.Birthday?.ToShortDateString()</p>
+<br />
+<p>Club    = @Model.Club</p>
+<br />
+<p>Region  = @Model.Region</p>
+<br />
 <div>
-    <h4>AccountProfileModel</h4>
-    <hr />
-    <dl class="row">
-    </dl>
-</div>
-<div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index">Back to List</a>
+    @if (User.Identity.Name == login)
+    {
+        @Html.ActionLink("Edit", "Edit", new { login = User.Identity.Name });
+    }
 </div>

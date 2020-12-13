@@ -26,8 +26,15 @@ using OrienteeringUkraine.Models;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 3 "C:\Users\Vadik\Google Диск\Универ\3 курс\5 семестр\ТРПЗ\OrienteeringUkraine\OrienteeringUkraine\Views\_ViewImports.cshtml"
+using OrienteeringUkraine.Data;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"7091c65830b0329e613be026ede8a57552863778", @"/Views/_ViewStart.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"f3e00978c29e716ca87ea1cf837fffb4bc811a9c", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"aab656d71931cf5a9830223abc239499fd25c387", @"/Views/_ViewImports.cshtml")]
     public class Views__ViewStart : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         #pragma warning disable 1998
