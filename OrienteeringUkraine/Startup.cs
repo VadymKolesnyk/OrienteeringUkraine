@@ -660,6 +660,180 @@ namespace OrienteeringUkraine
                     }
                 }
 
+                if (!context.Groups.Any())
+                {
+                    context.Groups.AddRange(
+                        new Group { Name = "Ж12"},
+                        new Group { Name = "Ж14" },
+                        new Group { Name = "Ж16" },
+                        new Group { Name = "Ж18" },
+                        new Group { Name = "Ж20" },
+                        new Group { Name = "Ж21Е" },
+                        new Group { Name = "Ж21А" },
+                        new Group { Name = "Ж35" },
+                        new Group { Name = "Ж40" },
+                        new Group { Name = "Ж45" },
+                        new Group { Name = "Ж50" },
+                        new Group { Name = "Ж55" },
+                        new Group { Name = "Ж60" },
+                        new Group { Name = "Ж65" },
+                        new Group { Name = "Ж70" },
+                        new Group { Name = "Ж75" },
+                        new Group { Name = "М12" },
+                        new Group { Name = "М14" },
+                        new Group { Name = "М16" },
+                        new Group { Name = "М18" },
+                        new Group { Name = "М20" },
+                        new Group { Name = "М21Е" },
+                        new Group { Name = "М21А" },
+                        new Group { Name = "М35" },
+                        new Group { Name = "М40" },
+                        new Group { Name = "М45" },
+                        new Group { Name = "М50" },
+                        new Group { Name = "М55" },
+                        new Group { Name = "М60" },
+                        new Group { Name = "М65" },
+                        new Group { Name = "М70" },
+                        new Group { Name = "М75" }
+                        );
+                }
+
+                if (!context.Events.Any())
+                {
+                    context.Events.AddRange(
+                        new Event
+                        {
+                            Title = "Старт, посвященный памяти Рикуна В. Б.",
+                            EventDate = new DateTime(2020, 12, 6),
+                            InfoLink = "http://orientsumy.com.ua/index.php?event=3044&inf=1",
+                            ResultsLink = "http://orientsumy.com.ua/index.php?event=3044&inf=2",
+                            Location = "с. Китайгород",
+                            RegionId = 23,
+                            OrganizerId = 30
+                        },
+                        new Event
+                        {
+                            Title = "Открытый турнир, посвященный Дню Энергетика",
+                            EventDate = new DateTime(2020, 12, 12),
+                            InfoLink = "",
+                            ResultsLink = "",
+                            Location = "с. Катеринка",
+                            RegionId = 23,
+                            OrganizerId = 31
+                        },
+                        new Event
+                        {
+                            Title = "Тренировочный старт \"Днепровские пороги\"",
+                            EventDate = new DateTime(2020, 12, 13),
+                            InfoLink = "http://orientsumy.com.ua/index.php?event=3086&inf=1",
+                            ResultsLink = "http://orientsumy.com.ua/index.php?event=3086&inf=2",
+                            Location = "с. Майорка (дачи)",
+                            RegionId = 12,
+                            OrganizerId = 32
+                        },
+                        new Event
+                        {
+                            Title = "Відкриті змагання Донецької області зі спортивного орієнтування (бігом), присвячені Дню Святого Миколая.",
+                            EventDate = new DateTime(2020, 12, 19),
+                            InfoLink = "",
+                            ResultsLink = "",
+                            Location = "Відокремлений підрозділ громадської організації ”Федерація спортивного орієнтування України” у Донецькій області.",
+                            RegionId = 22,
+                            OrganizerId = 33
+                        },
+                        new Event
+                        {
+                            Title = "Традиційні змагання зі спортивного орієнтування \"Сніжинка 2021\"",
+                            EventDate = new DateTime(2020, 12, 19),
+                            InfoLink = "",
+                            ResultsLink = "",
+                            Location = "КСОТ \"Центуріон\"",
+                            RegionId = 10,
+                            OrganizerId = 34
+                        },
+                        new Event
+                        {
+                            Title = "Закрытие сезона",
+                            EventDate = new DateTime(2020, 12, 20),
+                            InfoLink = "http://orientsumy.com.ua/index.php?event=3044&inf=1",
+                            ResultsLink = "http://orientsumy.com.ua/index.php?event=3044&inf=2",
+                            Location = "с/к \"Наш клуб\"",
+                            RegionId = 23,
+                            OrganizerId = 35
+                        },
+                        new Event
+                        {
+                            Title = "Ёлки-палки",
+                            EventDate = new DateTime(2020, 12, 25),
+                            InfoLink = "http://orientsumy.com.ua/index.php?event=3086&inf=1",
+                            ResultsLink = "http://orientsumy.com.ua/index.php?event=3086&inf=2",
+                            Location = "с/к \"Сириус\"",
+                            RegionId = 23,
+                            OrganizerId = 36
+                        },
+                        new Event
+                        {
+                            Title = "Різдвяний старт",
+                            EventDate = new DateTime(2020, 12, 26),
+                            InfoLink = "",
+                            ResultsLink = "",
+                            Location = "Відокремлений підрозділ громадської організації \"Федерація спортивного орієнтування України\" у Донецькій області.",
+                            RegionId = 22,
+                            OrganizerId = 31
+                        },
+                        new Event
+                        {
+                            Title = "НОВОРІЧНА КОРИДА 2020",
+                            EventDate = new DateTime(2020, 12, 27),
+                            InfoLink = "http://orientsumy.com.ua/index.php?event=3086&inf=1",
+                            ResultsLink = "http://orientsumy.com.ua/index.php?event=3086&inf=2",
+                            Location = "Лижна база \"Авангард\", ур.Токарі",
+                            RegionId = 7,
+                            OrganizerId = 32
+                        },
+                        new Event
+                        {
+                            Title = "Супер кубок приз мильярд денег",
+                            EventDate = new DateTime(2020, 12, 31),
+                            InfoLink = "",
+                            ResultsLink = "",
+                            Location = "дом Колотушкина",
+                            RegionId = 24,
+                            OrganizerId = 33
+                        },
+                        new Event
+                        {
+                            Title = "Марафон веб-дизайнеров",
+                            EventDate = new DateTime(2020, 12, 30),
+                            InfoLink = "",
+                            ResultsLink = "",
+                            Location = "с. Бутстрап",
+                            RegionId = 3,
+                            OrganizerId = 34
+                        },
+                        new Event
+                        {
+                            Title = "Биба Бобовна",
+                            EventDate = new DateTime(2021, 1, 7),
+                            InfoLink = "http://orientsumy.com.ua/index.php?event=3044&inf=1",
+                            ResultsLink = "http://orientsumy.com.ua/index.php?event=3044&inf=2",
+                            Location = "с. Моя хата",
+                            RegionId = 17,
+                            OrganizerId = 35
+                        },
+                        new Event
+                        {
+                            Title = "Кубок нероб",
+                            EventDate = new DateTime(2021, 1, 14),
+                            InfoLink = "http://orientsumy.com.ua/index.php?event=3086&inf=1",
+                            ResultsLink = "http://orientsumy.com.ua/index.php?event=3086&inf=2",
+                            Location = "с. Чилловое",
+                            RegionId = 14,
+                            OrganizerId = 36
+                        }
+                        ); ;
+                }
+
                 context.SaveChanges();
             }
         }
