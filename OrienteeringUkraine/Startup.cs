@@ -660,44 +660,6 @@ namespace OrienteeringUkraine
                     }
                 }
 
-                if (!context.Groups.Any())
-                {
-                    context.Groups.AddRange(
-                        new Group { Name = "Æ12"},
-                        new Group { Name = "Æ14" },
-                        new Group { Name = "Æ16" },
-                        new Group { Name = "Æ18" },
-                        new Group { Name = "Æ20" },
-                        new Group { Name = "Æ21Å" },
-                        new Group { Name = "Æ21À" },
-                        new Group { Name = "Æ35" },
-                        new Group { Name = "Æ40" },
-                        new Group { Name = "Æ45" },
-                        new Group { Name = "Æ50" },
-                        new Group { Name = "Æ55" },
-                        new Group { Name = "Æ60" },
-                        new Group { Name = "Æ65" },
-                        new Group { Name = "Æ70" },
-                        new Group { Name = "Æ75" },
-                        new Group { Name = "Ì12" },
-                        new Group { Name = "Ì14" },
-                        new Group { Name = "Ì16" },
-                        new Group { Name = "Ì18" },
-                        new Group { Name = "Ì20" },
-                        new Group { Name = "Ì21Å" },
-                        new Group { Name = "Ì21À" },
-                        new Group { Name = "Ì35" },
-                        new Group { Name = "Ì40" },
-                        new Group { Name = "Ì45" },
-                        new Group { Name = "Ì50" },
-                        new Group { Name = "Ì55" },
-                        new Group { Name = "Ì60" },
-                        new Group { Name = "Ì65" },
-                        new Group { Name = "Ì70" },
-                        new Group { Name = "Ì75" }
-                        );
-                }
-
                 if (!context.Events.Any())
                 {
                     context.Events.AddRange(
@@ -833,6 +795,82 @@ namespace OrienteeringUkraine
                         }
                         ); ;
                 }
+
+                if (!context.Groups.Any())
+                {
+                    context.Groups.AddRange(
+                        new Group { Name = "Æ12" },
+                        new Group { Name = "Æ14" },
+                        new Group { Name = "Æ16" },
+                        new Group { Name = "Æ18" },
+                        new Group { Name = "Æ20" },
+                        new Group { Name = "Æ21Å" },
+                        new Group { Name = "Æ21À" },
+                        new Group { Name = "Æ35" },
+                        new Group { Name = "Æ40" },
+                        new Group { Name = "Æ45" },
+                        new Group { Name = "Æ50" },
+                        new Group { Name = "Æ55" },
+                        new Group { Name = "Æ60" },
+                        new Group { Name = "Æ65" },
+                        new Group { Name = "Æ70" },
+                        new Group { Name = "Æ75" },
+                        new Group { Name = "Ì12" },
+                        new Group { Name = "Ì14" },
+                        new Group { Name = "Ì16" },
+                        new Group { Name = "Ì18" },
+                        new Group { Name = "Ì20" },
+                        new Group { Name = "Ì21Å" },
+                        new Group { Name = "Ì21À" },
+                        new Group { Name = "Ì35" },
+                        new Group { Name = "Ì40" },
+                        new Group { Name = "Ì45" },
+                        new Group { Name = "Ì50" },
+                        new Group { Name = "Ì55" },
+                        new Group { Name = "Ì60" },
+                        new Group { Name = "Ì65" },
+                        new Group { Name = "Ì70" },
+                        new Group { Name = "Ì75" }
+                        );
+                }
+                
+                if (!context.EventGroups.Any())
+                {
+                    List<int> GroupIds_Template_1 = new List<int> { 1, 30, 25, 26, 24, 20, 15, 14, 9, 10, 8, 4};
+                    List<int> GroupIds_Template_2 = new List<int> { 30, 29, 28, 27, 26, 20, 11, 10, 9, 8, 7, 6 };
+                    List<int> GroupIds_Template_3 = new List<int> { 1, 24, 23, 22, 21, 20, 13, 12, 11, 9, 5, 3 };
+                    List<int> GroupIds_Template_4 = new List<int> { 1, 30, 29, 28, 27, 13, 12, 11, 8, 5, 4, 3 };
+
+                    for (int i = 1; i <= 12; i += 4)
+                    {
+                        foreach (int groupId in GroupIds_Template_1)
+                        {
+                            context.EventGroups.Add(new EventGroup { GroupId = groupId, EventId = (i) });
+                        }
+
+                        foreach (int groupId in GroupIds_Template_2)
+                        {
+                            context.EventGroups.Add(new EventGroup { GroupId = groupId, EventId = (i + 1) });
+                        }
+
+                        foreach (int groupId in GroupIds_Template_3)
+                        {
+                            context.EventGroups.Add(new EventGroup { GroupId = groupId, EventId = (i + 2) });
+                        }
+
+                        foreach (int groupId in GroupIds_Template_4)
+                        {
+                            context.EventGroups.Add(new EventGroup { GroupId = groupId, EventId = (i + 3) });
+                        }
+                    }
+
+                    foreach (int groupId in GroupIds_Template_1)
+                    {
+                        context.EventGroups.Add(new EventGroup { GroupId = groupId, EventId = 13 });
+                    }
+
+                }
+
 
                 context.SaveChanges();
             }
