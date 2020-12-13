@@ -14,6 +14,11 @@ namespace OrienteeringUkraine
             public string Login { get; set; }
             public string Password { get; set; }
             public string Role { get; set; }
+            public string Name { get; set; }
+            public string Surname { get; set; }
+            public DateTime? Birthday { get; set; }
+            public int RegionId { get; set; }
+            public int? ClubId { get; set; }
         }
 
         public TempDataManager()
@@ -25,10 +30,10 @@ namespace OrienteeringUkraine
         }
         private List<LoginInfo> logins = new List<LoginInfo>()
         {
-            new LoginInfo() { Login = "admin", Password = "admin", Role = "admin" },
-            new LoginInfo() { Login = "moderator", Password = "moderator", Role = "moderator" },
-            new LoginInfo() { Login = "organizator", Password = "organizator", Role = "organizator" },
-            new LoginInfo() { Login = "sportsmen", Password = "sportsmen", Role = "sportsmen" }
+            new LoginInfo() { Login = "admin",     Password = "admin",     Role = "admin",     Name = "Саша",   Surname = "Дзюбчик",       RegionId = 22, Birthday = DateTime.Parse("2001-03-24")},
+            new LoginInfo() { Login = "moderator", Password = "moderator", Role = "moderator", Name = "Катя",   Surname = "Кубышка",       RegionId = 22, },
+            new LoginInfo() { Login = "organizer", Password = "organizer", Role = "organizer", Name = "Сережа", Surname = "Переясвавский", RegionId = 18, ClubId = 2},
+            new LoginInfo() { Login = "sportsman", Password = "sportsman", Role = "sportsman", Name = "Вадик",  Surname = "Колесник",      RegionId = 15, ClubId = 1, Birthday = DateTime.Parse("2001-02-19")}
         };
 
         private List<Region> regions = new List<Region>()
@@ -72,28 +77,46 @@ namespace OrienteeringUkraine
             {
                 Login = data.Login,
                 Password = data.Password,
-                Role = "sportsmen"
+                Role = "sportsmen",
+                Name = data.Name ,
+                Surname = data.Surname,
+                ClubId = data.ClubId,
+                Birthday = data.Birthday,
+                RegionId = data.RegionId,
             });
         }
 
 
-        public async Task<AccountUser> GetUserAsync(string login)
+        public async Task<AccountUserModel> GetUserAsync(string login)
         {
             var user = await Task.Run(() => logins.FirstOrDefault((u => u.Login == login)));
-            return user == null ? null : new AccountUser()
+            return user == null ? null : new AccountUserModel()
             {
                 Login = user.Login,
-                Role = user.Role
+                Role = user.Role,
+                Name = user.Name,
+                Surname = user.Surname,
+                Club = clubs.FirstOrDefault(club => user.ClubId == club.Id)?.Name,
+                Birthday = user.Birthday,
+                RegionId = user.RegionId,
+                Region = regions.FirstOrDefault(reg => user.RegionId == reg.Id)?.Name,
             };
         }
 
-        public async Task<AccountUser> GetUserAsync(string login, string password)
+        public async Task<AccountUserModel> GetUserAsync(string login, string password)
         {
             var user = await Task.Run(() => logins.FirstOrDefault((u => u.Login == login && u.Password == password)));
-            return user == null ? null : new AccountUser()
+            return user == null ? null : new AccountUserModel()
             {
                 Login = user.Login,
-                Role = user.Role
+                Role = user.Role,
+                Name = user.Name,
+                Surname = user.Surname,
+                ClubId = user.ClubId,
+                Club = clubs.FirstOrDefault(club => user.ClubId == club.Id)?.Name,
+                Birthday = user.Birthday,
+                RegionId = user.RegionId,
+                Region = regions.FirstOrDefault(reg => user.RegionId == reg.Id)?.Name,
             };
         }
 
@@ -105,6 +128,29 @@ namespace OrienteeringUkraine
         public IEnumerable<Club> GetAllClubs()
         {
             return clubs;
+        }
+
+        public async Task<AccountUserModel> UpdateUser(string login, AccountUserModel data)
+        {
+            var user = logins.Find(x => x.Login == login);
+            user.Login = data.Login;
+            user.Name = data.Name;
+            user.Surname = data.Surname;
+            user.ClubId = data.ClubId;
+            user.Birthday = data.Birthday;
+            user.RegionId = data.RegionId;
+            return new AccountUserModel()
+            {
+                Login = user.Login,
+                Role = user.Role,
+                Name = user.Name,
+                Surname = user.Surname,
+                ClubId = user.ClubId,
+                Club = clubs.FirstOrDefault(club => user.ClubId == club.Id)?.Name,
+                Birthday = user.Birthday,
+                RegionId = user.RegionId,
+                Region = regions.FirstOrDefault(reg => user.RegionId == reg.Id)?.Name,
+            };
         }
     }
 }

@@ -31,12 +31,17 @@ namespace OrienteeringUkraine
             throw new NotImplementedException();
         }
 
-        public Task<AccountUser> GetUserAsync(string login)
+        public Task<AccountUserModel> GetUserAsync(string login)
         {
             throw new NotImplementedException();
         }
 
-        public Task<AccountUser> GetUserAsync(string login, string password)
+        public Task<AccountUserModel> GetUserAsync(string login, string password)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<AccountUserModel> UpdateUser(string login, AccountUserModel user)
         {
             throw new NotImplementedException();
         }
