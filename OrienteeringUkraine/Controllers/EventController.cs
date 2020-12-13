@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using OrienteeringUkraine.Data;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -35,22 +36,50 @@ namespace OrienteeringUkraine.Controllers
         }
         [Authorize(Roles = "admin, moderator, organizer")]
         [HttpPost]
-        public IActionResult New(EventNewData data)
+        public IActionResult New(EventData data)
         {
             SetSelectLists();
             if (ModelState.IsValid)
             {
-
+                data.OrganizerLogin = User.Identity.Name;
+                int id = dataManager.AddNewEvent(data);
+                return RedirectToAction("Applications", new { Id = id });
             }
             return View(data);
         }
-        public IActionResult Edit()
+        [Authorize(Roles = "admin, moderator, organizer")]
+        [HttpGet]
+        public IActionResult Edit(int id)
         {
-            return View();
+            SetSelectLists();
+            var @event = dataManager.GetEventById(id);
+            if (User.IsInRole("organizer") && User.Identity.Name != @event?.OrganizerLogin)
+            {
+                return RedirectToAction("Applications", new { Id = id });
+            }
+            if (@event == null)
+            {
+                return RedirectToAction("Index","Home");
+            }
+            return View(@event);
         }
-        public IActionResult Export()
+        [Authorize(Roles = "admin, moderator, organizer")]
+        [HttpPost]
+        public IActionResult Edit(int id, EventData data)
         {
-            return RedirectToAction("Index", "Home");
+            SetSelectLists();
+            if (ModelState.IsValid)
+            {
+                dataManager.UpdateEvent(id, data);
+                return RedirectToAction("Applications", new { Id = id });
+            }
+            ModelState.AddModelError("", "Недопустимые изменения");
+            return View(data);
+        }
+        [Authorize(Roles = "admin, moderator, organizer")]
+        public IActionResult Export(int id)
+        {
+            return RedirectToAction("Applications", new { Id = id });
         }
     }
 }

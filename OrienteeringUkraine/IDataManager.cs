@@ -17,7 +17,9 @@ namespace OrienteeringUkraine
         public IEnumerable<Club> GetAllClubs();
         public EventApplicationsModel GetApplicationsById(int id);
         public bool IsExistsEvent(int id);
+        public EventData GetEventById(int id);
+        public void UpdateEvent(int id, EventData data);
 
-        public void AddNewEvent(EventNewData data);
+        public int AddNewEvent(EventData data);
     }
 }

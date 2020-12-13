@@ -213,7 +213,42 @@ namespace OrienteeringUkraine
             };
         }
 
-        public void AddNewEvent(EventNewData data)
+        public int AddNewEvent(EventData data)
+        {
+            return 1;
+        }
+
+        public EventData GetEventById(int id)
+        {
+            if (id == 0 || id > 10)
+            {
+                return null;
+            }
+            var model = new EventData();
+            if (id >= 5)
+            {
+                model.Title = "Відкритий кубок Львова зі спортивного орієнтуванн Lion Cup 2020. Всеукраїнські змагання";
+                model.InfoLink = "http://orientsumy.com.ua/index.php?event=3044&inf=1";
+                model.ResultsLink = "http://orientsumy.com.ua/index.php?event=3044&inf=2";
+                model.Date = DateTime.Parse("2020-10-30");
+                model.OrganizerLogin = "organizer";
+                model.RegionId = 6;
+                model.Location = "м. Львів";
+            }
+            else
+            {
+                model.Title = "Чемпіонат України серед дорослих, юніорів, юнаків та ветеранів зі спортивного орієнтування (бігом)";
+                model.InfoLink = "http://orientsumy.com.ua/index.php?event=3086&inf=1";
+                model.ResultsLink = "http://orientsumy.com.ua/index.php?event=3086&inf=2";
+                model.Date = DateTime.Parse("2020-12-04");
+                model.OrganizerLogin = "organizer2";
+                model.RegionId = 5;
+            }
+            model.Groups = "Ж12;Ж14;М12;М14;";
+            return model;
+        }
+
+        public void UpdateEvent(int id, EventData data)
         {
             
         }

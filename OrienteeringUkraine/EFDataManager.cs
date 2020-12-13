@@ -55,5 +55,20 @@ namespace OrienteeringUkraine
         {
             throw new NotImplementedException();
         }
+
+        public int AddNewEvent(EventData data)
+        {
+            throw new NotImplementedException();
+        }
+
+        public EventData GetEventById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateEvent(int id, EventData data)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
