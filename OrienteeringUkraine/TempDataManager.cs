@@ -130,8 +130,50 @@ namespace OrienteeringUkraine
                 model.CurrentPage = model.CountPages;
             }
             return model;
+
+        }
+        public TempDataManager()
+        {
+            int i = 1;
+            regions.ForEach(reg => reg.Id = i++);
+            i = 1;
         }
 
+        private List<Region> regions = new List<Region>()
+            {
+                new Region() {Name = "АР Крым"},
+                new Region() {Name = "Винницкая"},
+                new Region() {Name = "Волынская"},
+                new Region() {Name = "Днепропетровская"},
+                new Region() {Name = "Донецкая"},
+                new Region() {Name = "Житомирская"},
+                new Region() {Name = "Закарпатская"},
+                new Region() {Name = "Запорожская"},
+                new Region() {Name = "Ивано-Франковская"},
+                new Region() {Name = "Киевская"},
+                new Region() {Name = "Кировоградская"},
+                new Region() {Name = "Луганская"},
+                new Region() {Name = "Львовская"},
+                new Region() {Name = "Николаевская"},
+                new Region() {Name = "Одесская"},
+                new Region() {Name = "Полтавская"},
+                new Region() {Name = "Ровненская"},
+                new Region() {Name = "Сумская"},
+                new Region() {Name = "Тернопольская"},
+                new Region() {Name = "Харьковская"},
+                new Region() {Name = "Херсонская"},
+                new Region() {Name = "Хмельницкая"},
+                new Region() {Name = "Черкасская"},
+                new Region() {Name = "Черниговская"},
+                new Region() {Name = "Черновицкая"},
+                new Region() {Name = "г. Киев"},
+                new Region() {Name = "г. Севастополь"},
+            };
+
+        public IEnumerable<Region> GetAllRegions()
+        {
+            return regions;
+        }
 
     }
 }

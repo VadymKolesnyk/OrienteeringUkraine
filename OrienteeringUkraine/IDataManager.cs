@@ -10,6 +10,6 @@ namespace OrienteeringUkraine
     public interface IDataManager
     {
         public HomeIndexModel GetEventsInfo(HomeIndexData data);
-       
+        public IEnumerable<Region> GetAllRegions();
     }
 }

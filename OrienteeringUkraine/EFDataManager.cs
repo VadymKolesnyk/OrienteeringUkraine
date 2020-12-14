@@ -16,6 +16,11 @@ namespace OrienteeringUkraine
             this.db = db;
         }
 
+        public IEnumerable<Region> GetAllRegions()
+        {
+            throw new NotImplementedException();
+        }
+
         public HomeIndexModel GetEventsInfo(HomeIndexData data)
         {
             throw new NotImplementedException();

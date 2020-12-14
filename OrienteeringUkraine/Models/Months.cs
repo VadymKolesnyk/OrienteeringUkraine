@@ -14,6 +14,5 @@
         October,    Oct = October,
         November,   Nov = November,
         December,   Dec = December,
-        All
     }
 }

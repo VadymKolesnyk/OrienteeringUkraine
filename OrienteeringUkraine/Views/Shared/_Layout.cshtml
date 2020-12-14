@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OrienteeringUkraine - @ViewData["Title"]</title>
+    <title>@ViewData["Title"] - OrienteeringUkraine</title>
 
     <link rel="stylesheet" type="text/css" href="~/css/header_footer_styles.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
@@ -20,22 +20,27 @@
 
                     <div class="col-4"></div>
 
-
-                    <!-- <div class="col-2 header-cols"><a href="">Вход</a></div>
-                    <div class="col-2 header-cols"><a href="">Регистрация</a></div> -->
-
-                    <div class="col-4 header-name">
-                        <div class="header-autorize">
-                            <span class="name-autorized px-3">Nickname</span>
-                            <ul class="name-submenu px-1 m-0">
-                                <li><a href="">Профиль</a></li>
-                                <li><a href="">Редактирование</a></li>
-                                <li><a href="">Выход</a></li>
-                            </ul>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <div class="col-4 header-name">
+                            <div class="header-autorize">
+                                <span class="name-autorized px-3">@User.FindFirst("FullName").Value</span>
+                                <ul class="name-submenu px-1 m-0">
+                                    <li><a asp-controller="Account" asp-action="Profile" asp-route-login="@User.Identity.Name">Профиль</a></li>
+                                    @if (User.IsInRole("admin") || User.IsInRole("moderator"))
+                                    {
+                                        <li><a asp-controller="Manage" asp-action="Users">Редактирование</a></li>
+                                    }
+                                    <li><a asp-controller="Account" asp-action="Logout">Выход</a></li>
+                                </ul>
+                            </div>
                         </div>
-                    </div>
-
-
+                    }
+                    else
+                    {
+                        <div class="col-2 header-cols"><a asp-controller="Account" asp-action="Login" asp-route-returnUrl="@($"{Context.Request.Path}{Context.Request.QueryString}")">Вход</a></div>
+                        <div class="col-2 header-cols"><a asp-controller="Account" asp-action="Register">Регистрация</a></div>
+                    }
                 </div>
             </div>
         </nav>
