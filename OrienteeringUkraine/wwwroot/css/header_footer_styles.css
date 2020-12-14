@@ -1,6 +1,6 @@
 * {
     color: #ffffff;
-    font-size: xx-large; /*32px*/
+    font-size: calc(14px + (32 - 14) * ((100vw - 300px) / (1920 - 300)));
 }
 
 body {
@@ -9,7 +9,7 @@ body {
 }
 
 .content-wrapper {
-    min-height: calc(100vh - 250px);
+    min-height: calc(100vh - 225px);
 }
 
 .container-xxl {
@@ -25,7 +25,7 @@ body {
 
 .navbar {
     background-color: rgb(51, 102, 0);
-    height: 100px;
+    height: 75px;
 }
 
     .navbar .container-xxl .col-4 {
@@ -54,6 +54,7 @@ body {
 
 .header-autorize {
     float: right;
+    position: relative;
 }
 
     .header-autorize span {
@@ -72,8 +73,8 @@ body {
     list-style-type: none;
     background-color: rgba(51, 102, 0, 0.8);
     position: absolute;
-    min-width: min-content;
     box-sizing: border-box;
+    right: 5%;
 }
 
     .name-submenu li a {
