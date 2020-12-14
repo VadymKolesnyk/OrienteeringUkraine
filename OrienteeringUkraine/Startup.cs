@@ -28,9 +28,10 @@ namespace OrienteeringUkraine
                 .AddCookie(options => //CookieAuthenticationOptions
                 {
                     options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
+                    options.AccessDeniedPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
                 });
             services.AddControllersWithViews();
-            services.AddTransient<IDataManager, TempDataManager>();
+            services.AddSingleton<IDataManager, TempDataManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
