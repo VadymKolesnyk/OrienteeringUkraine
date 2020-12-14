@@ -8619,19 +8619,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Vadik\\.nuget\\packages\\": {}
+    "C:\\Users\\Sergey\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Vadik\\Google Диск\\Универ\\3 курс\\5 семестр\\ТРПЗ\\OrienteeringUkraine\\OrienteeringUkraine\\OrienteeringUkraine.csproj",
+      "projectUniqueName": "E:\\OrienteeringUkraine\\OrienteeringUkraine\\OrienteeringUkraine.csproj",
       "projectName": "OrienteeringUkraine",
-      "projectPath": "C:\\Users\\Vadik\\Google Диск\\Универ\\3 курс\\5 семестр\\ТРПЗ\\OrienteeringUkraine\\OrienteeringUkraine\\OrienteeringUkraine.csproj",
-      "packagesPath": "C:\\Users\\Vadik\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Vadik\\Google Диск\\Универ\\3 курс\\5 семестр\\ТРПЗ\\OrienteeringUkraine\\OrienteeringUkraine\\obj\\",
+      "projectPath": "E:\\OrienteeringUkraine\\OrienteeringUkraine\\OrienteeringUkraine.csproj",
+      "packagesPath": "C:\\Users\\Sergey\\.nuget\\packages\\",
+      "outputPath": "E:\\OrienteeringUkraine\\OrienteeringUkraine\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Vadik\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Sergey\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -8643,10 +8643,9 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
-          "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\Vadik\\Google Диск\\Универ\\3 курс\\5 семестр\\ТРПЗ\\OrienteeringUkraine\\DataLayer\\DataLayer.csproj": {
-              "projectPath": "C:\\Users\\Vadik\\Google Диск\\Универ\\3 курс\\5 семестр\\ТРПЗ\\OrienteeringUkraine\\DataLayer\\DataLayer.csproj"
+            "E:\\OrienteeringUkraine\\DataLayer\\DataLayer.csproj": {
+              "projectPath": "E:\\OrienteeringUkraine\\DataLayer\\DataLayer.csproj"
             }
           }
         }
@@ -8659,7 +8658,6 @@
     },
     "frameworks": {
       "netcoreapp3.1": {
-        "targetAlias": "netcoreapp3.1",
         "dependencies": {
           "Microsoft.EntityFrameworkCore": {
             "target": "Package",
@@ -8698,7 +8696,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
       }
     }
   }

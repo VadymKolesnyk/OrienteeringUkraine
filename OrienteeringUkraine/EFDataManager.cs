@@ -28,12 +28,14 @@ namespace OrienteeringUkraine
 
         public IEnumerable<Club> GetAllClubs()
         {
-            throw new NotImplementedException();
+            var clubs = db.Clubs.Select(club => new Club { Id = club.Id, Name = club.Name });
+            return clubs;
         }
 
         public IEnumerable<Region> GetAllRegions()
         {
-            throw new NotImplementedException();
+            var regions = db.Regions.Select(region => new Region { Id = region.Id, Name = region.Name });
+            return regions;
         }
 
         public EventApplicationsModel GetApplicationsById(int id)
@@ -63,7 +65,8 @@ namespace OrienteeringUkraine
 
         public bool IsExistsEvent(int id)
         {
-            throw new NotImplementedException();
+            DataLayer.Tables.Event existing_event = db.Events.FirstOrDefault(event_ => event_.Id == id);
+            return existing_event != null;
         }
 
         public void UpdateEvent(int id, EventData data)
