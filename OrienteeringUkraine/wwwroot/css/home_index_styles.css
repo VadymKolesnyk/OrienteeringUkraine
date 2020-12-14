@@ -1,43 +1,6 @@
-* {
-    color: #ffffff;
-    font-size: xx-large; /*32px*/
-}
-
-body {
-    background-image: url("../img/background-body_1.png");
-    min-height: 100vh;
-}
-
-.container-xxl {
-    padding: 0 !important;
-}
-
-.row {
-    margin: 0 !important;
-}
+﻿
 
 /*^^^^^^^^^^^^^^header^^^^^^^^^^^^^^*/
-
-.navbar {
-    background-color: rgb(51, 102, 0);
-    padding: .2rem 0 !important;
-}
-
-    .navbar .container-xxl .col-2 {
-        padding: 0 !important;
-    }
-
-.header-cols {
-    /* font-size: 24px; */
-    text-align: right;
-}
-
-    .header-cols a {
-        color: #ffffff;
-        text-decoration: none;
-        font-size: x-large;
-    }
-
 /*^^^^^^^^^^^^^^main-picture^^^^^^^^^^^^^^*/
 
 .main-picture {
@@ -85,14 +48,14 @@ body {
 
     .select-list select {
         color: #000000;
-        font-size: 14px;
+        font-size: 40%;
         background-color: #d9c4b5;
         width: 80%;
     }
 
         .select-list select option {
             color: #000000;
-            font-size: 14px;
+            font-size: 100%;
         }
 
 .search-row .col-3 .filter-button {
@@ -115,7 +78,6 @@ body {
 .main-block {
     padding-top: 20px;
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
-    height: 100vh;
 }
 
 .news-content {
@@ -129,7 +91,7 @@ body {
     }
 
     .news-content .new-year-text {
-        font-size: 24px;
+        font-size: 60%;
     }
 
     .news-content .news-picture {
@@ -142,7 +104,7 @@ body {
 /*^^^^^^^^^^^^^^^^^accordion^^^^^^^^^^^^^^^^^^^^^*/
 /* Style the buttons that are used to open and close the accordion panel */
 .accordion-wrapper {
-    height: 80%;
+    min-height: calc(100vh - 150px - 100px - 50px - 20px - 104px);
 }
 
 .accordion {
@@ -157,14 +119,17 @@ body {
 
 .button-date {
     width: 20%;
-    height: 100%;
-    display: inline-block;
+    min-height: 50px;
+    font-size: 50%;
     background-color: #8b623e;
+    display: flex;
+    justify-content: right;
+    align-items: center;
 }
 
 .button-name {
-    height: 100%;
-    display: inline-block;
+    min-height: 50px;
+    font-size: 50%;
     width: 80%;
     text-align: center;
 }
@@ -196,6 +161,15 @@ body {
         font-size: 50%;
     }
 
+.accordion-fixed-text {
+    width: 20%;
+    text-align: left;
+}
+
+.accordion-text {
+    width: 80%;
+    text-align: center;
+}
 /* Style the accordion panel. Note: hidden by default */
 .panel {
     display: none;
@@ -203,7 +177,10 @@ body {
 }
 
 .col-9 nav {
-    height: 10%;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
     .col-9 nav ul {
@@ -221,44 +198,3 @@ body {
     border-color: white !important;
     background-color: #8b623e !important;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-/*^^^^^^^^^^^^^^footer^^^^^^^^^^^^^^*/
-footer {
-    height: 100%;
-}
-
-.footer-phrase {
-    background-color: #336600;
-    height: 12vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-    .footer-phrase h4 {
-        font-size: 100%;
-    }
-
-.footer-copyright {
-    background-color: #064400;
-    height: 4vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-    .footer-copyright h5 {
-        font-size: 40%;
-        margin: 0;
-    }
