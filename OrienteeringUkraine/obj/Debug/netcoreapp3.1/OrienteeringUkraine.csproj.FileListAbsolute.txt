@@ -432,3 +432,32 @@ D:\OrienteeringUkraine\OrienteeringUkraine\obj\Debug\netcoreapp3.1\OrienteeringU
 D:\OrienteeringUkraine\OrienteeringUkraine\obj\Debug\netcoreapp3.1\OrienteeringUkraine.dll
 D:\OrienteeringUkraine\OrienteeringUkraine\obj\Debug\netcoreapp3.1\OrienteeringUkraine.pdb
 D:\OrienteeringUkraine\OrienteeringUkraine\obj\Debug\netcoreapp3.1\OrienteeringUkraine.genruntimeconfig.cache
+C:\Users\Vadik\Google Диск\Универ\3 курс\5 семестр\ТРПЗ\OrienteeringUkraine\OrienteeringUkraine\bin\Debug\netcoreapp3.1\dbsettings.json
+C:\Users\Vadik\Google Диск\Универ\3 курс\5 семестр\ТРПЗ\OrienteeringUkraine\OrienteeringUkraine\bin\Debug\netcoreapp3.1\Humanizer.dll
+C:\Users\Vadik\Google Диск\Универ\3 курс\5 семестр\ТРПЗ\OrienteeringUkraine\OrienteeringUkraine\bin\Debug\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+C:\Users\Vadik\Google Диск\Универ\3 курс\5 семестр\ТРПЗ\OrienteeringUkraine\OrienteeringUkraine\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\Vadik\Google Диск\Универ\3 курс\5 семестр\ТРПЗ\OrienteeringUkraine\OrienteeringUkraine\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\Vadik\Google Диск\Универ\3 курс\5 семестр\ТРПЗ\OrienteeringUkraine\OrienteeringUkraine\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.SqlServer.dll
+C:\Users\Vadik\Google Диск\Универ\3 курс\5 семестр\ТРПЗ\OrienteeringUkraine\OrienteeringUkraine\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\Vadik\Google Диск\Универ\3 курс\5 семестр\ТРПЗ\OrienteeringUkraine\OrienteeringUkraine\bin\Debug\netcoreapp3.1\Microsoft.Identity.Client.dll
+C:\Users\Vadik\Google Диск\Универ\3 курс\5 семестр\ТРПЗ\OrienteeringUkraine\OrienteeringUkraine\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\Vadik\Google Диск\Универ\3 курс\5 семестр\ТРПЗ\OrienteeringUkraine\OrienteeringUkraine\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Logging.dll
+C:\Users\Vadik\Google Диск\Универ\3 курс\5 семестр\ТРПЗ\OrienteeringUkraine\OrienteeringUkraine\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.dll
+C:\Users\Vadik\Google Диск\Универ\3 курс\5 семестр\ТРПЗ\OrienteeringUkraine\OrienteeringUkraine\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\Vadik\Google Диск\Универ\3 курс\5 семестр\ТРПЗ\OrienteeringUkraine\OrienteeringUkraine\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
+C:\Users\Vadik\Google Диск\Универ\3 курс\5 семестр\ТРПЗ\OrienteeringUkraine\OrienteeringUkraine\bin\Debug\netcoreapp3.1\System.Configuration.ConfigurationManager.dll
+C:\Users\Vadik\Google Диск\Универ\3 курс\5 семестр\ТРПЗ\OrienteeringUkraine\OrienteeringUkraine\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\Vadik\Google Диск\Универ\3 курс\5 семестр\ТРПЗ\OrienteeringUkraine\OrienteeringUkraine\bin\Debug\netcoreapp3.1\System.Runtime.Caching.dll
+C:\Users\Vadik\Google Диск\Универ\3 курс\5 семестр\ТРПЗ\OrienteeringUkraine\OrienteeringUkraine\bin\Debug\netcoreapp3.1\System.Security.Cryptography.ProtectedData.dll
+C:\Users\Vadik\Google Диск\Универ\3 курс\5 семестр\ТРПЗ\OrienteeringUkraine\OrienteeringUkraine\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+C:\Users\Vadik\Google Диск\Универ\3 курс\5 семестр\ТРПЗ\OrienteeringUkraine\OrienteeringUkraine\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+C:\Users\Vadik\Google Диск\Универ\3 курс\5 семестр\ТРПЗ\OrienteeringUkraine\OrienteeringUkraine\bin\Debug\netcoreapp3.1\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\Vadik\Google Диск\Универ\3 курс\5 семестр\ТРПЗ\OrienteeringUkraine\OrienteeringUkraine\bin\Debug\netcoreapp3.1\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.pdb
+C:\Users\Vadik\Google Диск\Универ\3 курс\5 семестр\ТРПЗ\OrienteeringUkraine\OrienteeringUkraine\bin\Debug\netcoreapp3.1\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\Vadik\Google Диск\Универ\3 курс\5 семестр\ТРПЗ\OrienteeringUkraine\OrienteeringUkraine\bin\Debug\netcoreapp3.1\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.pdb
+C:\Users\Vadik\Google Диск\Универ\3 курс\5 семестр\ТРПЗ\OrienteeringUkraine\OrienteeringUkraine\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\Vadik\Google Диск\Универ\3 курс\5 семестр\ТРПЗ\OrienteeringUkraine\OrienteeringUkraine\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.pdb
+C:\Users\Vadik\Google Диск\Универ\3 курс\5 семестр\ТРПЗ\OrienteeringUkraine\OrienteeringUkraine\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\Vadik\Google Диск\Универ\3 курс\5 семестр\ТРПЗ\OrienteeringUkraine\OrienteeringUkraine\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.pdb
+C:\Users\Vadik\Google Диск\Универ\3 курс\5 семестр\ТРПЗ\OrienteeringUkraine\OrienteeringUkraine\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
+C:\Users\Vadik\Google Диск\Универ\3 курс\5 семестр\ТРПЗ\OrienteeringUkraine\OrienteeringUkraine\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
