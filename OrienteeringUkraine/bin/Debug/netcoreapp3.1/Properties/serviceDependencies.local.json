@@ -1,9 +1,0 @@
-{
-  "dependencies": {
-    "mssql1": {
-      "type": "mssql.local",
-      "connectionId": "OrienteeringDB",
-      "secretStore": null
-    }
-  }
-}
