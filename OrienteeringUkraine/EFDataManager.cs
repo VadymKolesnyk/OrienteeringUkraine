@@ -11,7 +11,7 @@ namespace OrienteeringUkraine
     public class EFDataManager : IDataManager
     {
         private readonly EFContext db;
-        public EFDataManager(EFContext db)
+        public EFDataManager(EFContext db) : base()
         {
             this.db = db;
         }

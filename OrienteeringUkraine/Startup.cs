@@ -35,8 +35,9 @@ namespace OrienteeringUkraine
                     options.AccessDeniedPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
                 });
             services.AddDbContext<EFContext>(options => options.UseSqlServer(confString.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("OrienteeringUkraine")));
-            services.AddControllersWithViews();
-            services.AddSingleton<IDataManager, TempDataManager>();
+            services.AddScoped<EFDataManager>();
+            services.AddScoped<IDataManager, TempDataManager>();
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
