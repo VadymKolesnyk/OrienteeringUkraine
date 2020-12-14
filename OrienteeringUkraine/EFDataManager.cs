@@ -28,13 +28,13 @@ namespace OrienteeringUkraine
 
         public IEnumerable<Club> GetAllClubs()
         {
-            var clubs = db.Clubs.Select(club => new Club { Id = club.Id, Name = club.Name });
+            var clubs = db.Clubs.Select(club => new Club { Id = club.Id, Name = club.Name }).OrderBy(club => club.Name);
             return clubs;
         }
 
         public IEnumerable<Region> GetAllRegions()
         {
-            var regions = db.Regions.Select(region => new Region { Id = region.Id, Name = region.Name });
+            var regions = db.Regions.Select(region => new Region { Id = region.Id, Name = region.Name }).OrderBy(region => region.Name);
             return regions;
         }
 
@@ -65,8 +65,7 @@ namespace OrienteeringUkraine
 
         public bool IsExistsEvent(int id)
         {
-            DataLayer.Tables.Event existing_event = db.Events.FirstOrDefault(event_ => event_.Id == id);
-            return existing_event != null;
+            return db.Events.Any(event_ => event_.Id == id);
         }
 
         public void UpdateEvent(int id, EventData data)
