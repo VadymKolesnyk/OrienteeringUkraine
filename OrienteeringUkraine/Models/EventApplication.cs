@@ -9,6 +9,7 @@ namespace OrienteeringUkraine.Models
         public string Club { get; set; }
         public string Region { get; set; }
         public int Chip { get; set; }
+        public string GroupId { get; set; }
 
     }
 }

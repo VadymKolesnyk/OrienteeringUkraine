@@ -26,12 +26,27 @@ namespace OrienteeringUkraine
             throw new NotImplementedException();
         }
 
+        public void AppNewApplication(int id, string login, int groupId, int? chip)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteApplication(int id, string login)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<Club> GetAllClubs()
         {
             throw new NotImplementedException();
         }
 
         public IEnumerable<Region> GetAllRegions()
+        {
+            throw new NotImplementedException();
+        }
+
+        public ApplicationData GetApplication(int id, string login)
         {
             throw new NotImplementedException();
         }
@@ -51,6 +66,11 @@ namespace OrienteeringUkraine
             throw new NotImplementedException();
         }
 
+        public IEnumerable<Group> GetGroupsOnEvent(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<AccountUserModel> GetUserAsync(string login)
         {
             throw new NotImplementedException();
@@ -61,7 +81,12 @@ namespace OrienteeringUkraine
             throw new NotImplementedException();
         }
 
-        public bool IsExistsEvent(int id)
+        public bool IsApplied(int EventId, string login)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateApplication(int id, string login, int groupId, int? chip)
         {
             throw new NotImplementedException();
         }

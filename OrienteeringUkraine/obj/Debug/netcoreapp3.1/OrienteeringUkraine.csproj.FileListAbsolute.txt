@@ -114,7 +114,6 @@ C:\Users\Vadik\Google Диск\Универ\3 курс\5 семестр\ТРПЗ
 C:\Users\Vadik\Google Диск\Универ\3 курс\5 семестр\ТРПЗ\OrienteeringUkraine\OrienteeringUkraine\obj\Debug\netcoreapp3.1\Razor\Views\Manage\Users.cshtml.g.cs
 C:\Users\Vadik\Google Диск\Универ\3 курс\5 семестр\ТРПЗ\OrienteeringUkraine\OrienteeringUkraine\obj\Debug\netcoreapp3.1\Razor\Views\Manage\Edit.cshtml.g.cs
 C:\Users\Vadik\Google Диск\Универ\3 курс\5 семестр\ТРПЗ\OrienteeringUkraine\OrienteeringUkraine\obj\Debug\netcoreapp3.1\Razor\Views\Apply\New.cshtml.g.cs
-C:\Users\Vadik\Google Диск\Универ\3 курс\5 семестр\ТРПЗ\OrienteeringUkraine\OrienteeringUkraine\obj\Debug\netcoreapp3.1\Razor\Views\Apply\Edit.cshtml.g.cs
 C:\Users\Vadik\Google Диск\Универ\3 курс\5 семестр\ТРПЗ\OrienteeringUkraine\OrienteeringUkraine\obj\Debug\netcoreapp3.1\Razor\Views\Event\Applications.cshtml.g.cs
 C:\Users\Vadik\Google Диск\Универ\3 курс\5 семестр\ТРПЗ\OrienteeringUkraine\OrienteeringUkraine\obj\Debug\netcoreapp3.1\Razor\Views\Event\New.cshtml.g.cs
 C:\Users\Vadik\Google Диск\Универ\3 курс\5 семестр\ТРПЗ\OrienteeringUkraine\OrienteeringUkraine\obj\Debug\netcoreapp3.1\Razor\Views\Event\Edit.cshtml.g.cs
@@ -268,3 +267,5 @@ D:\OrienteeringUkraine\OrienteeringUkraine\obj\Debug\netcoreapp3.1\OrienteeringU
 D:\OrienteeringUkraine\OrienteeringUkraine\obj\Debug\netcoreapp3.1\OrienteeringUkraine.dll
 D:\OrienteeringUkraine\OrienteeringUkraine\obj\Debug\netcoreapp3.1\OrienteeringUkraine.pdb
 D:\OrienteeringUkraine\OrienteeringUkraine\obj\Debug\netcoreapp3.1\OrienteeringUkraine.genruntimeconfig.cache
+C:\Users\Vadik\Google Диск\Универ\3 курс\5 семестр\ТРПЗ\OrienteeringUkraine\OrienteeringUkraine\obj\Debug\netcoreapp3.1\Razor\Views\Apply\EditAdmin.cshtml.g.cs
+C:\Users\Vadik\Google Диск\Универ\3 курс\5 семестр\ТРПЗ\OrienteeringUkraine\OrienteeringUkraine\obj\Debug\netcoreapp3.1\Razor\Views\Apply\EditUser.cshtml.g.cs

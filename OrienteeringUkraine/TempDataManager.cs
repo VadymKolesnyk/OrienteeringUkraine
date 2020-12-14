@@ -145,8 +145,6 @@ namespace OrienteeringUkraine
                 RegionId = data.RegionId,
             });
         }
-
-
         public async Task<AccountUserModel> GetUserAsync(string login)
         {
             var user = await Task.Run(() => logins.FirstOrDefault((u => u.Login == login)));
@@ -233,6 +231,7 @@ namespace OrienteeringUkraine
                 model.Date = DateTime.Parse("2020-10-30");
                 model.OrganizerLogin = "organizer";
                 model.RegionId = 6;
+                model.Region = regions.FirstOrDefault(reg => model.RegionId == reg.Id)?.Name;
                 model.Location = "м. Львів";
             }
             else
@@ -243,6 +242,7 @@ namespace OrienteeringUkraine
                 model.Date = DateTime.Parse("2020-12-04");
                 model.OrganizerLogin = "organizer2";
                 model.RegionId = 5;
+                model.Region = regions.FirstOrDefault(reg => model.RegionId == reg.Id)?.Name;
             }
             model.Groups = "Ж12;Ж14;М12;М14;";
             return model;
@@ -254,9 +254,9 @@ namespace OrienteeringUkraine
         }
         public HomeIndexModel GetEventsInfo(HomeIndexData data)
         {
-            var events = new List<HomeEvent>
+            var events = new List<Event>
             {
-                new HomeEvent
+                new Event
                 {
                     Title = "Відкритий кубок Львова зі спортивного орієнтуванн Lion Cup 2020. Всеукраїнські змагання",
                     EventDate = DateTime.Parse("30-10-2020"),
@@ -266,7 +266,7 @@ namespace OrienteeringUkraine
                     InfoLink = "http://orientsumy.com.ua/index.php?event=3044&inf=1",
                     ResultsLink = "http://orientsumy.com.ua/index.php?event=3044&inf=2"
                 },
-                new HomeEvent
+                new Event
                 {
                     Title = "Відкритий кубок Львова зі спортивного орієнтуванн Lion Cup 2020. Всеукраїнські змагання",
                     EventDate = DateTime.Parse("30-10-2020"),
@@ -276,7 +276,7 @@ namespace OrienteeringUkraine
                     InfoLink = "http://orientsumy.com.ua/index.php?event=3044&inf=1",
                     ResultsLink = "http://orientsumy.com.ua/index.php?event=3044&inf=2"
                 },
-                new HomeEvent
+                new Event
                 {
                     Title = "Відкритий кубок Львова зі спортивного орієнтуванн Lion Cup 2020. Всеукраїнські змагання",
                     EventDate = DateTime.Parse("30-10-2020"),
@@ -286,7 +286,7 @@ namespace OrienteeringUkraine
                     InfoLink = "http://orientsumy.com.ua/index.php?event=3044&inf=1",
                     ResultsLink = "http://orientsumy.com.ua/index.php?event=3044&inf=2"
                 },
-                new HomeEvent
+                new Event
                 {
                     Title = "Відкритий кубок Львова зі спортивного орієнтуванн Lion Cup 2020. Всеукраїнські змагання",
                     EventDate = DateTime.Parse("30-10-2020"),
@@ -296,7 +296,7 @@ namespace OrienteeringUkraine
                     InfoLink = "http://orientsumy.com.ua/index.php?event=3044&inf=1",
                     ResultsLink = "http://orientsumy.com.ua/index.php?event=3044&inf=2"
                 },
-                new HomeEvent
+                new Event
                 {
                     Title = "Відкритий кубок Львова зі спортивного орієнтуванн Lion Cup 2020. Всеукраїнські змагання",
                     EventDate = DateTime.Parse("30-10-2020"),
@@ -306,7 +306,7 @@ namespace OrienteeringUkraine
                     InfoLink = "http://orientsumy.com.ua/index.php?event=3044&inf=1",
                     ResultsLink = "http://orientsumy.com.ua/index.php?event=3044&inf=2"
                 },
-                new HomeEvent
+                new Event
                 {
                     Title = "Чемпіонат України серед дорослих, юніорів, юнаків та ветеранів зі спортивного орієнтування (бігом)",
                     EventDate = DateTime.Parse("04-12-2020"),
@@ -316,7 +316,7 @@ namespace OrienteeringUkraine
                     InfoLink = "http://orientsumy.com.ua/index.php?event=3086&inf=1",
                     ResultsLink = "http://orientsumy.com.ua/index.php?event=3086&inf=2"
                 },
-                new HomeEvent
+                new Event
                 {
                     Title = "Чемпіонат України серед дорослих, юніорів, юнаків та ветеранів зі спортивного орієнтування (бігом)",
                     EventDate = DateTime.Parse("04-12-2020"),
@@ -326,7 +326,7 @@ namespace OrienteeringUkraine
                     InfoLink = "http://orientsumy.com.ua/index.php?event=3086&inf=1",
                     ResultsLink = "http://orientsumy.com.ua/index.php?event=3086&inf=2"
                 },
-                new HomeEvent
+                new Event
                 {
                     Title = "Чемпіонат України серед дорослих, юніорів, юнаків та ветеранів зі спортивного орієнтування (бігом)",
                     EventDate = DateTime.Parse("04-12-2020"),
@@ -336,7 +336,7 @@ namespace OrienteeringUkraine
                     InfoLink = "http://orientsumy.com.ua/index.php?event=3086&inf=1",
                     ResultsLink = "http://orientsumy.com.ua/index.php?event=3086&inf=2"
                 },
-                new HomeEvent
+                new Event
                 {
                     Title = "Чемпіонат України серед дорослих, юніорів, юнаків та ветеранів зі спортивного орієнтування (бігом)",
                     EventDate = DateTime.Parse("04-12-2020"),
@@ -346,7 +346,7 @@ namespace OrienteeringUkraine
                     InfoLink = "http://orientsumy.com.ua/index.php?event=3086&inf=1",
                     ResultsLink = "http://orientsumy.com.ua/index.php?event=3086&inf=2"
                 },
-                new HomeEvent
+                new Event
                 {
                     Title = "Чемпіонат України серед дорослих, юніорів, юнаків та ветеранів зі спортивного орієнтування (бігом)",
                     EventDate = DateTime.Parse("04-12-2020"),
@@ -377,6 +377,52 @@ namespace OrienteeringUkraine
                 model.CurrentPage = 1;
             }
             return model;
+        }
+
+        public IEnumerable<Group> GetGroupsOnEvent(int id)
+        {
+            return new List<Group>()
+            {
+                new Group() {Id = 1, Name = "Ж12"},
+                new Group() {Id = 2, Name = "Ж14"},
+                new Group() {Id = 10, Name = "М12"},
+                new Group() {Id = 11, Name = "М14"},
+            };
+        }
+
+        public bool IsApplied(int EventId, string login)
+        {
+            return login == "sportsman";
+        }
+
+        public void AppNewApplication(int id, string login, int groupId, int? chip)
+        {
+            
+        }
+
+        public void DeleteApplication(int id, string login)
+        {
+            
+        }
+
+        public ApplicationData GetApplication(int id, string login)
+        {
+            if (login == "moderator")
+            {
+                return null;
+            }
+            var res = new ApplicationData()
+            {
+                CurrentEvent = GetEventById(id),
+                Chip = 111222333,
+                GroupId = 2
+            };
+            return res;
+        }
+
+        public void UpdateApplication(int id, string login, int groupId, int? chip)
+        {
+            
         }
     }
 }

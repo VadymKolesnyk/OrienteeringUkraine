@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace OrienteeringUkraine.Models
 {
-    public class HomeEvent
+    public class Event
     {
         public int Id { get; set; }
         public string Title { get; set; }
