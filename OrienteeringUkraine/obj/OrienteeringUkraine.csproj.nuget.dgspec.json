@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Vadik\\Google Диск\\Универ\\3 курс\\5 семестр\\ТРПЗ\\OrienteeringUkraine\\OrienteeringUkraine\\OrienteeringUkraine.csproj": {}
+    "E:\\OrienteeringUkraine\\OrienteeringUkraine\\OrienteeringUkraine.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Vadik\\Google Диск\\Универ\\3 курс\\5 семестр\\ТРПЗ\\OrienteeringUkraine\\DataLayer\\DataLayer.csproj": {
+    "E:\\OrienteeringUkraine\\DataLayer\\DataLayer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Vadik\\Google Диск\\Универ\\3 курс\\5 семестр\\ТРПЗ\\OrienteeringUkraine\\DataLayer\\DataLayer.csproj",
+        "projectUniqueName": "E:\\OrienteeringUkraine\\DataLayer\\DataLayer.csproj",
         "projectName": "DataLayer",
-        "projectPath": "C:\\Users\\Vadik\\Google Диск\\Универ\\3 курс\\5 семестр\\ТРПЗ\\OrienteeringUkraine\\DataLayer\\DataLayer.csproj",
-        "packagesPath": "C:\\Users\\Vadik\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Vadik\\Google Диск\\Универ\\3 курс\\5 семестр\\ТРПЗ\\OrienteeringUkraine\\DataLayer\\obj\\",
+        "projectPath": "E:\\OrienteeringUkraine\\DataLayer\\DataLayer.csproj",
+        "packagesPath": "C:\\Users\\Sergey\\.nuget\\packages\\",
+        "outputPath": "E:\\OrienteeringUkraine\\DataLayer\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Vadik\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Sergey\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,7 +26,6 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
-            "targetAlias": "netcoreapp3.1",
             "projectReferences": {}
           }
         },
@@ -38,11 +37,16 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
-          "targetAlias": "netcoreapp3.1",
           "dependencies": {
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[5.0.0, )"
+              "version": "[5.0.1, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[5.0.1, )"
             }
           },
           "imports": [
@@ -60,21 +64,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Vadik\\Google Диск\\Универ\\3 курс\\5 семестр\\ТРПЗ\\OrienteeringUkraine\\OrienteeringUkraine\\OrienteeringUkraine.csproj": {
+    "E:\\OrienteeringUkraine\\OrienteeringUkraine\\OrienteeringUkraine.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Vadik\\Google Диск\\Универ\\3 курс\\5 семестр\\ТРПЗ\\OrienteeringUkraine\\OrienteeringUkraine\\OrienteeringUkraine.csproj",
+        "projectUniqueName": "E:\\OrienteeringUkraine\\OrienteeringUkraine\\OrienteeringUkraine.csproj",
         "projectName": "OrienteeringUkraine",
-        "projectPath": "C:\\Users\\Vadik\\Google Диск\\Универ\\3 курс\\5 семестр\\ТРПЗ\\OrienteeringUkraine\\OrienteeringUkraine\\OrienteeringUkraine.csproj",
-        "packagesPath": "C:\\Users\\Vadik\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Vadik\\Google Диск\\Универ\\3 курс\\5 семестр\\ТРПЗ\\OrienteeringUkraine\\OrienteeringUkraine\\obj\\",
+        "projectPath": "E:\\OrienteeringUkraine\\OrienteeringUkraine\\OrienteeringUkraine.csproj",
+        "packagesPath": "C:\\Users\\Sergey\\.nuget\\packages\\",
+        "outputPath": "E:\\OrienteeringUkraine\\OrienteeringUkraine\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Vadik\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Sergey\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -86,10 +90,9 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
-            "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\Vadik\\Google Диск\\Универ\\3 курс\\5 семестр\\ТРПЗ\\OrienteeringUkraine\\DataLayer\\DataLayer.csproj": {
-                "projectPath": "C:\\Users\\Vadik\\Google Диск\\Универ\\3 курс\\5 семестр\\ТРПЗ\\OrienteeringUkraine\\DataLayer\\DataLayer.csproj"
+              "E:\\OrienteeringUkraine\\DataLayer\\DataLayer.csproj": {
+                "projectPath": "E:\\OrienteeringUkraine\\DataLayer\\DataLayer.csproj"
               }
             }
           }
@@ -102,8 +105,21 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
-          "targetAlias": "netcoreapp3.1",
           "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.1, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[5.0.1, )"
+            },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[3.1.4, )"
@@ -127,7 +143,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
         }
       }
     }
