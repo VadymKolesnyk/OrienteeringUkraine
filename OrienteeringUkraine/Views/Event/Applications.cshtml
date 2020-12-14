@@ -12,7 +12,51 @@
     <dl class="row">
     </dl>
 </div>
-<div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index">Back to List</a>
+@if (ViewBag.ShowAdminModule)
+{
+    <div>
+        <a asp-controller="Apply" asp-action="Edit" asp-route-id="@Model.Id">Редекция заявок</a> |
+        <a asp-action="Edit" asp-route-id="@Model.Id">Редекция соревнований</a> |
+        <a asp-action="Export" asp-route-id="@Model.Id">Экстпорт баз</a>
+    </div>
+}
+<hr />
+<dl class="row">
+</dl>
+<div><a asp-controller="Home" asp-action="Index">Back to List</a>   </div>
+<div><a asp-controller="Home" asp-action="Index">Заявиться</a>   </div>
+<div class="col-12 align-items-center">
+    <h2>@Model.Title</h2> <br />
+    <h4>@Model.Date</h4>
 </div>
+<div class="col-3"><p>Количество заявившихся :@Model.AmountOfPeople</p></div>
+<div class="col-3"><p>Аренда чипов :@Model.AmountOfRentChips</p></div>
+
+@foreach (var item in Model.Applications)
+{
+    <div class="col-12 align-items-center">
+        <b>@item.Key</b>
+    </div>
+    <table class="col-12">
+        <tr>
+            <td>ФИО</td>
+            <td>ДР</td>
+            <td>Чип</td>
+            <td>Клуб</td>
+            <td>Регион</td>
+        </tr>
+        @foreach (var app in item.Value)
+        {
+            <tr>
+                <td>@app.Name</td>
+                <td>@app.Birthday.ToLongDateString()</td>
+                <td>@app.Chip</td>
+                <td>@app.Club</td>
+                <td>@app.Region</td>
+            </tr>
+        }
+    </table>
+}
+
+
+

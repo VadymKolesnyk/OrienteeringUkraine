@@ -1,7 +1,8 @@
-using System;
+п»їusing System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using DataLayer;
 using DataLayer.Tables;
 using Microsoft.AspNetCore.Builder;
@@ -27,8 +28,15 @@ namespace OrienteeringUkraine
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options => //CookieAuthenticationOptions
+                {
+                    options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
+                    options.AccessDeniedPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
+                });
             services.AddDbContext<EFContext>(options => options.UseSqlServer(confString.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("OrienteeringUkraine")));
             services.AddControllersWithViews();
+            services.AddSingleton<IDataManager, TempDataManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,7 +57,8 @@ namespace OrienteeringUkraine
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            app.UseAuthentication();    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+            app.UseAuthorization();     // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
             app.UseEndpoints(endpoints =>
             {
@@ -70,33 +79,33 @@ namespace OrienteeringUkraine
                 if (!context.Regions.Any())
                 {
                     context.Regions.AddRange(
-                        new Region { Name = "АР Крым" },
-                        new Region { Name = "Винницкая" },
-                        new Region { Name = "Волынская" },
-                        new Region { Name = "Днепропетровская" },
-                        new Region { Name = "Донецкая" },
-                        new Region { Name = "Житомирская" },
-                        new Region { Name = "Закарпатская" },
-                        new Region { Name = "Запорожская" },
-                        new Region { Name = "Ивано-Франковская" },
-                        new Region { Name = "Город Киев" },
-                        new Region { Name = "Киевская" },
-                        new Region { Name = "Кировоградская" },
-                        new Region { Name = "Луганская" },
-                        new Region { Name = "Львовская" },
-                        new Region { Name = "Николаевская" },
-                        new Region { Name = "Одесская" },
-                        new Region { Name = "Полтавская" },
-                        new Region { Name = "Ровенская" },
-                        new Region { Name = "Город Севастополоть" },
-                        new Region { Name = "Сумская" },
-                        new Region { Name = "Тернопольская" },
-                        new Region { Name = "Харьковская" },
-                        new Region { Name = "Херсонская" },
-                        new Region { Name = "Хмельницкая" },
-                        new Region { Name = "Черкасская" },
-                        new Region { Name = "Черниговская" },
-                        new Region { Name = "Черновицкая" }
+                        new Region { Name = "пїЅпїЅ пїЅпїЅпїЅпїЅ" },
+                        new Region { Name = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ" },
+                        new Region { Name = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ" },
+                        new Region { Name = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ" },
+                        new Region { Name = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ" },
+                        new Region { Name = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ" },
+                        new Region { Name = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ" },
+                        new Region { Name = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ" },
+                        new Region { Name = "пїЅпїЅпїЅпїЅпїЅ-пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ" },
+                        new Region { Name = "пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ" },
+                        new Region { Name = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ" },
+                        new Region { Name = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ" },
+                        new Region { Name = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ" },
+                        new Region { Name = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ" },
+                        new Region { Name = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ" },
+                        new Region { Name = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ" },
+                        new Region { Name = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ" },
+                        new Region { Name = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ" },
+                        new Region { Name = "пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ" },
+                        new Region { Name = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ" },
+                        new Region { Name = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ" },
+                        new Region { Name = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ" },
+                        new Region { Name = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ" },
+                        new Region { Name = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ" },
+                        new Region { Name = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ" },
+                        new Region { Name = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ" },
+                        new Region { Name = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ" }
                         );
 
                 }
@@ -114,13 +123,13 @@ namespace OrienteeringUkraine
                 if (!context.Clubs.Any())
                 {
                     context.Clubs.AddRange(
-                        new Club { Name = "Азимут"},
+                        new Club { Name = "пїЅпїЅпїЅпїЅпїЅпїЅ"},
                         new Club { Name = "Odessa Team" },
-                        new Club { Name = "Клуб веб-дизайнеров"},
-                        new Club { Name = "Север" },
-                        new Club { Name = "Юг" },
-                        new Club { Name = "Запад" },
-                        new Club { Name = "Восток" }
+                        new Club { Name = "пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ-пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ"},
+                        new Club { Name = "пїЅпїЅпїЅпїЅпїЅ" },
+                        new Club { Name = "пїЅпїЅ" },
+                        new Club { Name = "пїЅпїЅпїЅпїЅпїЅ" },
+                        new Club { Name = "пїЅпїЅпїЅпїЅпїЅпїЅ" }
                         );
                 }
 
@@ -137,8 +146,8 @@ namespace OrienteeringUkraine
                         },
                         new User
                         {
-                            Name = "Вадим",
-                            Surname = "Колесник",
+                            Name = "пїЅпїЅпїЅпїЅпїЅ",
+                            Surname = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
                             BirthDate = new DateTime(2001, 2, 19),
                             RoleId = 2,
                             RegionId = 17,
@@ -146,8 +155,8 @@ namespace OrienteeringUkraine
                         },
                         new User
                         {
-                            Name = "Екатерина",
-                            Surname = "Кубышка",
+                            Name = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
+                            Surname = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
                             BirthDate = new DateTime(2001, 9, 23),
                             RoleId = 2,
                             RegionId = 17,
@@ -155,8 +164,8 @@ namespace OrienteeringUkraine
                         },
                         new User
                         {
-                            Name = "Сергей",
-                            Surname = "Переяславский",
+                            Name = "пїЅпїЅпїЅпїЅпїЅпїЅ",
+                            Surname = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
                             BirthDate = new DateTime(2000, 11, 22),
                             RoleId = 3,
                             RegionId = 11,
@@ -164,8 +173,8 @@ namespace OrienteeringUkraine
                         },
                         new User
                         {
-                            Name = "Александр",
-                            Surname = "Дзюбчик",
+                            Name = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
+                            Surname = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
                             BirthDate = new DateTime(2001, 3, 24),
                             RoleId = 3,
                             RegionId = 3,
@@ -173,8 +182,8 @@ namespace OrienteeringUkraine
                         },
                         new User
                         {
-                            Name = "Биба",
-                            Surname = "Бобович",
+                            Name = "пїЅпїЅпїЅпїЅ",
+                            Surname = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
                             BirthDate = new DateTime(2005, 2, 20),
                             RoleId = 3,
                             RegionId = 17,
@@ -182,8 +191,8 @@ namespace OrienteeringUkraine
                         },
                         new User
                         {
-                            Name = "Максим",
-                            Surname = "Гапонюк",
+                            Name = "пїЅпїЅпїЅпїЅпїЅпїЅ",
+                            Surname = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
                             BirthDate = new DateTime(2000, 12, 4),
                             RoleId = 3,
                             RegionId = 3,
@@ -191,8 +200,8 @@ namespace OrienteeringUkraine
                         },
                         new User
                         {
-                            Name = "Гибон",
-                            Surname = "Пожилой",
+                            Name = "пїЅпїЅпїЅпїЅпїЅ",
+                            Surname = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
                             BirthDate = new DateTime(1900, 2, 2),
                             RoleId = 4,
                             RegionId = 3,
@@ -200,8 +209,8 @@ namespace OrienteeringUkraine
                         }, 
                         new User
                         {
-                            Name = "Тарас",
-                            Surname = "Рачук",
+                            Name = "пїЅпїЅпїЅпїЅпїЅ",
+                            Surname = "пїЅпїЅпїЅпїЅпїЅ",
                             BirthDate = new DateTime(1998, 7, 28),
                             RoleId = 4,
                             RegionId = 25,
@@ -209,8 +218,8 @@ namespace OrienteeringUkraine
                         },
                         new User
                         {
-                            Name = "Сергей",
-                            Surname = "Поникаров",
+                            Name = "пїЅпїЅпїЅпїЅпїЅпїЅ",
+                            Surname = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
                             BirthDate = new DateTime(1982, 2, 23),
                             RoleId = 4,
                             RegionId = 25,
@@ -218,8 +227,8 @@ namespace OrienteeringUkraine
                         },
                         new User
                         {
-                            Name = "Надежда",
-                            Surname = "Сердюк",
+                            Name = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
+                            Surname = "пїЅпїЅпїЅпїЅпїЅпїЅ",
                             BirthDate = new DateTime(1953, 6, 25),
                             RoleId = 4,
                             RegionId = 10,
@@ -227,8 +236,8 @@ namespace OrienteeringUkraine
                         },
                         new User
                         {
-                            Name = "Олег",
-                            Surname = "Скляр",
+                            Name = "пїЅпїЅпїЅпїЅ",
+                            Surname = "пїЅпїЅпїЅпїЅпїЅ",
                             BirthDate = new DateTime(1985, 5, 25),
                             RoleId = 4,
                             RegionId = 5,
@@ -236,8 +245,8 @@ namespace OrienteeringUkraine
                         },
                         new User
                         {
-                            Name = "Елена",
-                            Surname = "Стрыжак",
+                            Name = "пїЅпїЅпїЅпїЅпїЅ",
+                            Surname = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
                             BirthDate = new DateTime(1963, 10, 7),
                             RoleId = 4,
                             RegionId = 17,
@@ -245,8 +254,8 @@ namespace OrienteeringUkraine
                         },
                         new User
                         {
-                            Name = "Галина",
-                            Surname = "Строчук",
+                            Name = "пїЅпїЅпїЅпїЅпїЅпїЅ",
+                            Surname = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
                             BirthDate = new DateTime(1977, 7, 26),
                             RoleId = 4,
                             RegionId = 18,
@@ -254,8 +263,8 @@ namespace OrienteeringUkraine
                         },
                         new User
                         {
-                            Name = "Сергей",
-                            Surname = "Тарасенко",
+                            Name = "пїЅпїЅпїЅпїЅпїЅпїЅ",
+                            Surname = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
                             BirthDate = new DateTime(1972, 4, 28),
                             RoleId = 4,
                             RegionId = 22,
@@ -263,8 +272,8 @@ namespace OrienteeringUkraine
                         },
                         new User
                         {
-                            Name = "Наталия",
-                            Surname = "Уманец",
+                            Name = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
+                            Surname = "пїЅпїЅпїЅпїЅпїЅпїЅ",
                             BirthDate = new DateTime(1978, 1, 19),
                             RoleId = 4,
                             RegionId = 25,
@@ -272,8 +281,8 @@ namespace OrienteeringUkraine
                         },
                         new User
                         {
-                            Name = "Александр",
-                            Surname = "Уфимцев",
+                            Name = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
+                            Surname = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
                             BirthDate = new DateTime(1957, 10, 29),
                             RoleId = 4,
                             RegionId = 5,
@@ -281,8 +290,8 @@ namespace OrienteeringUkraine
                         },
                         new User
                         {
-                            Name = "Андрей",
-                            Surname = "Алёшин",
+                            Name = "пїЅпїЅпїЅпїЅпїЅпїЅ",
+                            Surname = "пїЅпїЅпїЅпїЅпїЅ",
                             BirthDate = new DateTime(1996, 12, 9),
                             RoleId = 4,
                             RegionId = 7,
@@ -290,8 +299,8 @@ namespace OrienteeringUkraine
                         },
                         new User
                         {
-                            Name = "Владимир",
-                            Surname = "Бондаренко",
+                            Name = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
+                            Surname = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
                             BirthDate = new DateTime(1959, 7, 28),
                             RoleId = 4,
                             RegionId = 5,
@@ -299,8 +308,8 @@ namespace OrienteeringUkraine
                         },
                         new User
                         {
-                            Name = "Владислав",
-                            Surname = "Вовк",
+                            Name = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
+                            Surname = "пїЅпїЅпїЅпїЅ",
                             BirthDate = new DateTime(1968, 11, 21),
                             RoleId = 4,
                             RegionId = 5,
@@ -308,8 +317,8 @@ namespace OrienteeringUkraine
                         },
                         new User
                         {
-                            Name = "Артур",
-                            Surname = "Ганилов",
+                            Name = "пїЅпїЅпїЅпїЅпїЅ",
+                            Surname = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
                             BirthDate = new DateTime(1968, 5, 12),
                             RoleId = 4,
                             RegionId = 6,
@@ -317,8 +326,8 @@ namespace OrienteeringUkraine
                         },
                         new User
                         {
-                            Name = "Виталий",
-                            Surname = "Кличко",
+                            Name = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
+                            Surname = "пїЅпїЅпїЅпїЅпїЅпїЅ",
                             BirthDate = new DateTime(1999, 9, 21),
                             RoleId = 4,
                             RegionId = 17,
@@ -326,8 +335,8 @@ namespace OrienteeringUkraine
                         },
                         new User
                         {
-                            Name = "Евгений",
-                            Surname = "Гевел",
+                            Name = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
+                            Surname = "пїЅпїЅпїЅпїЅпїЅ",
                             BirthDate = new DateTime(1956, 4, 2),
                             RoleId = 4,
                             RegionId = 4,
@@ -335,8 +344,8 @@ namespace OrienteeringUkraine
                         },
                         new User
                         {
-                            Name = "Мария",
-                            Surname = "Гудак",
+                            Name = "пїЅпїЅпїЅпїЅпїЅ",
+                            Surname = "пїЅпїЅпїЅпїЅпїЅ",
                             BirthDate = new DateTime(1988, 8, 12),
                             RoleId = 4,
                             RegionId = 26,
@@ -344,8 +353,8 @@ namespace OrienteeringUkraine
                         },
                         new User
                         {
-                            Name = "Руслан",
-                            Surname = "Шимчук",
+                            Name = "пїЅпїЅпїЅпїЅпїЅпїЅ",
+                            Surname = "пїЅпїЅпїЅпїЅпїЅпїЅ",
                             BirthDate = new DateTime(1968, 7, 22),
                             RoleId = 4,
                             RegionId = 20,
@@ -353,8 +362,8 @@ namespace OrienteeringUkraine
                         },
                         new User
                         {
-                            Name = "Евгений",
-                            Surname = "Чёрный",
+                            Name = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
+                            Surname = "ЧёпїЅпїЅпїЅпїЅ",
                             BirthDate = new DateTime(2001, 2, 12),
                             RoleId = 4,
                             RegionId = 5,
@@ -362,8 +371,8 @@ namespace OrienteeringUkraine
                         },
                         new User
                         {
-                            Name = "Руслан",
-                            Surname = "Шимчук",
+                            Name = "пїЅпїЅпїЅпїЅпїЅпїЅ",
+                            Surname = "пїЅпїЅпїЅпїЅпїЅпїЅ",
                             BirthDate = new DateTime(2008, 12, 2),
                             RoleId = 4,
                             RegionId = 21,
@@ -371,8 +380,8 @@ namespace OrienteeringUkraine
                         },
                         new User
                         {
-                            Name = "Анастасия",
-                            Surname = "Костюк",
+                            Name = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
+                            Surname = "пїЅпїЅпїЅпїЅпїЅпїЅ",
                             BirthDate = new DateTime(2002, 2, 16),
                             RoleId = 4,
                             RegionId = 1,
@@ -380,8 +389,8 @@ namespace OrienteeringUkraine
                         },
                         new User
                         {
-                            Name = "Юлия",
-                            Surname = "Азарова",
+                            Name = "пїЅпїЅпїЅпїЅ",
+                            Surname = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
                             BirthDate = new DateTime(1999, 11, 6),
                             RoleId = 4,
                             RegionId = 15,
@@ -389,8 +398,8 @@ namespace OrienteeringUkraine
                         },
                         new User
                         {
-                            Name = "Анна",
-                            Surname = "Марусиченко",
+                            Name = "пїЅпїЅпїЅпїЅ",
+                            Surname = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
                             BirthDate = new DateTime(2004, 7, 24),
                             RoleId = 4,
                             RegionId = 26,
@@ -398,8 +407,8 @@ namespace OrienteeringUkraine
                         },
                         new User
                         {
-                            Name = "Дарья",
-                            Surname = "Томаш",
+                            Name = "пїЅпїЅпїЅпїЅпїЅ",
+                            Surname = "пїЅпїЅпїЅпїЅпїЅ",
                             BirthDate = new DateTime(2001, 5, 12),
                             RoleId = 4,
                             RegionId = 27,
@@ -407,8 +416,8 @@ namespace OrienteeringUkraine
                         },
                         new User
                         {
-                            Name = "Юлия",
-                            Surname = "Бугаец",
+                            Name = "пїЅпїЅпїЅпїЅ",
+                            Surname = "пїЅпїЅпїЅпїЅпїЅпїЅ",
                             BirthDate = new DateTime(1997, 2, 2),
                             RoleId = 4,
                             RegionId = 7,
@@ -416,8 +425,8 @@ namespace OrienteeringUkraine
                         },
                         new User
                         {
-                            Name = "Светлана",
-                            Surname = "Пашиста",
+                            Name = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
+                            Surname = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
                             BirthDate = new DateTime(2003, 8, 23),
                             RoleId = 4,
                             RegionId = 9,
@@ -425,8 +434,8 @@ namespace OrienteeringUkraine
                         },
                         new User
                         {
-                            Name = "Татьяна",
-                            Surname = "Клепикова",
+                            Name = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
+                            Surname = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
                             BirthDate = new DateTime(1995, 6, 20),
                             RoleId = 4,
                             RegionId = 4,
@@ -434,8 +443,8 @@ namespace OrienteeringUkraine
                         },
                         new User
                         {
-                            Name = "Татьяна",
-                            Surname = "Олейник",
+                            Name = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
+                            Surname = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
                             BirthDate = new DateTime(1994, 4, 10),
                             RoleId = 4,
                             RegionId = 22,
@@ -443,8 +452,8 @@ namespace OrienteeringUkraine
                         },
                         new User
                         {
-                            Name = "Александр",
-                            Surname = "Авраменко",
+                            Name = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
+                            Surname = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
                             BirthDate = new DateTime(1977, 7, 18),
                             RoleId = 4,
                             RegionId = 25,
@@ -452,8 +461,8 @@ namespace OrienteeringUkraine
                         },
                         new User
                         {
-                            Name = "Василий",
-                            Surname = "Рублевский",
+                            Name = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
+                            Surname = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
                             BirthDate = new DateTime(1999, 4, 8),
                             RoleId = 4,
                             RegionId = 14,
@@ -461,8 +470,8 @@ namespace OrienteeringUkraine
                         },
                         new User
                         {
-                            Name = "Карина",
-                            Surname = "Бойсюк",
+                            Name = "пїЅпїЅпїЅпїЅпїЅпїЅ",
+                            Surname = "пїЅпїЅпїЅпїЅпїЅпїЅ",
                             BirthDate = new DateTime(1978, 4, 12),
                             RoleId = 4,
                             RegionId = 24,
@@ -470,8 +479,8 @@ namespace OrienteeringUkraine
                         },
                         new User
                         {
-                            Name = "Анна",
-                            Surname = "Волкова",
+                            Name = "пїЅпїЅпїЅпїЅ",
+                            Surname = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
                             BirthDate = new DateTime(2002, 3, 2),
                             RoleId = 4,
                             RegionId = 12,
@@ -479,8 +488,8 @@ namespace OrienteeringUkraine
                         },
                         new User
                         {
-                            Name = "Полина",
-                            Surname = "Волошина",
+                            Name = "пїЅпїЅпїЅпїЅпїЅпїЅ",
+                            Surname = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
                             BirthDate = new DateTime(1972, 6, 12),
                             RoleId = 4,
                             RegionId = 4,
@@ -488,8 +497,8 @@ namespace OrienteeringUkraine
                         },
                         new User
                         {
-                            Name = "Дарья",
-                            Surname = "Гладкая",
+                            Name = "пїЅпїЅпїЅпїЅпїЅ",
+                            Surname = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
                             BirthDate = new DateTime(1997, 9, 22),
                             RoleId = 4,
                             RegionId = 20,
@@ -497,8 +506,8 @@ namespace OrienteeringUkraine
                         },
                         new User
                         {
-                            Name = "Марьяна",
-                            Surname = "Демченко",
+                            Name = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
+                            Surname = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
                             BirthDate = new DateTime(2003, 2, 1),
                             RoleId = 4,
                             RegionId = 7,
@@ -506,8 +515,8 @@ namespace OrienteeringUkraine
                         },
                         new User
                         {
-                            Name = "Дарья",
-                            Surname = "Додон",
+                            Name = "пїЅпїЅпїЅпїЅпїЅ",
+                            Surname = "пїЅпїЅпїЅпїЅпїЅ",
                             BirthDate = new DateTime(2001, 12, 12),
                             RoleId = 4,
                             RegionId = 5,
@@ -515,8 +524,8 @@ namespace OrienteeringUkraine
                         },
                         new User
                         {
-                            Name = "Инна",
-                            Surname = "Игнатьева",
+                            Name = "пїЅпїЅпїЅпїЅ",
+                            Surname = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
                             BirthDate = new DateTime(1993, 2, 26),
                             RoleId = 4,
                             RegionId = 6,
@@ -524,8 +533,8 @@ namespace OrienteeringUkraine
                         },
                         new User
                         {
-                            Name = "Евгения",
-                            Surname = "Магас",
+                            Name = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
+                            Surname = "пїЅпїЅпїЅпїЅпїЅ",
                             BirthDate = new DateTime(2004, 8, 1),
                             RoleId = 4,
                             RegionId = 17,
@@ -533,8 +542,8 @@ namespace OrienteeringUkraine
                         },
                         new User
                         {
-                            Name = "Наталия",
-                            Surname = "Малькова",
+                            Name = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
+                            Surname = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
                             BirthDate = new DateTime(1984, 4, 17),
                             RoleId = 4,
                             RegionId = 19,
@@ -542,8 +551,8 @@ namespace OrienteeringUkraine
                         },
                         new User
                         {
-                            Name = "Анастасия",
-                            Surname = "Мищук",
+                            Name = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
+                            Surname = "пїЅпїЅпїЅпїЅпїЅ",
                             BirthDate = new DateTime(1994, 8, 27),
                             RoleId = 4,
                             RegionId = 9,
@@ -551,8 +560,8 @@ namespace OrienteeringUkraine
                         },
                         new User
                         {
-                            Name = "Тарас",
-                            Surname = "Гаврилюк",
+                            Name = "пїЅпїЅпїЅпїЅпїЅ",
+                            Surname = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
                             BirthDate = new DateTime(2001, 8, 7),
                             RoleId = 4,
                             RegionId = 19,
@@ -560,8 +569,8 @@ namespace OrienteeringUkraine
                         },
                         new User
                         {
-                            Name = "Максим",
-                            Surname = "Дворный",
+                            Name = "пїЅпїЅпїЅпїЅпїЅпїЅ",
+                            Surname = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
                             BirthDate = new DateTime(1956, 3, 27),
                             RoleId = 4,
                             RegionId = 23,
@@ -569,8 +578,8 @@ namespace OrienteeringUkraine
                         },
                         new User
                         {
-                            Name = "Михаил",
-                            Surname = "Давиденко",
+                            Name = "пїЅпїЅпїЅпїЅпїЅпїЅ",
+                            Surname = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
                             BirthDate = new DateTime(1986, 8, 7),
                             RoleId = 4,
                             RegionId = 26,
@@ -578,8 +587,8 @@ namespace OrienteeringUkraine
                         },
                         new User
                         {
-                            Name = "Богдан",
-                            Surname = "Кабанов",
+                            Name = "пїЅпїЅпїЅпїЅпїЅпїЅ",
+                            Surname = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
                             BirthDate = new DateTime(1985, 4, 27),
                             RoleId = 4,
                             RegionId = 14,
@@ -587,8 +596,8 @@ namespace OrienteeringUkraine
                         },
                         new User
                         {
-                            Name = "Денис",
-                            Surname = "Кобзар",
+                            Name = "пїЅпїЅпїЅпїЅпїЅ",
+                            Surname = "пїЅпїЅпїЅпїЅпїЅпїЅ",
                             BirthDate = new DateTime(1965, 4, 12),
                             RoleId = 4,
                             RegionId = 17,
@@ -596,8 +605,8 @@ namespace OrienteeringUkraine
                         },
                         new User
                         {
-                            Name = "Владимир",
-                            Surname = "Куцак",
+                            Name = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
+                            Surname = "пїЅпїЅпїЅпїЅпїЅ",
                             BirthDate = new DateTime(2001, 7, 11),
                             RoleId = 4,
                             RegionId = 11,
@@ -605,8 +614,8 @@ namespace OrienteeringUkraine
                         },
                         new User
                         {
-                            Name = "Константин",
-                            Surname = "Комарницкий",
+                            Name = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
+                            Surname = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
                             BirthDate = new DateTime(1991, 6, 1),
                             RoleId = 4,
                             RegionId = 16,
@@ -614,8 +623,8 @@ namespace OrienteeringUkraine
                         },
                         new User
                         {
-                            Name = "Юрий",
-                            Surname = "Черняк",
+                            Name = "пїЅпїЅпїЅпїЅ",
+                            Surname = "пїЅпїЅпїЅпїЅпїЅпїЅ",
                             BirthDate = new DateTime(2000, 4, 12),
                             RoleId = 4,
                             RegionId = 21,
@@ -623,8 +632,8 @@ namespace OrienteeringUkraine
                         },
                         new User
                         {
-                            Name = "Андрей",
-                            Surname = "Андрусяк",
+                            Name = "пїЅпїЅпїЅпїЅпїЅпїЅ",
+                            Surname = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
                             BirthDate = new DateTime(1994, 10, 7),
                             RoleId = 4,
                             RegionId = 11,
@@ -632,8 +641,8 @@ namespace OrienteeringUkraine
                         },
                         new User
                         {
-                            Name = "Иван",
-                            Surname = "Беляев",
+                            Name = "пїЅпїЅпїЅпїЅ",
+                            Surname = "пїЅпїЅпїЅпїЅпїЅпїЅ",
                             BirthDate = new DateTime(1965, 10, 5),
                             RoleId = 4,
                             RegionId = 8,
@@ -665,131 +674,131 @@ namespace OrienteeringUkraine
                     context.Events.AddRange(
                         new Event
                         {
-                            Title = "Старт, посвященный памяти Рикуна В. Б.",
+                            Title = "пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ. пїЅ.",
                             EventDate = new DateTime(2020, 12, 6),
                             InfoLink = "http://orientsumy.com.ua/index.php?event=3044&inf=1",
                             ResultsLink = "http://orientsumy.com.ua/index.php?event=3044&inf=2",
-                            Location = "с. Китайгород",
+                            Location = "пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
                             RegionId = 23,
                             OrganizerId = 30
                         },
                         new Event
                         {
-                            Title = "Открытый турнир, посвященный Дню Энергетика",
+                            Title = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
                             EventDate = new DateTime(2020, 12, 12),
                             InfoLink = "",
                             ResultsLink = "",
-                            Location = "с. Катеринка",
+                            Location = "пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
                             RegionId = 23,
                             OrganizerId = 31
                         },
                         new Event
                         {
-                            Title = "Тренировочный старт \"Днепровские пороги\"",
+                            Title = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ \"пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ\"",
                             EventDate = new DateTime(2020, 12, 13),
                             InfoLink = "http://orientsumy.com.ua/index.php?event=3086&inf=1",
                             ResultsLink = "http://orientsumy.com.ua/index.php?event=3086&inf=2",
-                            Location = "с. Майорка (дачи)",
+                            Location = "пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅпїЅ)",
                             RegionId = 12,
                             OrganizerId = 32
                         },
                         new Event
                         {
-                            Title = "Відкриті змагання Донецької області зі спортивного орієнтування (бігом), присвячені Дню Святого Миколая.",
+                            Title = "ВіпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅпїЅ), пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ.",
                             EventDate = new DateTime(2020, 12, 19),
                             InfoLink = "",
                             ResultsLink = "",
-                            Location = "Відокремлений підрозділ громадської організації ”Федерація спортивного орієнтування України” у Донецькій області.",
+                            Location = "ВіпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ.",
                             RegionId = 22,
                             OrganizerId = 33
                         },
                         new Event
                         {
-                            Title = "Традиційні змагання зі спортивного орієнтування \"Сніжинка 2021\"",
+                            Title = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ \"пїЅпїЅпїЅпїЅпїЅпїЅпїЅ 2021\"",
                             EventDate = new DateTime(2020, 12, 19),
                             InfoLink = "",
                             ResultsLink = "",
-                            Location = "КСОТ \"Центуріон\"",
+                            Location = "пїЅпїЅпїЅпїЅ \"пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ\"",
                             RegionId = 10,
                             OrganizerId = 34
                         },
                         new Event
                         {
-                            Title = "Закрытие сезона",
+                            Title = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ",
                             EventDate = new DateTime(2020, 12, 20),
                             InfoLink = "http://orientsumy.com.ua/index.php?event=3044&inf=1",
                             ResultsLink = "http://orientsumy.com.ua/index.php?event=3044&inf=2",
-                            Location = "с/к \"Наш клуб\"",
+                            Location = "пїЅ/пїЅ \"пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ\"",
                             RegionId = 23,
                             OrganizerId = 35
                         },
                         new Event
                         {
-                            Title = "Ёлки-палки",
+                            Title = "пїЅпїЅпїЅпїЅ-пїЅпїЅпїЅпїЅпїЅ",
                             EventDate = new DateTime(2020, 12, 25),
                             InfoLink = "http://orientsumy.com.ua/index.php?event=3086&inf=1",
                             ResultsLink = "http://orientsumy.com.ua/index.php?event=3086&inf=2",
-                            Location = "с/к \"Сириус\"",
+                            Location = "пїЅ/пїЅ \"пїЅпїЅпїЅпїЅпїЅпїЅ\"",
                             RegionId = 23,
                             OrganizerId = 36
                         },
                         new Event
                         {
-                            Title = "Різдвяний старт",
+                            Title = "РіпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ",
                             EventDate = new DateTime(2020, 12, 26),
                             InfoLink = "",
                             ResultsLink = "",
-                            Location = "Відокремлений підрозділ громадської організації \"Федерація спортивного орієнтування України\" у Донецькій області.",
+                            Location = "ВіпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ \"пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ\" пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ.",
                             RegionId = 22,
                             OrganizerId = 31
                         },
                         new Event
                         {
-                            Title = "НОВОРІЧНА КОРИДА 2020",
+                            Title = "пїЅпїЅпїЅпїЅРІпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ 2020",
                             EventDate = new DateTime(2020, 12, 27),
                             InfoLink = "http://orientsumy.com.ua/index.php?event=3086&inf=1",
                             ResultsLink = "http://orientsumy.com.ua/index.php?event=3086&inf=2",
-                            Location = "Лижна база \"Авангард\", ур.Токарі",
+                            Location = "пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ \"пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ\", пїЅпїЅ.пїЅпїЅпїЅпїЅпїЅ",
                             RegionId = 7,
                             OrganizerId = 32
                         },
                         new Event
                         {
-                            Title = "Супер кубок приз мильярд денег",
+                            Title = "пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ",
                             EventDate = new DateTime(2020, 12, 31),
                             InfoLink = "",
                             ResultsLink = "",
-                            Location = "дом Колотушкина",
+                            Location = "пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
                             RegionId = 24,
                             OrganizerId = 33
                         },
                         new Event
                         {
-                            Title = "Марафон веб-дизайнеров",
+                            Title = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ-пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
                             EventDate = new DateTime(2020, 12, 30),
                             InfoLink = "",
                             ResultsLink = "",
-                            Location = "с. Бутстрап",
+                            Location = "пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
                             RegionId = 3,
                             OrganizerId = 34
                         },
                         new Event
                         {
-                            Title = "Биба Бобовна",
+                            Title = "пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
                             EventDate = new DateTime(2021, 1, 7),
                             InfoLink = "http://orientsumy.com.ua/index.php?event=3044&inf=1",
                             ResultsLink = "http://orientsumy.com.ua/index.php?event=3044&inf=2",
-                            Location = "с. Моя хата",
+                            Location = "пїЅ. пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ",
                             RegionId = 17,
                             OrganizerId = 35
                         },
                         new Event
                         {
-                            Title = "Кубок нероб",
+                            Title = "пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ",
                             EventDate = new DateTime(2021, 1, 14),
                             InfoLink = "http://orientsumy.com.ua/index.php?event=3086&inf=1",
                             ResultsLink = "http://orientsumy.com.ua/index.php?event=3086&inf=2",
-                            Location = "с. Чилловое",
+                            Location = "пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
                             RegionId = 14,
                             OrganizerId = 36
                         }
@@ -799,38 +808,38 @@ namespace OrienteeringUkraine
                 if (!context.Groups.Any())
                 {
                     context.Groups.AddRange(
-                        new Group { Name = "Ж12" },
-                        new Group { Name = "Ж14" },
-                        new Group { Name = "Ж16" },
-                        new Group { Name = "Ж18" },
-                        new Group { Name = "Ж20" },
-                        new Group { Name = "Ж21Е" },
-                        new Group { Name = "Ж21А" },
-                        new Group { Name = "Ж35" },
-                        new Group { Name = "Ж40" },
-                        new Group { Name = "Ж45" },
-                        new Group { Name = "Ж50" },
-                        new Group { Name = "Ж55" },
-                        new Group { Name = "Ж60" },
-                        new Group { Name = "Ж65" },
-                        new Group { Name = "Ж70" },
-                        new Group { Name = "Ж75" },
-                        new Group { Name = "М12" },
-                        new Group { Name = "М14" },
-                        new Group { Name = "М16" },
-                        new Group { Name = "М18" },
-                        new Group { Name = "М20" },
-                        new Group { Name = "М21Е" },
-                        new Group { Name = "М21А" },
-                        new Group { Name = "М35" },
-                        new Group { Name = "М40" },
-                        new Group { Name = "М45" },
-                        new Group { Name = "М50" },
-                        new Group { Name = "М55" },
-                        new Group { Name = "М60" },
-                        new Group { Name = "М65" },
-                        new Group { Name = "М70" },
-                        new Group { Name = "М75" }
+                        new Group { Name = "пїЅ12" },
+                        new Group { Name = "пїЅ14" },
+                        new Group { Name = "пїЅ16" },
+                        new Group { Name = "пїЅ18" },
+                        new Group { Name = "пїЅ20" },
+                        new Group { Name = "пїЅ21пїЅ" },
+                        new Group { Name = "пїЅ21пїЅ" },
+                        new Group { Name = "пїЅ35" },
+                        new Group { Name = "пїЅ40" },
+                        new Group { Name = "пїЅ45" },
+                        new Group { Name = "пїЅ50" },
+                        new Group { Name = "пїЅ55" },
+                        new Group { Name = "пїЅ60" },
+                        new Group { Name = "пїЅ65" },
+                        new Group { Name = "пїЅ70" },
+                        new Group { Name = "пїЅ75" },
+                        new Group { Name = "пїЅ12" },
+                        new Group { Name = "пїЅ14" },
+                        new Group { Name = "пїЅ16" },
+                        new Group { Name = "пїЅ18" },
+                        new Group { Name = "пїЅ20" },
+                        new Group { Name = "пїЅ21пїЅ" },
+                        new Group { Name = "пїЅ21пїЅ" },
+                        new Group { Name = "пїЅ35" },
+                        new Group { Name = "пїЅ40" },
+                        new Group { Name = "пїЅ45" },
+                        new Group { Name = "пїЅ50" },
+                        new Group { Name = "пїЅ55" },
+                        new Group { Name = "пїЅ60" },
+                        new Group { Name = "пїЅ65" },
+                        new Group { Name = "пїЅ70" },
+                        new Group { Name = "пїЅ75" }
                         );
                 }
                 

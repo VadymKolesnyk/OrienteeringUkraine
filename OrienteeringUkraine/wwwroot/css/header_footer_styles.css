@@ -1,0 +1,122 @@
+* {
+    color: #ffffff;
+    font-size: calc(14px + (32 - 14) * ((100vw - 300px) / (1920 - 300)));
+}
+
+body {
+    background-image: url("../img/background-body_1.png");
+    height: 100%;
+}
+
+.content-wrapper {
+    min-height: calc(100vh - 225px);
+}
+
+.container-xxl {
+    padding: 0 !important;
+    height: auto !important;
+}
+
+.row {
+    margin: 0 !important;
+}
+
+/************************************/
+
+.navbar {
+    background-color: rgb(51, 102, 0);
+    height: 75px;
+}
+
+    .navbar .container-xxl .col-4 {
+        padding: 0 !important;
+        font-size: 80%;
+    }
+
+        .navbar .container-xxl .col-4 a {
+            text-decoration: none;
+            color: white;
+        }
+
+    .navbar .container-xxl .col-2 {
+        padding: 0 !important;
+    }
+
+.header-cols {
+    text-align: right;
+}
+
+    .header-cols a {
+        color: #ffffff;
+        text-decoration: none;
+        font-size: 60%;
+    }
+
+.header-autorize {
+    float: right;
+    position: relative;
+}
+
+    .header-autorize span {
+        font-size: 60%;
+        height: 100%;
+    }
+
+.name-autorized {
+    height: 100%;
+}
+
+.name-submenu {
+    display: none;
+    z-index: 1;
+    text-align: right;
+    list-style-type: none;
+    background-color: rgba(51, 102, 0, 0.8);
+    position: absolute;
+    box-sizing: border-box;
+    right: 5%;
+}
+
+    .name-submenu li a {
+        text-decoration: none;
+        font-size: 50%;
+    }
+
+.header-autorize:hover .name-submenu {
+    display: block;
+}
+
+.name-submenu:hover {
+    display: block;
+}
+
+/*****************************************************************************************************************************************/
+
+footer {
+    height: 150px;
+}
+
+.footer-phrase {
+    background-color: #336600;
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+    .footer-phrase h4 {
+        font-size: 100%;
+    }
+
+.footer-copyright {
+    background-color: #064400;
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+    .footer-copyright h5 {
+        font-size: 40%;
+        margin: 0;
+    }

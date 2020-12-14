@@ -1,7 +1,68 @@
-﻿
+﻿@model EventData
 @{
-    ViewData["Title"] = "New";
+    ViewData["Title"] = "New Event";
 }
+<h1>Добавление новых соревнований</h1>
+<form asp-action="New" asp-controller="Event" asp-anti-forgery="true">
+    <div class="validation" asp-validation-summary="ModelOnly"></div>
+    <div class="col-5">
+        <div class="form-group">
+            <label asp-for="Title">Введите название соревнований</label><br />
+            <input type="text" asp-for="Title" />
+            <span asp-validation-for="Title" />
+        </div>
+        <div class="form-group">
+            <label asp-for="RegionId">Выберите регион</label><br />
+            <select asp-for="RegionId" asp-items="ViewBag.Regions"><option value=""></option></select>
+            <span asp-validation-for="RegionId" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Date">Введите дату проведения</label><br />
+            <input type="date" asp-for="Date" />
+            <span asp-validation-for="Date" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Location">Введите место проведения</label><br />
+            <input type="text" asp-for="Location" />
+        </div>
+        <div class="form-group">
+            <label asp-for="InfoLink">Вставте ссылку на информацию</label><br />
+            <input type="url" asp-for="InfoLink" />
+            <span asp-validation-for="InfoLink" />
+        </div>
+        <div class="form-group">
+            <label asp-for="ResultsLink">Вставте ссылку на результаты</label><br />
+            <input type="url" asp-for="ResultsLink" />
+            <span asp-validation-for="ResultsLink" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Groups">Введите группы. Формат ввода : "[группа];[группа];" (пример: Ж12;Ж14;М12;М14;)</label><br />
+            <textarea rows="2" cols="100" asp-for="Groups"></textarea>
+            <span asp-validation-for="Groups" />
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Создать" />
+        </div>
+    </div>
+</form>
+@section scripts{
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}
+@section styles{
+    <style>
+        .input-validation-error {
+            background: crimson
+        }
 
-<h1>New</h1>
+        input, select, option {
+            color: black;
+        }
+
+        textarea {
+            color: black;
+            resize: both;
+        }
+    </style>
+}
 
