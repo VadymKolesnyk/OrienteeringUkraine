@@ -21,7 +21,50 @@ namespace OrienteeringUkraine
 
         public int AddNewEvent(EventData data)
         {
-            throw new NotImplementedException();
+            DataLayer.Tables.Event newEvent = new DataLayer.Tables.Event
+            {
+                Title = data.Title,
+                EventDate = data.Date,
+                InfoLink = data.InfoLink,
+                ResultsLink = data.ResultsLink,
+                Location = data.Location,
+                RegionId = data.RegionId,
+                OrganizerId = db.Logins.FirstOrDefault(user => user.Login == data.OrganizerLogin).UserId
+            };
+
+            db.Events.Add(newEvent);
+            db.SaveChanges();
+
+            string[] groups = data.Groups.Split(";");
+
+            foreach (string group in groups)
+            {
+                int groupId;
+
+                if (!db.Groups.Any(group_ => group_.Name == group))
+                {
+                    DataLayer.Tables.Group newGroup = new DataLayer.Tables.Group { Name = group};
+                    db.Groups.Add(newGroup);
+                    db.SaveChanges();
+                    groupId = newGroup.Id;
+                }
+                else
+                {
+                    groupId = db.Groups.FirstOrDefault(group_ => group_.Name == group).Id;
+                }
+
+                db.EventGroups.Add(
+                    new DataLayer.Tables.EventGroup
+                    { 
+                        GroupId = groupId, 
+                        EventId = newEvent.Id 
+                    }
+                    );
+            }
+
+            db.SaveChanges();
+
+            return newEvent.Id;
         }
 
         public async Task AddNewUserAsync(AccountRegisterData data)
