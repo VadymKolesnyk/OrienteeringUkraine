@@ -29,7 +29,7 @@ namespace OrienteeringUkraine
                 ResultsLink = data.ResultsLink,
                 Location = data.Location,
                 RegionId = data.RegionId,
-                OrganizerId = db.Logins.FirstOrDefault(user => user.Login == data.OrganizerLogin).UserId
+                OrganizerId = db.Logins.First(user => user.Login == data.OrganizerLogin).UserId
             };
 
             db.Events.Add(newEvent);
@@ -41,7 +41,8 @@ namespace OrienteeringUkraine
             {
                 int groupId;
 
-                if (!db.Groups.Any(group_ => group_.Name == group))
+                DataLayer.Tables.Group groupInDB = db.Groups.FirstOrDefault(group_ => group_.Name == group);
+                if (groupInDB == null)
                 {
                     DataLayer.Tables.Group newGroup = new DataLayer.Tables.Group { Name = group};
                     db.Groups.Add(newGroup);
@@ -50,7 +51,7 @@ namespace OrienteeringUkraine
                 }
                 else
                 {
-                    groupId = db.Groups.FirstOrDefault(group_ => group_.Name == group).Id;
+                    groupId = groupInDB.Id;
                 }
 
                 db.EventGroups.Add(
@@ -58,8 +59,7 @@ namespace OrienteeringUkraine
                     { 
                         GroupId = groupId, 
                         EventId = newEvent.Id 
-                    }
-                    );
+                    });
             }
 
             db.SaveChanges();
@@ -69,7 +69,7 @@ namespace OrienteeringUkraine
 
         public async Task AddNewUserAsync(AccountRegisterData data)
         {
-            DataLayer.Tables.Role defaulftRole = db.Roles.FirstOrDefault(role => role.Name == "sportsman");
+            DataLayer.Tables.Role defaulftRole = await db.Roles.FirstOrDefaultAsync(role => role.Name == "sportsman");
             int defaultRoleId = defaulftRole.Id;
 
             DataLayer.Tables.User newUser = new DataLayer.Tables.User
@@ -82,8 +82,10 @@ namespace OrienteeringUkraine
                 ClubId = data.ClubId
             };
 
-            EntityEntry<DataLayer.Tables.User> newUserEntry = await db.Users.AddAsync(newUser);
-            int userId = newUserEntry.Entity.Id;
+            await db.Users.AddAsync(newUser);
+            await db.SaveChangesAsync();
+
+            int userId = newUser.Id;
 
             DataLayer.Tables.LoginData newLogin = new DataLayer.Tables.LoginData
             {
@@ -93,7 +95,6 @@ namespace OrienteeringUkraine
             };
 
             await db.Logins.AddAsync(newLogin);
-
             await db.SaveChangesAsync();
         }
 
@@ -116,7 +117,33 @@ namespace OrienteeringUkraine
 
         public EventData GetEventById(int id)
         {
-            throw new NotImplementedException();
+            DataLayer.Tables.Event eventInDB = db.Events.FirstOrDefault(event_ => event_.Id == id);
+
+            if (eventInDB == null)
+                return null;
+
+            var groups = from events in db.Events
+                         where events.Id == eventInDB.Id
+                         join eventGroups in db.EventGroups on events.Id equals eventGroups.EventId
+                         join groups_ in db.Groups on eventGroups.GroupId equals groups_.Id
+                         orderby groups_.Name ascending
+                         select new { groups_.Name };
+
+            string joinedGroups = string.Join(";", groups.Select(x => x.Name)) + ";";
+
+            EventData queriedEvent = new EventData
+            {
+                Title = eventInDB.Title,
+                Date = eventInDB.EventDate,
+                ResultsLink = eventInDB.ResultsLink,
+                InfoLink = eventInDB.InfoLink,
+                OrganizerLogin = db.Logins.First(organizer => organizer.UserId == eventInDB.OrganizerId).Login,
+                RegionId = eventInDB.RegionId,
+                Location = eventInDB.Location,
+                Groups = joinedGroups
+            };
+
+            return queriedEvent;
         }
 
         public HomeIndexModel GetEventsInfo(HomeIndexData data)
@@ -126,8 +153,8 @@ namespace OrienteeringUkraine
 
         public async Task<AccountUserModel> GetUserAsync(string login)
         {
-            DataLayer.Tables.LoginData userLoginData = db.Logins.FirstOrDefault(@user => @user.Login == login);
-            DataLayer.Tables.User userInDB = db.Users.FirstOrDefault(@user => @user.Id == userLoginData.UserId);
+            DataLayer.Tables.LoginData userLoginData = await db.Logins.FirstOrDefaultAsync(@user => @user.Login == login);
+            DataLayer.Tables.User userInDB = await db.Users.FirstOrDefaultAsync(@user => @user.Id == userLoginData.UserId);
 
             if (userLoginData == null || userInDB == null)
                 return null;
@@ -135,14 +162,14 @@ namespace OrienteeringUkraine
             AccountUserModel user = new AccountUserModel
             {
                 Login = userLoginData.Login,
-                Role = db.Roles.FirstOrDefault(role => role.Id == userInDB.RoleId).Name,
+                Role = (await db.Roles.FirstOrDefaultAsync(role => role.Id == userInDB.RoleId)).Name,
                 Name = userInDB.Name,
                 Surname = userInDB.Surname,
                 Birthday = userInDB.BirthDate,
                 RegionId = userInDB.RegionId,
-                Region = db.Regions.FirstOrDefault(region => region.Id == userInDB.RegionId).Name,
+                Region = (await db.Regions.FirstOrDefaultAsync(region => region.Id == userInDB.RegionId)).Name,
                 ClubId = userInDB.ClubId,
-                Club = db.Clubs.FirstOrDefault(club => club.Id == userInDB.ClubId).Name
+                Club = (await db.Clubs.FirstOrDefaultAsync(club => club.Id == userInDB.ClubId)).Name
             };
 
             return user;
@@ -150,7 +177,7 @@ namespace OrienteeringUkraine
 
         public async Task<AccountUserModel> GetUserAsync(string login, string password)
         {
-            DataLayer.Tables.LoginData userLoginData = db.Logins.FirstOrDefault(@user => @user.Login == login);
+            DataLayer.Tables.LoginData userLoginData = await db.Logins.FirstOrDefaultAsync(@user => @user.Login == login);
 
             if (userLoginData == null)
                 return null;
@@ -189,15 +216,18 @@ namespace OrienteeringUkraine
             userInDB.RegionId = user.RegionId;
             userInDB.ClubId = user.ClubId;
 
-            db.Logins.Remove(userLoginData);
+            if (userLoginData.Login != user.Login)
+            {
+                db.Logins.Remove(userLoginData);
 
-            db.Logins.Add(
-                new DataLayer.Tables.LoginData 
-                { 
-                    Login = user.Login, 
-                    UserId = userInDB.Id, 
-                    HashedPassword = userLoginData.HashedPassword 
-                });
+                db.Logins.Add(
+                    new DataLayer.Tables.LoginData
+                    {
+                        Login = user.Login,
+                        UserId = userInDB.Id,
+                        HashedPassword = userLoginData.HashedPassword
+                    });
+            }
 
             await db.SaveChangesAsync();
 
