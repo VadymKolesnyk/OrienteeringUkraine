@@ -81,14 +81,41 @@ namespace OrienteeringUkraine
             throw new NotImplementedException();
         }
 
-        public Task<AccountUserModel> GetUserAsync(string login)
+        public async Task<AccountUserModel> GetUserAsync(string login)
         {
-            throw new NotImplementedException();
+            DataLayer.Tables.LoginData userLoginData = db.Logins.FirstOrDefault(@user => @user.Login == login);
+            DataLayer.Tables.User userInDB = db.Users.FirstOrDefault(@user => @user.Id == userLoginData.UserId);
+
+            if (userLoginData == null || userInDB == null)
+                return null;
+
+            AccountUserModel user = new AccountUserModel
+            {
+                Login = userLoginData.Login,
+                Role = db.Roles.FirstOrDefault(role => role.Id == userInDB.RoleId).Name,
+                Name = userInDB.Name,
+                Surname = userInDB.Surname,
+                Birthday = userInDB.BirthDate,
+                RegionId = userInDB.RegionId,
+                Region = db.Regions.FirstOrDefault(region => region.Id == userInDB.RegionId).Name,
+                ClubId = userInDB.ClubId,
+                Club = db.Clubs.FirstOrDefault(club => club.Id == userInDB.ClubId).Name
+            };
+
+            return user;
         }
 
-        public Task<AccountUserModel> GetUserAsync(string login, string password)
+        public async Task<AccountUserModel> GetUserAsync(string login, string password)
         {
-            throw new NotImplementedException();
+            DataLayer.Tables.LoginData userLoginData = db.Logins.FirstOrDefault(@user => @user.Login == login);
+
+            if (userLoginData == null)
+                return null;
+
+            if (!VerifyHashedPassword(userLoginData.HashedPassword, password))
+                return null;
+
+            return await GetUserAsync(login);
         }
 
         public bool IsExistsEvent(int id)
@@ -103,30 +130,30 @@ namespace OrienteeringUkraine
 
         public async Task<AccountUserModel> UpdateUser(string login, AccountUserModel user)
         {
-            DataLayer.Tables.LoginData userData = db.Logins.FirstOrDefault(@user => @user.Login == login);
-            DataLayer.Tables.User ourUser = db.Users.FirstOrDefault(@user => @user.Id == userData.UserId);
+            DataLayer.Tables.LoginData userLoginData = db.Logins.FirstOrDefault(@user => @user.Login == login);
+            DataLayer.Tables.User userInDB = db.Users.FirstOrDefault(@user => @user.Id == userLoginData.UserId);
 
-            if (userData == null || ourUser == null)
+            if (userLoginData == null || userInDB == null)
                 return null;
 
-            user.Role = db.Roles.FirstOrDefault(role => role.Id == ourUser.RoleId).Name;
+            user.Role = db.Roles.FirstOrDefault(role => role.Id == userInDB.RoleId).Name;
             user.Club = db.Clubs.FirstOrDefault(club => club.Id == user.ClubId).Name;
             user.Region = db.Regions.FirstOrDefault(region => region.Id == user.RegionId).Name;
 
-            ourUser.Name = user.Name;
-            ourUser.Surname = user.Surname;
-            ourUser.BirthDate = user.Birthday;
-            ourUser.RegionId = user.RegionId;
-            ourUser.ClubId = user.ClubId;
+            userInDB.Name = user.Name;
+            userInDB.Surname = user.Surname;
+            userInDB.BirthDate = user.Birthday;
+            userInDB.RegionId = user.RegionId;
+            userInDB.ClubId = user.ClubId;
 
-            db.Logins.Remove(userData);
+            db.Logins.Remove(userLoginData);
 
             db.Logins.Add(
                 new DataLayer.Tables.LoginData 
                 { 
                     Login = user.Login, 
-                    UserId = ourUser.Id, 
-                    HashedPassword = userData.HashedPassword 
+                    UserId = userInDB.Id, 
+                    HashedPassword = userLoginData.HashedPassword 
                 });
 
             await db.SaveChangesAsync();
