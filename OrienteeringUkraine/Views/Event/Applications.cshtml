@@ -4,59 +4,142 @@
     ViewData["Title"] = "Applications";
 }
 
-<h1>Applications</h1>
+< <div class="container-xxl content-wrapper">
 
-<div>
-    <h4>EventApplicationsModel</h4>
-    <hr />
-    <dl class="row">
-    </dl>
-</div>
-@if (ViewBag.ShowAdminModule)
-{
-    <div>
-        <a asp-controller="Apply" asp-action="Edit" asp-route-id="@Model.Id">Редекция заявок</a> |
-        <a asp-action="Edit" asp-route-id="@Model.Id">Редекция соревнований</a> |
-        <a asp-action="Export" asp-route-id="@Model.Id">Экстпорт баз</a>
+    <div class="event-title"><h1>SUMY Skif Treasure</h1></div>
+
+    <div class="event-info row">
+
+        <div class="col-2 p-1 event-date">10.12.2020</div>
+
+        <div class="col-3 p-1 chip-info">
+
+            <div class="info-block">
+                <div class="row">   <span class="px-1 ">Всего заявилось:</span><span class="p-0"> 1000</span>   </div>
+                <div class="row">   <span class="px-1 ">Арендных чипов:</span><span class="p-0"> 500</span>  </div>
+            </div>
+
+        </div>
+
+        <div class="col-4 p-1 event-loc">
+
+            <div class="info-block">
+                <div class="row">   <span class="px-1 ">Регион:</span><span class="p-0">Одеська обл</span>   </div>
+                <div class="row">   <span class="px-1 ">Место:</span><span class="p-0">Малиновський р-н, "Дон Боско""Дон Боско""Дон Боско"</span>  </div>
+                <div class="row">   <span class="px-1 ">Организатор:</span><span class="p-0">Колесник К., Колесник В.</span>  </div>
+            </div>
+        </div>
+
+        <div class="col-3 p-0">
+            <div class="row">
+                <div class="col-6 p-1 button-block"><a href="">Информация>></a></div>
+                <div class="col-6 p-1 button-block"><a href="">Результаты>></a></div>
+            </div>
+        </div>
+
+
     </div>
-}
-<hr />
-<dl class="row">
-</dl>
-<div><a asp-controller="Home" asp-action="Index">Back to List</a>   </div>
-<div><a asp-controller="Home" asp-action="Index">Заявиться</a>   </div>
-<div class="col-12 align-items-center">
-    <h2>@Model.Title</h2> <br />
-    <h4>@Model.Date</h4>
-</div>
-<div class="col-3"><p>Количество заявившихся :@Model.AmountOfPeople</p></div>
-<div class="col-3"><p>Аренда чипов :@Model.AmountOfRentChips</p></div>
 
-@foreach (var item in Model.Applications)
-{
-    <div class="col-12 align-items-center">
-        <b>@item.Key</b>
+    <div class="row three-button-row">
+
+        <div class="col-2"></div>
+
+        <div class="col-10 p-0 row">
+
+            <div class="col-2 py-2 px-1"></div>
+
+            <div class="col-2 py-2 px-1">
+                <div class="button-href"><a href="">Редакция заявки</a></div>
+            </div>
+
+            <div class="col-1 py-2 px-1"></div>
+
+            <div class="col-2 py-2 px-1">
+                <div class="button-href"><a href="">Редакция соревнований</a></div>
+            </div>
+
+            <div class="col-1 py-2 px-1"></div>
+
+            <div class="col-2 py-2 px-1">
+                <div class="button-href"><a href="">Экспорт баз</a></div>
+            </div>
+
+            <div class="col-2 py-2 px-1"></div>
+
+        </div>
+
     </div>
-    <table class="col-12">
-        <tr>
-            <td>ФИО</td>
-            <td>ДР</td>
-            <td>Чип</td>
-            <td>Клуб</td>
-            <td>Регион</td>
-        </tr>
-        @foreach (var app in item.Value)
-        {
-            <tr>
-                <td>@app.Name</td>
-                <td>@app.Birthday.ToLongDateString()</td>
-                <td>@app.Chip</td>
-                <td>@app.Club</td>
-                <td>@app.Region</td>
-            </tr>
-        }
-    </table>
+
+    <div class="main-content-block row">
+
+        <div class="col-2 p-0 navig">
+            <div class="navig-wrap-div">
+                <div class="nav-register-button m-2"><a href="">Заявиться</a></div>
+                <div class="nav-column mt-1">
+                    @foreach (var item in Model.Applications.Keys)
+                    {
+                        <div class="anchor-link-table m-2"><a href="#@item">@item</a></div>
+                    }
+                </div>
+            </div>
+        </div>
+
+            <div class="col-10 p-0">
+
+                @foreach (var item in Model.Applications)
+                {
+                    <div class="table-title"><a name="@item.Key">@item.Key</a></div>
+
+                    <div class="table-fixed-row row p-0">
+                        <div class="col-1 p-0"></div>
+
+                        <div class="col-1 px-1 content-cell">Номер участника</div>
+
+                        <div class="col-2 px-1 content-cell colored-cell">Фамилия Имя</div>
+
+                        <div class="col-2 px-1 content-cell">Дата рождения</div>
+
+                        <div class="col-1 px-1 content-cell colored-cell">Чип</div>
+
+                        <div class="col-2 px-1 content-cell">Регион</div>
+
+                        <div class="col-2 px-1 content-cell colored-cell">Клуб</div>
+
+                        <div class="col-1 p-0"></div>
+                    </div>
+
+                    int i = 1;
+
+                    @foreach (var app in item.Value)
+                    {
+
+                        <div class="table-content-row row p-0">
+                            <div class="col-1 p-0"></div>
+
+                            <div class="col-1 p-1 content-cell">@(i++)</div>
+
+                            <div class="col-2 p-1 content-cell colored-cell">@app.Name</div>
+
+                            <div class="col-2 p-1 content-cell">@app.Birthday.ToLongDateString()</div>
+
+                            <div class="col-1 p-1 content-cell colored-cell">@app.Chip</div>
+
+                            <div class="col-2 p-1 content-cell">@app.Region</div>
+
+                            <div class="col-2 p-1 content-cell colored-cell">@app.Club</div>
+
+                            <div class="col-1 p-0"></div>
+                        </div>
+                    }
+
+                }
+
+            </div>
+        </div>
+</div>
+
+@section styles
+{
+    <link rel="stylesheet" type="text/css" href="~/css/event_applications_styles.css">
 }
-
-
 
