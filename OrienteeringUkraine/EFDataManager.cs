@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 using DataLayer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using OrienteeringUkraine.Data;
 using OrienteeringUkraine.Models;
@@ -32,10 +33,10 @@ namespace OrienteeringUkraine
             {
                 Name = data.Name,
                 Surname = data.Surname,
-                BirthDate = data.Birthday ?? null,
+                BirthDate = data.Birthday,
                 RoleId = defaultRoleId,
                 RegionId = data.RegionId,
-                ClubId = data.ClubId ?? null
+                ClubId = data.ClubId
             };
 
             EntityEntry<DataLayer.Tables.User> newUserEntry = await db.Users.AddAsync(newUser);
@@ -49,6 +50,8 @@ namespace OrienteeringUkraine
             };
 
             await db.Logins.AddAsync(newLogin);
+
+            await db.SaveChangesAsync();
         }
 
         public IEnumerable<Club> GetAllClubs()
@@ -90,7 +93,7 @@ namespace OrienteeringUkraine
 
         public bool IsExistsEvent(int id)
         {
-            return db.Events.Any(event_ => event_.Id == id);
+            return db.Events.Any(@event => @event.Id == id);
         }
 
         public void UpdateEvent(int id, EventData data)
@@ -98,9 +101,37 @@ namespace OrienteeringUkraine
             throw new NotImplementedException();
         }
 
-        public Task<AccountUserModel> UpdateUser(string login, AccountUserModel user)
+        public async Task<AccountUserModel> UpdateUser(string login, AccountUserModel user)
         {
-            throw new NotImplementedException();
+            DataLayer.Tables.LoginData userData = db.Logins.FirstOrDefault(@user => @user.Login == login);
+            DataLayer.Tables.User ourUser = db.Users.FirstOrDefault(@user => @user.Id == userData.UserId);
+
+            if (userData == null || ourUser == null)
+                return null;
+
+            user.Role = db.Roles.FirstOrDefault(role => role.Id == ourUser.RoleId).Name;
+            user.Club = db.Clubs.FirstOrDefault(club => club.Id == user.ClubId).Name;
+            user.Region = db.Regions.FirstOrDefault(region => region.Id == user.RegionId).Name;
+
+            ourUser.Name = user.Name;
+            ourUser.Surname = user.Surname;
+            ourUser.BirthDate = user.Birthday;
+            ourUser.RegionId = user.RegionId;
+            ourUser.ClubId = user.ClubId;
+
+            db.Logins.Remove(userData);
+
+            db.Logins.Add(
+                new DataLayer.Tables.LoginData 
+                { 
+                    Login = user.Login, 
+                    UserId = ourUser.Id, 
+                    HashedPassword = userData.HashedPassword 
+                });
+
+            await db.SaveChangesAsync();
+
+            return user;
         }
 
         public static string HashPassword(string password)
