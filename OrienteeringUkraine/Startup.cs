@@ -70,6 +70,7 @@ namespace OrienteeringUkraine
 
         }
 
+        /*
         public void SeedDB(IApplicationBuilder app)
         {
             using (var serviceScope = app.ApplicationServices.CreateScope())
@@ -914,6 +915,6 @@ namespace OrienteeringUkraine
                 context.SaveChanges();
             }
         }
-       
+        */
     }
 }

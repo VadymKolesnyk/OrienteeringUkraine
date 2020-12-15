@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using DataLayer;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using OrienteeringUkraine.Data;
 using OrienteeringUkraine.Models;
 
@@ -21,9 +23,32 @@ namespace OrienteeringUkraine
             throw new NotImplementedException();
         }
 
-        public Task AddNewUserAsync(AccountRegisterData data)
+        public async Task AddNewUserAsync(AccountRegisterData data)
         {
-            throw new NotImplementedException();
+            DataLayer.Tables.Role defaulftRole = db.Roles.FirstOrDefault(role => role.Name == "sportsman");
+            int defaultRoleId = defaulftRole.Id;
+
+            DataLayer.Tables.User newUser = new DataLayer.Tables.User
+            {
+                Name = data.Name,
+                Surname = data.Surname,
+                BirthDate = data.Birthday ?? null,
+                RoleId = defaultRoleId,
+                RegionId = data.RegionId,
+                ClubId = data.ClubId ?? null
+            };
+
+            EntityEntry<DataLayer.Tables.User> newUserEntry = await db.Users.AddAsync(newUser);
+            int userId = newUserEntry.Entity.Id;
+
+            DataLayer.Tables.LoginData newLogin = new DataLayer.Tables.LoginData
+            {
+                Login = data.Login,
+                UserId = userId,
+                HashedPassword = HashPassword(data.Password)
+            };
+
+            await db.Logins.AddAsync(newLogin);
         }
 
         public IEnumerable<Club> GetAllClubs()
