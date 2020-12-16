@@ -1,6 +1,11 @@
 ﻿@model ApplicationData
 @{
     ViewData["Title"] = "Edit";
+    var id = Context.Request.Query["id"].ToString();
+    if (id == "")
+    {
+        id = Context.Request.Path.Value.Split('/').Last();
+    }
 }
 
 <p>@Model.CurrentEvent?.Title</p>
@@ -12,7 +17,7 @@
     <div>
         <div>
             <label asp-for="Chip">Чип</label><br />
-            <input type="number" min="0" max="999999999" asp-for="Chip" data- />
+            <input type="number" min="0" max="999999999" asp-for="Chip"/>
             <span asp-validation-for="Chip" />
         </div>
         <div>
@@ -25,6 +30,9 @@
         </div>
     </div>
 </form>
+<div>
+    <a asp-action="Delete" asp-route-id="@id">Удалить заявку</a>
+</div>
 @section scripts{
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>

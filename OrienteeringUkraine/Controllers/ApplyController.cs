@@ -61,9 +61,15 @@ namespace OrienteeringUkraine.Controllers
             SetSelectLists(id);
             if (mode == "organizer")
             {
-                if ((User.IsInRole("admin") || User.IsInRole("moderator") /*|| User.Identity.Name == data.OrganizerLogin*/))
+                var model = dataManager.GetApplicationsById(id);
+                if (model == null)
                 {
-                    return View("EditAdmin");
+                    return RedirectToAction("Index", "Home");
+                }
+                ViewBag.ShowAdminModule = (User.IsInRole("admin") || User.IsInRole("moderator") || User.Identity.Name == model.OrganizerLogin);
+                if (ViewBag.ShowAdminModule)
+                {
+                    return View("EditAdmin", model);
                 }
             }
             var application = dataManager.GetApplication(id, User.Identity.Name);
@@ -74,32 +80,35 @@ namespace OrienteeringUkraine.Controllers
             return View("EditUser", application);
         }
         [HttpPost]
-        public IActionResult Edit(int id, ApplicationData data)
+        public IActionResult Edit(int id, ApplicationData data, string login = null)
         {
             if (ModelState.IsValid)
             {
-                dataManager.UpdateApplication(id, User.Identity.Name, data.GroupId, data.Chip);
-                return RedirectToAction("Applications", "Event", new { Id = id });
-            }
-            SetSelectLists(id);
-            return View("EditUser", data);
-        }
-        [HttpPost]
-        public IActionResult Edit(int id, ApplyEditData data)
-        {
-            if (ModelState.IsValid)
-            {
-                //dataManager.UpdateApplication(id, User.Identity.Name, data.GroupId, data.Chip);
-                return RedirectToAction("Applications", "Event", new { Id = id });
+                dataManager.UpdateApplication(id, login ?? User.Identity.Name, data.GroupId, data.Chip);
+                if (login == null)
+                {
+                    return RedirectToAction("Applications", "Event", new { Id = id });
+                }
+                else
+                {
+                    return RedirectToAction("Edit", "Apply", new { Id = id, Mode = "organizer" });
+                }
             }
             SetSelectLists(id);
             return View("EditUser", data);
         }
 
-        public IActionResult Delete(int id)
+        public IActionResult Delete(int id, string login = null)
         {
-            dataManager.DeleteApplication(id, User.Identity.Name);
-            return RedirectToAction("Applications", "Event", new { Id = id });
+            dataManager.DeleteApplication(id, login ?? User.Identity.Name);
+            if (login == null)
+            {
+                return RedirectToAction("Applications", "Event", new { Id = id });
+            }
+            else
+            {
+                return RedirectToAction("Edit", "Apply", new { Id = id, Mode = "organizer" });
+            }
         }
     }
 }

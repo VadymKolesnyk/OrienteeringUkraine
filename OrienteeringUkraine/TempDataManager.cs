@@ -54,7 +54,16 @@ namespace OrienteeringUkraine
                         Chip = i + 10 * i + 100 * i + 1000000 * a,
                         Club = "}{мельницькі пацыки",
                         Name = "Олександр Дзюбчик " + i,
-                        Region = "Хмельницька"
+                        Region = "Хмельницька",
+                        GroupId = item switch
+                        {
+                            "Ж12" => 1,
+                            "Ж14" => 2,
+                            "М12" => 10,
+                            "М14" => 11,
+                            _ => 0
+                        },
+                        Login = "sportsman"
                     });
                 }
                 model.Applications.Add(item, applications);
