@@ -9,6 +9,6 @@ namespace OrienteeringUkraine.Models
         public int? RegionId { get; set; }
         public int? Year { get; set; }
         public Months? Month { get; set; }
-        public IEnumerable<HomeEvent> Events { get; set; }
+        public IEnumerable<Event> Events { get; set; }
     }
 }

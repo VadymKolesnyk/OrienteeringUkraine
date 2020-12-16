@@ -19,11 +19,11 @@ namespace OrienteeringUkraine.Controllers
         }
         public IActionResult Applications(int id)
         {
-            if (!dataManager.IsExistsEvent(id))
+            var model = dataManager.GetApplicationsById(id);
+            if (model == null)
             {
                 return RedirectToAction("Index", "Home");
             }
-            var model = dataManager.GetApplicationsById(id);
             ViewBag.ShowAdminModule = (User.IsInRole("admin") || User.IsInRole("moderator") || User.Identity.Name == model.OrganizerLogin);
             return View(model);
         }

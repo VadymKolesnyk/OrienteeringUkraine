@@ -16,6 +16,7 @@ namespace OrienteeringUkraine.Data
         public string OrganizerLogin { get; set; }
         [Required(ErrorMessage = "Не указан регион соревнований")]
         public int RegionId { get; set; }
+        public string Region { get; set; }
         public string Location { get; set; }
         [Required(ErrorMessage = "Укажите хотя-бы одну группу")]
         [RegularExpression(@"([^;\n]+;)*", ErrorMessage = "Неправильный формат ввода")]
