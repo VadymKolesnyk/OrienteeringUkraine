@@ -6,17 +6,17 @@
 
 < <div class="container-xxl content-wrapper">
 
-    <div class="event-title"><h1>SUMY Skif Treasure</h1></div>
+    <div class="event-title"><h1>@Model.Title</h1></div>
 
     <div class="event-info row">
 
-        <div class="col-2 p-1 event-date">10.12.2020</div>
+        <div class="col-2 p-1 event-date">@Model.Date.ToShortDateString()</div>
 
         <div class="col-3 p-1 chip-info">
 
             <div class="info-block">
-                <div class="row">   <span class="px-1 ">Всего заявилось:</span><span class="p-0"> 1000</span>   </div>
-                <div class="row">   <span class="px-1 ">Арендных чипов:</span><span class="p-0"> 500</span>  </div>
+                <div class="row">   <span class="px-1 ">Всего заявилось:</span><span class="p-0"> @Model.AmountOfPeople</span>   </div>
+                <div class="row">   <span class="px-1 ">Арендных чипов:</span><span class="p-0"> @Model.AmountOfRentChips</span>  </div>
             </div>
 
         </div>
@@ -24,57 +24,60 @@
         <div class="col-4 p-1 event-loc">
 
             <div class="info-block">
-                <div class="row">   <span class="px-1 ">Регион:</span><span class="p-0">Одеська обл</span>   </div>
-                <div class="row">   <span class="px-1 ">Место:</span><span class="p-0">Малиновський р-н, "Дон Боско""Дон Боско""Дон Боско"</span>  </div>
-                <div class="row">   <span class="px-1 ">Организатор:</span><span class="p-0">Колесник К., Колесник В.</span>  </div>
+                <div class="row">   <span class="px-1 ">Регион:</span><span class="p-0">@Model.Region</span>   </div>
+                <div class="row">   <span class="px-1 ">Место:</span><span class="p-0">@Model.Location</span>  </div>
+                <div class="row">   <span class="px-1 ">Организатор:</span><span class="p-0">@Model.Organizer</span>  </div>
             </div>
         </div>
 
         <div class="col-3 p-0">
             <div class="row">
-                <div class="col-6 p-1 button-block"><a href="">Информация>></a></div>
-                <div class="col-6 p-1 button-block"><a href="">Результаты>></a></div>
+                <div class="col-6 p-1 button-block"><a href="@Model.InfoLink">Информация>></a></div>
+                <div class="col-6 p-1 button-block"><a href="@Model.ResultsLink">Результаты>></a></div>
             </div>
         </div>
 
 
     </div>
+    @if (ViewBag.ShowAdminModule)
+    {
+        <div class="row three-button-row">
 
-    <div class="row three-button-row">
+            <div class="col-2"></div>
 
-        <div class="col-2"></div>
+            <div class="col-10 p-0 row">
 
-        <div class="col-10 p-0 row">
+                <div class="col-2 py-2 px-1"></div>
 
-            <div class="col-2 py-2 px-1"></div>
+                <div class="col-2 py-2 px-1">
+                    <div class="button-href"><a asp-action="Edit" asp-controller="Apply" asp-route-mode="organizer" asp-route-id="@Model.Id">Редакция заявки</a></div>
+                </div>
 
-            <div class="col-2 py-2 px-1">
-                <div class="button-href"><a href="">Редакция заявки</a></div>
+                <div class="col-1 py-2 px-1"></div>
+
+                <div class="col-2 py-2 px-1">
+                    <div class="button-href"><a asp-action="Edit" asp-route-id="@Model.Id">Редакция соревнований</a></div>
+                </div>
+
+                <div class="col-1 py-2 px-1"></div>
+
+                <div class="col-2 py-2 px-1">
+                    <div class="button-href"><a asp-action="Export" asp-route-id="@Model.Id">Экспорт баз</a></div>
+                </div>
+
+                <div class="col-2 py-2 px-1"></div>
+
             </div>
-
-            <div class="col-1 py-2 px-1"></div>
-
-            <div class="col-2 py-2 px-1">
-                <div class="button-href"><a href="">Редакция соревнований</a></div>
-            </div>
-
-            <div class="col-1 py-2 px-1"></div>
-
-            <div class="col-2 py-2 px-1">
-                <div class="button-href"><a href="">Экспорт баз</a></div>
-            </div>
-
-            <div class="col-2 py-2 px-1"></div>
 
         </div>
+    }
 
-    </div>
 
     <div class="main-content-block row">
 
         <div class="col-2 p-0 navig">
             <div class="navig-wrap-div">
-                <div class="nav-register-button m-2"><a href="">Заявиться</a></div>
+                <div class="nav-register-button m-2"><a asp-action="New" asp-controller="Apply" asp-route-id="@Model.Id">Заявиться</a></div>
                 <div class="nav-column mt-1">
                     @foreach (var item in Model.Applications.Keys)
                     {
@@ -84,58 +87,58 @@
             </div>
         </div>
 
-            <div class="col-10 p-0">
+        <div class="col-10">
 
-                @foreach (var item in Model.Applications)
+            @foreach (var item in Model.Applications)
+            {
+                <div class="table-title"><a name="@item.Key">@item.Key</a></div>
+
+                <div class="table-fixed-row row p-0">
+                    <div class="col-1 p-0"></div>
+
+                    <div class="col-1 px-1 content-cell">Номер участника</div>
+
+                    <div class="col-2 px-1 content-cell colored-cell">Фамилия Имя</div>
+
+                    <div class="col-2 px-1 content-cell">Дата рождения</div>
+
+                    <div class="col-1 px-1 content-cell colored-cell">Чип</div>
+
+                    <div class="col-2 px-1 content-cell">Регион</div>
+
+                    <div class="col-2 px-1 content-cell colored-cell">Клуб</div>
+
+                    <div class="col-1 p-0"></div>
+                </div>
+
+                int i = 1;
+
+                @foreach (var app in item.Value)
                 {
-                    <div class="table-title"><a name="@item.Key">@item.Key</a></div>
 
-                    <div class="table-fixed-row row p-0">
+                    <div class="table-content-row row p-0">
                         <div class="col-1 p-0"></div>
 
-                        <div class="col-1 px-1 content-cell">Номер участника</div>
+                        <div class="col-1 p-1 content-cell">@(i++)</div>
 
-                        <div class="col-2 px-1 content-cell colored-cell">Фамилия Имя</div>
+                        <div class="col-2 p-1 content-cell colored-cell">@app.Name</div>
 
-                        <div class="col-2 px-1 content-cell">Дата рождения</div>
+                        <div class="col-2 p-1 content-cell">@app.Birthday.ToLongDateString()</div>
 
-                        <div class="col-1 px-1 content-cell colored-cell">Чип</div>
+                        <div class="col-1 p-1 content-cell colored-cell">@app.Chip</div>
 
-                        <div class="col-2 px-1 content-cell">Регион</div>
+                        <div class="col-2 p-1 content-cell">@app.Region</div>
 
-                        <div class="col-2 px-1 content-cell colored-cell">Клуб</div>
+                        <div class="col-2 p-1 content-cell colored-cell">@app.Club</div>
 
                         <div class="col-1 p-0"></div>
                     </div>
-
-                    int i = 1;
-
-                    @foreach (var app in item.Value)
-                    {
-
-                        <div class="table-content-row row p-0">
-                            <div class="col-1 p-0"></div>
-
-                            <div class="col-1 p-1 content-cell">@(i++)</div>
-
-                            <div class="col-2 p-1 content-cell colored-cell">@app.Name</div>
-
-                            <div class="col-2 p-1 content-cell">@app.Birthday.ToLongDateString()</div>
-
-                            <div class="col-1 p-1 content-cell colored-cell">@app.Chip</div>
-
-                            <div class="col-2 p-1 content-cell">@app.Region</div>
-
-                            <div class="col-2 p-1 content-cell colored-cell">@app.Club</div>
-
-                            <div class="col-1 p-0"></div>
-                        </div>
-                    }
-
                 }
 
-            </div>
+            }
+
         </div>
+    </div>
 </div>
 
 @section styles

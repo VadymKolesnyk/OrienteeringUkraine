@@ -3,6 +3,9 @@
     width: 100%;
 }
 
+h1 {
+    font-size: 40px !important;
+}
 
 .event-info {
     width: 100%;
@@ -165,7 +168,9 @@
     font-size: 80%;
     text-align: center;
 }
-
+.col-10{
+    padding: 0 0 20px 0;
+}
 
 .table-fixed-row .col-1, .table-fixed-row .col-2 {
     font-size: 55%;
