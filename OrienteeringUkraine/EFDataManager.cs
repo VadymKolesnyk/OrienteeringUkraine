@@ -173,7 +173,7 @@ namespace OrienteeringUkraine
                         Name = user.Name + " " + user.Surname,
                         Birthday = user.BirthDate,
                         Club = db.Clubs.FirstOrDefault(club => club.Id == user.ClubId)?.Name,
-                        Region  = db.Regions.FirstOrDefault(region => region.Id == user.RegionId).Name,
+                        Region = db.Regions.FirstOrDefault(region => region.Id == user.RegionId).Name,
                         Chip = application.ChipId,
                         GroupId = group.Id
                     };
@@ -250,11 +250,11 @@ namespace OrienteeringUkraine
             }
             else
             {
-                IEnumerable<HomeEvent> homeEvents = from e in events
+                IEnumerable<Event> homeEvents = from e in events
                                                     join u in db.Users on e.OrganizerId equals u.Id
                                                     join r in db.Regions on e.RegionId equals r.Id
                                                     orderby e.EventDate ascending
-                                                    select new HomeEvent 
+                                                    select new Event
                                                     {
                                                         Id = e.Id,
                                                         EventDate = e.EventDate,
@@ -380,13 +380,13 @@ namespace OrienteeringUkraine
 
             db.SaveChanges();
         }
-            
+
         public async Task<AccountUserModel> UpdateUser(string login, AccountUserModel user)
         {
             DataLayer.Tables.LoginData userLoginData = db.Logins.FirstOrDefault(@user => @user.Login == login);
             if (userLoginData == null)
                 return null;
-            
+
             DataLayer.Tables.User userInDB = db.Users.FirstOrDefault(@user => @user.Id == userLoginData.UserId);
             if (userInDB == null)
                 return null;
@@ -478,5 +478,34 @@ namespace OrienteeringUkraine
             return true;
         }
 
+        public IEnumerable<Group> GetGroupsOnEvent(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool IsApplied(int EventId, string login)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddNewApplication(int id, string login, int groupId, int? chip)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateApplication(int id, string login, int groupId, int? chip)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteApplication(int id, string login)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ApplicationData GetApplication(int id, string login)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
