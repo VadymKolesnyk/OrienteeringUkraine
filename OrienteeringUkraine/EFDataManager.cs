@@ -179,6 +179,9 @@ namespace OrienteeringUkraine
                 model.Applications.Add(group.Name, applicationsPerGroup);
             }
 
+            model.AmountOfPeople = eventApplications.Count();
+            model.AmountOfRentChips = eventApplications.Count(x => x.ChipId == null);
+
             return model;
         }
 
