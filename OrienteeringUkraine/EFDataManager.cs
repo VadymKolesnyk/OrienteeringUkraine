@@ -39,32 +39,38 @@ namespace OrienteeringUkraine
 
             foreach (string group in groups)
             {
-                int groupId;
-
-                DataLayer.Tables.Group groupInDB = db.Groups.FirstOrDefault(group_ => group_.Name == group);
-                if (groupInDB == null)
-                {
-                    DataLayer.Tables.Group newGroup = new DataLayer.Tables.Group { Name = group};
-                    db.Groups.Add(newGroup);
-                    db.SaveChanges();
-                    groupId = newGroup.Id;
-                }
-                else
-                {
-                    groupId = groupInDB.Id;
-                }
-
-                db.EventGroups.Add(
-                    new DataLayer.Tables.EventGroup
-                    { 
-                        GroupId = groupId, 
-                        EventId = newEvent.Id 
-                    });
+                AssociateEventAndGroup(newEvent, group);
             }
 
             db.SaveChanges();
 
             return newEvent.Id;
+        }
+
+        private void AssociateEventAndGroup(DataLayer.Tables.Event curEvent, string group)
+        {
+            int groupId;
+
+            DataLayer.Tables.Group groupInDB = db.Groups.FirstOrDefault(group_ => group_.Name == group);
+
+            if (groupInDB == null)
+            {
+                DataLayer.Tables.Group newGroup = new DataLayer.Tables.Group { Name = group };
+                db.Groups.Add(newGroup);
+                db.SaveChanges();
+                groupId = newGroup.Id;
+            }
+            else
+            {
+                groupId = groupInDB.Id;
+            }
+
+            db.EventGroups.Add(
+                new DataLayer.Tables.EventGroup
+                {
+                    GroupId = groupId,
+                    EventId = curEvent.Id
+                });
         }
 
         public async Task AddNewUserAsync(AccountRegisterData data)
@@ -122,14 +128,7 @@ namespace OrienteeringUkraine
             if (eventInDB == null)
                 return null;
 
-            var groups = from events in db.Events
-                         where events.Id == eventInDB.Id
-                         join eventGroups in db.EventGroups on events.Id equals eventGroups.EventId
-                         join groups_ in db.Groups on eventGroups.GroupId equals groups_.Id
-                         orderby groups_.Name ascending
-                         select new { groups_.Name };
-
-            string joinedGroups = string.Join(";", groups.Select(x => x.Name)) + ";";
+            string joinedGroups = GetEventGroups(eventInDB);
 
             EventData queriedEvent = new EventData
             {
@@ -144,6 +143,19 @@ namespace OrienteeringUkraine
             };
 
             return queriedEvent;
+        }
+
+        private string GetEventGroups(DataLayer.Tables.Event eventInDB)
+        {
+            var groups = from events in db.Events
+                         where events.Id == eventInDB.Id
+                         join eventGroups in db.EventGroups on events.Id equals eventGroups.EventId
+                         join groups_ in db.Groups on eventGroups.GroupId equals groups_.Id
+                         orderby groups_.Name ascending
+                         select new { groups_.Name };
+
+            string joinedGroups = string.Join(";", groups.Select(x => x.Name)) + ";";
+            return joinedGroups;
         }
 
         public HomeIndexModel GetEventsInfo(HomeIndexData data)
@@ -197,9 +209,58 @@ namespace OrienteeringUkraine
 
         public void UpdateEvent(int id, EventData data)
         {
-            throw new NotImplementedException();
-        }
+            DataLayer.Tables.Event eventInDB = db.Events.FirstOrDefault(event_ => event_.Id == id);
 
+            if (eventInDB == null)
+                return;
+
+            string eventInDBGroups = GetEventGroups(eventInDB);
+
+            if (data.Title != eventInDB.Title)
+                eventInDB.Title = data.Title;
+
+            if (data.Date != eventInDB.EventDate)
+                eventInDB.EventDate = data.Date;
+
+            if (data.ResultsLink != eventInDB.ResultsLink)
+                eventInDB.ResultsLink = data.ResultsLink;
+
+            if (data.InfoLink != eventInDB.InfoLink)
+                eventInDB.InfoLink = data.ResultsLink;
+
+            if (data.RegionId != eventInDB.RegionId)
+                eventInDB.RegionId = data.RegionId;
+
+            if (data.Location != eventInDB.Location)
+                eventInDB.Location = data.Location;
+
+            if (data.Groups != eventInDBGroups)
+            {
+                var groupsInDB = eventInDBGroups[..^1].Split(";");
+                var editedGroups = data.Groups[..^1].Split(";").Distinct();
+
+                foreach (string group in groupsInDB)
+                {
+                    if (!editedGroups.Contains(group))
+                    {
+                        int groupId = db.Groups.FirstOrDefault(group_ => group_.Name == group).Id;
+                        DataLayer.Tables.EventGroup eventGroupToDelete = db.EventGroups.FirstOrDefault(eventGroup => eventGroup.EventId == eventInDB.Id && eventGroup.GroupId == groupId);
+                        db.EventGroups.Remove(eventGroupToDelete);
+                    }
+                }
+
+                foreach (string group in editedGroups)
+                {
+                    if (!groupsInDB.Contains(group))
+                    {
+                        AssociateEventAndGroup(eventInDB, group);
+                    }
+                }
+            }
+
+            db.SaveChanges();
+        }
+            
         public async Task<AccountUserModel> UpdateUser(string login, AccountUserModel user)
         {
             DataLayer.Tables.LoginData userLoginData = db.Logins.FirstOrDefault(@user => @user.Login == login);
