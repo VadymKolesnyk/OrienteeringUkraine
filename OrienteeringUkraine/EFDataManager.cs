@@ -154,9 +154,11 @@ namespace OrienteeringUkraine
         public async Task<AccountUserModel> GetUserAsync(string login)
         {
             DataLayer.Tables.LoginData userLoginData = await db.Logins.FirstOrDefaultAsync(@user => @user.Login == login);
+            if (userLoginData == null)
+                return null;
             DataLayer.Tables.User userInDB = await db.Users.FirstOrDefaultAsync(@user => @user.Id == userLoginData.UserId);
 
-            if (userLoginData == null || userInDB == null)
+            if (userInDB == null)
                 return null;
 
             AccountUserModel user = new AccountUserModel
@@ -167,9 +169,9 @@ namespace OrienteeringUkraine
                 Surname = userInDB.Surname,
                 Birthday = userInDB.BirthDate,
                 RegionId = userInDB.RegionId,
-                Region = (await db.Regions.FirstOrDefaultAsync(region => region.Id == userInDB.RegionId)).Name,
+                Region = (await db.Regions.FirstOrDefaultAsync(region => region.Id == userInDB.RegionId))?.Name,
                 ClubId = userInDB.ClubId,
-                Club = (await db.Clubs.FirstOrDefaultAsync(club => club.Id == userInDB.ClubId)).Name
+                Club = (await db.Clubs.FirstOrDefaultAsync(club => club.Id == userInDB.ClubId))?.Name
             };
 
             return user;
@@ -201,13 +203,16 @@ namespace OrienteeringUkraine
         public async Task<AccountUserModel> UpdateUser(string login, AccountUserModel user)
         {
             DataLayer.Tables.LoginData userLoginData = db.Logins.FirstOrDefault(@user => @user.Login == login);
+            if (userLoginData == null)
+                return null;
+            
             DataLayer.Tables.User userInDB = db.Users.FirstOrDefault(@user => @user.Id == userLoginData.UserId);
-
-            if (userLoginData == null || userInDB == null)
+            if (userInDB == null)
                 return null;
 
+
             user.Role = db.Roles.FirstOrDefault(role => role.Id == userInDB.RoleId).Name;
-            user.Club = db.Clubs.FirstOrDefault(club => club.Id == user.ClubId).Name;
+            user.Club = db.Clubs.FirstOrDefault(club => club.Id == user.ClubId)?.Name;
             user.Region = db.Regions.FirstOrDefault(region => region.Id == user.RegionId).Name;
 
             userInDB.Name = user.Name;

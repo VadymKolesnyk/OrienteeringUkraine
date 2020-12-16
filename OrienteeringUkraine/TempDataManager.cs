@@ -54,7 +54,8 @@ namespace OrienteeringUkraine
                         Chip = i + 10 * i + 100 * i + 1000000 * a,
                         Club = "}{мельницькі пацыки",
                         Name = "Олександр Дзюбчик " + i,
-                        Region = "Хмельницька"
+                        Region = "Хмельницька",
+                        GroupId = 1,
                     });
                 }
                 model.Applications.Add(item, applications);
@@ -66,7 +67,8 @@ namespace OrienteeringUkraine
 
         public bool IsExistsEvent(int id)
         {
-            return (id >= 1 && id <= 10);
+            return manager.IsExistsEvent(id);
+            //return (id >= 1 && id <= 10);
         }
         private class LoginInfo
         {
@@ -134,90 +136,96 @@ namespace OrienteeringUkraine
         };
         public async Task AddNewUserAsync(AccountRegisterData data)
         {
-            logins.Add(new LoginInfo()
-            {
-                Login = data.Login,
-                Password = data.Password,
-                Role = "sportsman",
-                Name = data.Name,
-                Surname = data.Surname,
-                ClubId = data.ClubId,
-                Birthday = data.Birthday,
-                RegionId = data.RegionId,
-            });
+            await manager.AddNewUserAsync(data);
+            //logins.Add(new LoginInfo()
+            //{
+            //    Login = data.Login,
+            //    Password = data.Password,
+            //    Role = "sportsman",
+            //    Name = data.Name,
+            //    Surname = data.Surname,
+            //    ClubId = data.ClubId,
+            //    Birthday = data.Birthday,
+            //    RegionId = data.RegionId,
+            //});
         }
 
 
         public async Task<AccountUserModel> GetUserAsync(string login)
         {
-            var user = await Task.Run(() => logins.FirstOrDefault((u => u.Login == login)));
-            return user == null ? null : new AccountUserModel()
-            {
-                Login = user.Login,
-                Role = user.Role,
-                Name = user.Name,
-                Surname = user.Surname,
-                Club = clubs.FirstOrDefault(club => user.ClubId == club.Id)?.Name,
-                Birthday = user.Birthday,
-                RegionId = user.RegionId,
-                Region = regions.FirstOrDefault(reg => user.RegionId == reg.Id)?.Name,
-                ClubId = user.ClubId
-            };
+            return await manager.GetUserAsync(login);
+            //var user = await Task.Run(() => logins.FirstOrDefault((u => u.Login == login)));
+            //return user == null ? null : new AccountUserModel()
+            //{
+            //    Login = user.Login,
+            //    Role = user.Role,
+            //    Name = user.Name,
+            //    Surname = user.Surname,
+            //    Club = clubs.FirstOrDefault(club => user.ClubId == club.Id)?.Name,
+            //    Birthday = user.Birthday,
+            //    RegionId = user.RegionId,
+            //    Region = regions.FirstOrDefault(reg => user.RegionId == reg.Id)?.Name,
+            //    ClubId = user.ClubId
+            //};
         }
 
         public async Task<AccountUserModel> GetUserAsync(string login, string password)
         {
-            var user = await Task.Run(() => logins.FirstOrDefault((u => u.Login == login && u.Password == password)));
-            return user == null ? null : new AccountUserModel()
-            {
-                Login = user.Login,
-                Role = user.Role,
-                Name = user.Name,
-                Surname = user.Surname,
-                ClubId = user.ClubId,
-                Club = clubs.FirstOrDefault(club => user.ClubId == club.Id)?.Name,
-                Birthday = user.Birthday,
-                RegionId = user.RegionId,
-                Region = regions.FirstOrDefault(reg => user.RegionId == reg.Id)?.Name
-            };
+            return await manager.GetUserAsync(login, password);
+            //var user = await Task.Run(() => logins.FirstOrDefault((u => u.Login == login && u.Password == password)));
+            //return user == null ? null : new AccountUserModel()
+            //{
+            //    Login = user.Login,
+            //    Role = user.Role,
+            //    Name = user.Name,
+            //    Surname = user.Surname,
+            //    ClubId = user.ClubId,
+            //    Club = clubs.FirstOrDefault(club => user.ClubId == club.Id)?.Name,
+            //    Birthday = user.Birthday,
+            //    RegionId = user.RegionId,
+            //    Region = regions.FirstOrDefault(reg => user.RegionId == reg.Id)?.Name
+            //};
         }
 
         public IEnumerable<Region> GetAllRegions()
         {
-            return regions.Select(x => new Region() { Id = x.Id, Name= x.Name});
+            return manager.GetAllRegions();
+            //return regions.Select(x => new Region() { Id = x.Id, Name= x.Name});
         }
 
         public IEnumerable<Club> GetAllClubs()
         {
-            return clubs;
+            return manager.GetAllClubs();
+            //return clubs;
         }
 
         public async Task<AccountUserModel> UpdateUser(string login, AccountUserModel data)
         {
-            var user = logins.Find(x => x.Login == login);
-            user.Login = data.Login;
-            user.Name = data.Name;
-            user.Surname = data.Surname;
-            user.ClubId = data.ClubId;
-            user.Birthday = data.Birthday;
-            user.RegionId = data.RegionId;
-            return new AccountUserModel()
-            {
-                Login = user.Login,
-                Role = user.Role,
-                Name = user.Name,
-                Surname = user.Surname,
-                ClubId = user.ClubId,
-                Club = clubs.FirstOrDefault(club => user.ClubId == club.Id)?.Name,
-                Birthday = user.Birthday,
-                RegionId = user.RegionId,
-                Region = regions.FirstOrDefault(reg => user.RegionId == reg.Id)?.Name,
-            };
+            return await manager.UpdateUser(login, data);
+            //var user = logins.Find(x => x.Login == login);
+            //user.Login = data.Login;
+            //user.Name = data.Name;
+            //user.Surname = data.Surname;
+            //user.ClubId = data.ClubId;
+            //user.Birthday = data.Birthday;
+            //user.RegionId = data.RegionId;
+            //return new AccountUserModel()
+            //{
+            //    Login = user.Login,
+            //    Role = user.Role,
+            //    Name = user.Name,
+            //    Surname = user.Surname,
+            //    ClubId = user.ClubId,
+            //    Club = clubs.FirstOrDefault(club => user.ClubId == club.Id)?.Name,
+            //    Birthday = user.Birthday,
+            //    RegionId = user.RegionId,
+            //    Region = regions.FirstOrDefault(reg => user.RegionId == reg.Id)?.Name,
+            //};
         }
 
         public int AddNewEvent(EventData data)
         {
-            return 1;
+            return manager.AddNewEvent(data);
         }
 
         public EventData GetEventById(int id)
