@@ -8,7 +8,7 @@ namespace DataLayer.Tables
     {
         public int Id { get; set; }
         public int EventGroupId { get; set; }
-        public int ChipId { get; set; }
+        public int? ChipId { get; set; }
         public int UserId { get; set; }
     }
 }

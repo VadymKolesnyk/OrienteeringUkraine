@@ -35,7 +35,7 @@ namespace OrienteeringUkraine
             db.Events.Add(newEvent);
             db.SaveChanges();
 
-            string[] groups = data.Groups.Split(";");
+            var groups = data.Groups[..^1].Split(";").Distinct();
 
             foreach (string group in groups)
             {
