@@ -169,9 +169,10 @@ namespace OrienteeringUkraine
                     {
                         Login = db.Logins.FirstOrDefault(user_ => user_.UserId == user.Id).Login,
                         Name = user.Name + " " + user.Surname,
-                        Birthday = (DateTime)(user.BirthDate ?? null),
-                        Club = db.Clubs.FirstOrDefault(club => club.Id == user.ClubId).Name,
+                        Birthday = user.BirthDate,
+                        Club = db.Clubs.FirstOrDefault(club => club.Id == user.ClubId)?.Name,
                         Region  = db.Regions.FirstOrDefault(region => region.Id == user.RegionId).Name,
+                        Chip = application.ChipId,
                         GroupId = group.Id
                     };
                     applicationsPerGroup.Add(userApplication);

@@ -6,10 +6,10 @@ namespace OrienteeringUkraine.Models
     {
         public string Login { get; set; }
         public string Name { get; set; }
-        public DateTime Birthday { get; set; }
+        public DateTime? Birthday { get; set; }
         public string Club { get; set; }
         public string Region { get; set; }
-        public int Chip { get; set; }
+        public int? Chip { get; set; }
         public int GroupId { get; set; }
     }
 }
