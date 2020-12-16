@@ -14,6 +14,7 @@ namespace OrienteeringUkraine
     public class EFDataManager : IDataManager
     {
         private readonly EFContext db;
+        private const int numderOfEventsOnPage = 10;
         public EFDataManager(EFContext db) : base()
         {
             this.db = db;
@@ -113,6 +114,7 @@ namespace OrienteeringUkraine
         public IEnumerable<Region> GetAllRegions()
         {
             var regions = db.Regions.Select(region => new Region { Id = region.Id, Name = region.Name }).OrderBy(region => region.Name);
+            Console.WriteLine(regions.GetType());
             return regions;
         }
 
@@ -144,7 +146,7 @@ namespace OrienteeringUkraine
                          join eventGroups in db.EventGroups on events.Id equals eventGroups.EventId
                          join groups_ in db.Groups on eventGroups.GroupId equals groups_.Id
                          orderby groups_.Name ascending
-                         select new { Id = groups_.Id, Name = groups_.Name };
+                         select new { groups_.Id, groups_.Name };
 
             model.Applications = new Dictionary<string, List<EventApplication>>();
 
@@ -154,9 +156,9 @@ namespace OrienteeringUkraine
                                     join applications in db.Applications on eventGroups.Id equals applications.EventGroupId
                                     select new
                                     {
-                                        GroupId = eventGroups.GroupId,
-                                        ChipId = applications.ChipId,
-                                        UserId = applications.UserId
+                                        eventGroups.GroupId,
+                                        applications.ChipId,
+                                        applications.UserId
                                     };
 
             foreach (var group in groups)
@@ -225,7 +227,60 @@ namespace OrienteeringUkraine
 
         public HomeIndexModel GetEventsInfo(HomeIndexData data)
         {
-            throw new NotImplementedException();
+            IEnumerable<DataLayer.Tables.Event> events = db.Events;
+            if (data.RegionId != null)
+            {
+                events = events?.Where(e => e.RegionId == data.RegionId);
+            }
+            if (data.Month != null)
+            {
+                events = events?.Where(e => e.EventDate.Month == (int)data.Month);
+            }
+            if (data.Year != null)
+            {
+                events = events?.Where(e => e.EventDate.Year == data.Year);
+            }
+
+            var res = new HomeIndexModel();
+            if (events == null)
+            {
+                res.Events = null;
+                res.CurrentPage = 1;
+                res.CountPages = 1;
+            }
+            else
+            {
+                IEnumerable<HomeEvent> homeEvents = from e in events
+                                                    join u in db.Users on e.OrganizerId equals u.Id
+                                                    join r in db.Regions on e.RegionId equals r.Id
+                                                    orderby e.EventDate ascending
+                                                    select new HomeEvent 
+                                                    {
+                                                        Id = e.Id,
+                                                        EventDate = e.EventDate,
+                                                        InfoLink = e.InfoLink,
+                                                        ResultsLink = e.ResultsLink,
+                                                        Location = e.Location,
+                                                        Title = e.Title,
+                                                        Organizer = u.Name + " " + u.Surname,
+                                                        Region = r.Name
+                                                    };
+                int amountOfPages = (homeEvents.Count() - 1) / numderOfEventsOnPage + 1;
+                int startIndex = (data.Page - 1) * numderOfEventsOnPage;
+                if (startIndex < 0)
+                {
+                    startIndex = 0;
+                }
+                if (startIndex > homeEvents.Count())
+                {
+                    startIndex = (amountOfPages - 1) * numderOfEventsOnPage;
+                }
+                int finishIndex = Math.Min(startIndex + numderOfEventsOnPage, homeEvents.Count());
+                res.Events = homeEvents.ToArray()[startIndex..finishIndex];
+                res.CurrentPage = startIndex / numderOfEventsOnPage + 1;
+                res.CountPages = amountOfPages;
+            }
+            return res;
         }
 
         public async Task<AccountUserModel> GetUserAsync(string login)

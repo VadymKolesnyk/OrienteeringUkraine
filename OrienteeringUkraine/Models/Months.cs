@@ -2,17 +2,17 @@
 {
     public enum Months
     {
-        January,    Jan = January,
-        February,   Feb = February,
-        March,      Mar = March,
-        April,      Apr = April,
+        Jan = 1,
+        Feb,
+        Mar,
+        Apr,
         May,
         June,
         July,
-        August,     Aug = August,
-        September,  Sept = September,
-        October,    Oct = October,
-        November,   Nov = November,
-        December,   Dec = December,
+        Aug,
+        Sept,
+        Oct,
+        Nov,
+        Dec,
     }
 }
