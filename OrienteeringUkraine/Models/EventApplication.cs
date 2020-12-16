@@ -4,6 +4,7 @@ namespace OrienteeringUkraine.Models
 {
     public class EventApplication
     {
+        public string Login { get; set; }
         public string Name { get; set; }
         public DateTime Birthday { get; set; }
         public string Club { get; set; }

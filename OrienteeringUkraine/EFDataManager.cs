@@ -167,6 +167,7 @@ namespace OrienteeringUkraine
                     DataLayer.Tables.User user = db.Users.FirstOrDefault(user => user.Id == application.UserId);
                     EventApplication userApplication = new EventApplication
                     {
+                        Login = db.Logins.FirstOrDefault(user_ => user_.UserId == user.Id).Login,
                         Name = user.Name + " " + user.Surname,
                         Birthday = (DateTime)(user.BirthDate ?? null),
                         Club = db.Clubs.FirstOrDefault(club => club.Id == user.ClubId).Name,
