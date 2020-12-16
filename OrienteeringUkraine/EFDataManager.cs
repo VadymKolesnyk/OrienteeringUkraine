@@ -118,7 +118,67 @@ namespace OrienteeringUkraine
 
         public EventApplicationsModel GetApplicationsById(int id)
         {
-            throw new NotImplementedException();
+            EventApplicationsModel model = new EventApplicationsModel();
+
+            DataLayer.Tables.Event eventInDB = db.Events.FirstOrDefault(@event => @event.Id == id);
+
+            if (eventInDB == null)
+                return null;
+
+            DataLayer.Tables.User organizer = db.Users.FirstOrDefault(user => user.Id == eventInDB.OrganizerId);
+            DataLayer.Tables.LoginData organizerLoginData = db.Logins.FirstOrDefault(user => user.UserId == organizer.Id);
+            DataLayer.Tables.Region eventRegion = db.Regions.FirstOrDefault(region => region.Id == eventInDB.RegionId);
+
+            model.Title = eventInDB.Title;
+            model.Date = eventInDB.EventDate;
+            model.ResultsLink = eventInDB.ResultsLink;
+            model.InfoLink = eventInDB.InfoLink;
+            model.Id = eventInDB.Id;
+            model.Organizer = organizer.Name + " " + organizer.Surname;
+            model.OrganizerLogin = organizerLoginData.Login;
+            model.Region = eventRegion.Name;
+            model.Location = eventInDB.Location;
+
+            var groups = from events in db.Events
+                         where events.Id == eventInDB.Id
+                         join eventGroups in db.EventGroups on events.Id equals eventGroups.EventId
+                         join groups_ in db.Groups on eventGroups.GroupId equals groups_.Id
+                         orderby groups_.Name ascending
+                         select new { Id = groups_.Id, Name = groups_.Name };
+
+            model.Applications = new Dictionary<string, List<EventApplication>>();
+
+            var eventApplications = from events in db.Events
+                                    where events.Id == eventInDB.Id
+                                    join eventGroups in db.EventGroups on events.Id equals eventGroups.EventId
+                                    join applications in db.Applications on eventGroups.Id equals applications.EventGroupId
+                                    select new
+                                    {
+                                        GroupId = eventGroups.GroupId,
+                                        ChipId = applications.ChipId,
+                                        UserId = applications.UserId
+                                    };
+
+            foreach (var group in groups)
+            {
+                List<EventApplication> applicationsPerGroup = new List<EventApplication>();
+                foreach (var application in eventApplications.Where(x => x.GroupId == group.Id))
+                {
+                    DataLayer.Tables.User user = db.Users.FirstOrDefault(user => user.Id == application.UserId);
+                    EventApplication userApplication = new EventApplication
+                    {
+                        Name = user.Name + " " + user.Surname,
+                        Birthday = (DateTime)(user.BirthDate ?? null),
+                        Club = db.Clubs.FirstOrDefault(club => club.Id == user.ClubId).Name,
+                        Region  = db.Regions.FirstOrDefault(region => region.Id == user.RegionId).Name,
+                        GroupId = group.Id
+                    };
+                    applicationsPerGroup.Add(userApplication);
+                }
+                model.Applications.Add(group.Name, applicationsPerGroup);
+            }
+
+            return model;
         }
 
         public EventData GetEventById(int id)
