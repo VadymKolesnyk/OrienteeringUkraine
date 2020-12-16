@@ -18,11 +18,21 @@
 
                     <div class="col-4"><a asp-controller="Home" asp-action="Index">OrienteeringUkraine</a></div>
 
-                    <div class="col-4"></div>
+                    <div class="col-3"></div>
 
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <div class="col-4 header-name">
+                        @if (User.IsInRole("admin") || User.IsInRole("moderator") || User.IsInRole("organizer"))
+                        {
+                            <div class="col-2 header-add-event">
+                                <a asp-controller="Event" asp-action="New">Добавить соревнование</a>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-2"></div>
+                        }
+                        <div class="col-3 header-name">
                             <div class="header-autorize">
                                 <span class="name-autorized px-3">@User.FindFirst("FullName").Value</span>
                                 <ul class="name-submenu px-1 m-0">
