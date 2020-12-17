@@ -26,16 +26,21 @@ body {
 .navbar {
     background-color: rgb(51, 102, 0);
     height: 75px;
+
 }
 
     .navbar .container-xxl .col-4 {
         padding: 0 !important;
         font-size: 80%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
         .navbar .container-xxl .col-4 a {
             text-decoration: none;
             color: white;
+           
         }
 
     .navbar .container-xxl .col-2 {
@@ -80,6 +85,7 @@ body {
     .name-submenu li a {
         text-decoration: none;
         font-size: 50%;
+        color: white;
     }
 
 .header-autorize:hover .name-submenu {
@@ -92,7 +98,7 @@ body {
 
 
 .header-add-event a {
-    font-size: 60%;
+    font-size: 55%;
     text-decoration: none;
     color: white;
 }
