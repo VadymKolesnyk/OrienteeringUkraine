@@ -42,8 +42,8 @@
             <span asp-validation-for="ResultsLink" />
         </div>
         <div class="form-group">
-            <label asp-for="Groups">Введите группы. Формат ввода : "[группа];[группа];" (пример: Ж12;Ж14;М12;М14;)</label><br />
-            <textarea class="input-note" rows="2" cols="100" asp-for="Groups"></textarea>
+            <label asp-for="Groups">Введите группы.</label><br />
+            <textarea class="input-note" rows="2" cols="100" asp-for="Groups"> Формат ввода : "[группа];[группа];" (пример: Ж12;Ж14;М12;М14;)</textarea>
             <span asp-validation-for="Groups" />
         </div>
         <div class="form-group">
@@ -51,7 +51,9 @@
         </div>
     </div>
 </form>
-
+<div>
+    <a asp-action="Delete" asp-route-id="@id">Delete</a>
+</div>
 <div>
     <a asp-action="Applications" asp-route-id="@id">Back</a>
 </div>

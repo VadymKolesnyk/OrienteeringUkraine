@@ -8619,19 +8619,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Vadik\\.nuget\\packages\\": {}
+    "C:\\Users\\User\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Vadik\\Google Диск\\Универ\\3 курс\\5 семестр\\ТРПЗ\\OrienteeringUkraine\\OrienteeringUkraine\\OrienteeringUkraine.csproj",
+      "projectUniqueName": "D:\\OrienteeringUkraine\\OrienteeringUkraine\\OrienteeringUkraine.csproj",
       "projectName": "OrienteeringUkraine",
-      "projectPath": "C:\\Users\\Vadik\\Google Диск\\Универ\\3 курс\\5 семестр\\ТРПЗ\\OrienteeringUkraine\\OrienteeringUkraine\\OrienteeringUkraine.csproj",
-      "packagesPath": "C:\\Users\\Vadik\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Vadik\\Google Диск\\Универ\\3 курс\\5 семестр\\ТРПЗ\\OrienteeringUkraine\\OrienteeringUkraine\\obj\\",
+      "projectPath": "D:\\OrienteeringUkraine\\OrienteeringUkraine\\OrienteeringUkraine.csproj",
+      "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+      "outputPath": "D:\\OrienteeringUkraine\\OrienteeringUkraine\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Vadik\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -8645,8 +8645,8 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\Vadik\\Google Диск\\Универ\\3 курс\\5 семестр\\ТРПЗ\\OrienteeringUkraine\\DataLayer\\DataLayer.csproj": {
-              "projectPath": "C:\\Users\\Vadik\\Google Диск\\Универ\\3 курс\\5 семестр\\ТРПЗ\\OrienteeringUkraine\\DataLayer\\DataLayer.csproj"
+            "D:\\OrienteeringUkraine\\DataLayer\\DataLayer.csproj": {
+              "projectPath": "D:\\OrienteeringUkraine\\DataLayer\\DataLayer.csproj"
             }
           }
         }

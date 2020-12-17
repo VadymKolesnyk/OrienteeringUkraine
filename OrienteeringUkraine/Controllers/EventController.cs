@@ -70,16 +70,30 @@ namespace OrienteeringUkraine.Controllers
             SetSelectLists();
             if (ModelState.IsValid)
             {
-                dataManager.UpdateEvent(id, data);
-                return RedirectToAction("Applications", new { Id = id });
+                string groups = dataManager.UpdateEvent(id, data);
+                if (groups != null)
+                {
+                    ModelState.AddModelError("", $"Не удалось удалить группы {groups}, по скольку в эти группы заявленны участники");
+                }
+                return View(data);
             }
-            ModelState.AddModelError("", "Недопустимые изменения");
+            ModelState.AddModelError("", "Некоректнные изменения");
             return View(data);
         }
         [Authorize(Roles = "admin, moderator, organizer")]
         public IActionResult Export(int id)
         {
             return RedirectToAction("Applications", new { Id = id });
+        }
+        [Authorize(Roles = "admin, moderator, organizer")]
+        public IActionResult Delete(int id)
+        {
+            var @event = dataManager.GetEventById(id);
+            if (User.IsInRole("organizer") && User.Identity.Name != @event?.OrganizerLogin)
+            {
+                dataManager.DeleteEvent(id);
+            }
+            return RedirectToAction("Index", "Home");
         }
     }
 }

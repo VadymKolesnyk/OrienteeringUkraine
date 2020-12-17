@@ -257,9 +257,9 @@ namespace OrienteeringUkraine
             return model;
         }
 
-        public void UpdateEvent(int id, EventData data)
+        public string UpdateEvent(int id, EventData data)
         {
-
+            return null;
         }
         public HomeIndexModel GetEventsInfo(HomeIndexData data)
         {
@@ -432,6 +432,11 @@ namespace OrienteeringUkraine
         public void UpdateApplication(int id, string login, int groupId, int? chip)
         {
             
+        }
+
+        public void DeleteEvent(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

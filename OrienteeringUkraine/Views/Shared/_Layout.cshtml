@@ -34,14 +34,14 @@
                         }
                         <div class="col-3 header-name">
                             <div class="header-autorize">
-                                <span class="name-autorized px-3">@User.FindFirst("FullName").Value</span>
+                                <span class="name-autorized px-3">@User.FindFirst("FullName")?.Value</span>
                                 <ul class="name-submenu px-1 m-0">
                                     <li><a asp-controller="Account" asp-action="Profile" asp-route-login="@User.Identity.Name">Профиль</a></li>
                                     @if (User.IsInRole("admin") || User.IsInRole("moderator"))
                                     {
-                                        <li><a asp-controller="Manage" asp-action="Users">Редактирование</a></li>
+                                        <li><a asp-controller="Manage" asp-action="Users">Администрирование</a></li>
                                     }
-                                    <li><a asp-controller="Account" asp-action="Logout">Выход</a></li>
+                                    <li><a asp-controller="Account" asp-action="Logout" asp-route-returnUrl="@($"{Context.Request.Path}{Context.Request.QueryString}")">Выход</a></li>
                                 </ul>
                             </div>
                         </div>

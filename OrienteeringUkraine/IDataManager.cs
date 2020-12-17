@@ -30,12 +30,14 @@ namespace OrienteeringUkraine
 
 
         public EventData GetEventById(int id);
-        public void UpdateEvent(int id, EventData data);
+        public string UpdateEvent(int id, EventData data);
 
         public int AddNewEvent(EventData data);
         void AppNewApplication(int id, string login, int groupId, int? chip);
         void UpdateApplication(int id, string login, int groupId, int? chip);
         void DeleteApplication(int id, string login);
         ApplicationData GetApplication(int id, string login);
+
+        void DeleteEvent(int id);
     }
 }
