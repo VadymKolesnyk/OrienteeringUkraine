@@ -141,12 +141,7 @@ namespace OrienteeringUkraine
             model.Region = eventRegion.Name;
             model.Location = eventInDB.Location;
 
-            var groups = from events in db.Events
-                         where events.Id == eventInDB.Id
-                         join eventGroups in db.EventGroups on events.Id equals eventGroups.EventId
-                         join groups_ in db.Groups on eventGroups.GroupId equals groups_.Id
-                         orderby groups_.Name ascending
-                         select new { groups_.Id, groups_.Name };
+            IEnumerable<Group> groups = GetGroupsOnEvent(eventInDB.Id);
 
             model.Applications = new Dictionary<string, List<EventApplication>>();
 
@@ -161,7 +156,7 @@ namespace OrienteeringUkraine
                                         applications.UserId
                                     };
 
-            foreach (var group in groups)
+            foreach (Group group in groups)
             {
                 List<EventApplication> applicationsPerGroup = new List<EventApplication>();
                 foreach (var application in eventApplications.Where(x => x.GroupId == group.Id))
@@ -195,7 +190,9 @@ namespace OrienteeringUkraine
             if (eventInDB == null)
                 return null;
 
-            string joinedGroups = GetEventGroups(eventInDB);
+            IEnumerable<Group> temp = GetGroupsOnEvent(eventInDB.Id);
+
+            string joinedGroups = string.Join(";", temp.Select(x => x.Name)) + ";";
 
             EventData queriedEvent = new EventData
             {
@@ -210,19 +207,6 @@ namespace OrienteeringUkraine
             };
 
             return queriedEvent;
-        }
-
-        private string GetEventGroups(DataLayer.Tables.Event eventInDB)
-        {
-            var groups = from events in db.Events
-                         where events.Id == eventInDB.Id
-                         join eventGroups in db.EventGroups on events.Id equals eventGroups.EventId
-                         join groups_ in db.Groups on eventGroups.GroupId equals groups_.Id
-                         orderby groups_.Name ascending
-                         select new { groups_.Name };
-
-            string joinedGroups = string.Join(";", groups.Select(x => x.Name)) + ";";
-            return joinedGroups;
         }
 
         public HomeIndexModel GetEventsInfo(HomeIndexData data)
@@ -251,20 +235,20 @@ namespace OrienteeringUkraine
             else
             {
                 IEnumerable<Event> homeEvents = from e in events
-                                                    join u in db.Users on e.OrganizerId equals u.Id
-                                                    join r in db.Regions on e.RegionId equals r.Id
-                                                    orderby e.EventDate ascending
-                                                    select new Event
-                                                    {
-                                                        Id = e.Id,
-                                                        EventDate = e.EventDate,
-                                                        InfoLink = e.InfoLink,
-                                                        ResultsLink = e.ResultsLink,
-                                                        Location = e.Location,
-                                                        Title = e.Title,
-                                                        Organizer = u.Name + " " + u.Surname,
-                                                        Region = r.Name
-                                                    };
+                                                join u in db.Users on e.OrganizerId equals u.Id
+                                                join r in db.Regions on e.RegionId equals r.Id
+                                                orderby e.EventDate ascending
+                                                select new Event
+                                                {
+                                                    Id = e.Id,
+                                                    EventDate = e.EventDate,
+                                                    InfoLink = e.InfoLink,
+                                                    ResultsLink = e.ResultsLink,
+                                                    Location = e.Location,
+                                                    Title = e.Title,
+                                                    Organizer = u.Name + " " + u.Surname,
+                                                    Region = r.Name
+                                                };
                 int amountOfPages = (homeEvents.Count() - 1) / numberOfEventsOnPage + 1;
                 int startIndex = (data.Page - 1) * numberOfEventsOnPage;
                 if (startIndex < 0)
@@ -334,7 +318,9 @@ namespace OrienteeringUkraine
             if (eventInDB == null)
                 return;
 
-            string eventInDBGroups = GetEventGroups(eventInDB);
+            IEnumerable<Group> temp = GetGroupsOnEvent(eventInDB.Id);
+            
+            string eventInDBGroups = string.Join(";", temp.Select(x => x.Name)) + ";";
 
             if (data.Title != eventInDB.Title)
                 eventInDB.Title = data.Title;
@@ -480,7 +466,13 @@ namespace OrienteeringUkraine
 
         public IEnumerable<Group> GetGroupsOnEvent(int eventId)
         {
-            throw new NotImplementedException();
+            IEnumerable<Group> groups = from events in db.Events
+                                        where events.Id == eventId
+                                        join eventGroups in db.EventGroups on events.Id equals eventGroups.EventId
+                                        join groups_ in db.Groups on eventGroups.GroupId equals groups_.Id
+                                        orderby groups_.Name ascending
+                                        select new Group { Id = groups_.Id, Name = groups_.Name };
+            return groups;
         }
 
         public bool IsApplied(int eventId, string login)
@@ -498,22 +490,22 @@ namespace OrienteeringUkraine
             return false;
         }
 
-        public void AddNewApplication(int id, string login, int groupId, int? chip)
+        public void AddNewApplication(int eventId, string login, int groupId, int? chip)
         {
             throw new NotImplementedException();
         }
 
-        public void UpdateApplication(int id, string login, int groupId, int? chip)
+        public void UpdateApplication(int eventId, string login, int groupId, int? chip)
         {
             throw new NotImplementedException();
         }
 
-        public void DeleteApplication(int id, string login)
+        public void DeleteApplication(int eventId, string login)
         {
             throw new NotImplementedException();
         }
 
-        public ApplicationData GetApplication(int id, string login)
+        public ApplicationData GetApplication(int eventId, string login)
         {
             throw new NotImplementedException();
         }
