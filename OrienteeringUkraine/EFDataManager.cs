@@ -14,7 +14,7 @@ namespace OrienteeringUkraine
     public class EFDataManager : IDataManager
     {
         private readonly EFContext db;
-        private const int numderOfEventsOnPage = 10;
+        private const int numberOfEventsOnPage = 10;
         public EFDataManager(EFContext db) : base()
         {
             this.db = db;
@@ -265,19 +265,19 @@ namespace OrienteeringUkraine
                                                         Organizer = u.Name + " " + u.Surname,
                                                         Region = r.Name
                                                     };
-                int amountOfPages = (homeEvents.Count() - 1) / numderOfEventsOnPage + 1;
-                int startIndex = (data.Page - 1) * numderOfEventsOnPage;
+                int amountOfPages = (homeEvents.Count() - 1) / numberOfEventsOnPage + 1;
+                int startIndex = (data.Page - 1) * numberOfEventsOnPage;
                 if (startIndex < 0)
                 {
                     startIndex = 0;
                 }
                 if (startIndex > homeEvents.Count())
                 {
-                    startIndex = (amountOfPages - 1) * numderOfEventsOnPage;
+                    startIndex = (amountOfPages - 1) * numberOfEventsOnPage;
                 }
-                int finishIndex = Math.Min(startIndex + numderOfEventsOnPage, homeEvents.Count());
+                int finishIndex = Math.Min(startIndex + numberOfEventsOnPage, homeEvents.Count());
                 res.Events = homeEvents.ToArray()[startIndex..finishIndex];
-                res.CurrentPage = startIndex / numderOfEventsOnPage + 1;
+                res.CurrentPage = startIndex / numberOfEventsOnPage + 1;
                 res.CountPages = amountOfPages;
             }
             return res;
