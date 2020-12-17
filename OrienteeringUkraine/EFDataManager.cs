@@ -36,6 +36,11 @@ namespace OrienteeringUkraine
             throw new NotImplementedException();
         }
 
+        public void DeleteEvent(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<Club> GetAllClubs()
         {
             throw new NotImplementedException();
@@ -91,7 +96,7 @@ namespace OrienteeringUkraine
             throw new NotImplementedException();
         }
 
-        public void UpdateEvent(int id, EventData data)
+        public string UpdateEvent(int id, EventData data)
         {
             throw new NotImplementedException();
         }

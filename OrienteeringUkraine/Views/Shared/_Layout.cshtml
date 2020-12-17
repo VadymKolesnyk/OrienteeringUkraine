@@ -39,9 +39,9 @@
                                     <li><a asp-controller="Account" asp-action="Profile" asp-route-login="@User.Identity.Name">Профиль</a></li>
                                     @if (User.IsInRole("admin") || User.IsInRole("moderator"))
                                     {
-                                        <li><a asp-controller="Manage" asp-action="Users">Редактирование</a></li>
+                                        <li><a asp-controller="Manage" asp-action="Users">Администрирование</a></li>
                                     }
-                                    <li><a asp-controller="Account" asp-action="Logout">Выход</a></li>
+                                    <li><a asp-controller="Account" asp-action="Logout" asp-route-returnUrl="@($"{Context.Request.Path}{Context.Request.QueryString}")">Выход</a></li>
                                 </ul>
                             </div>
                         </div>

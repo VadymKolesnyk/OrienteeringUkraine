@@ -81,20 +81,23 @@ namespace OrienteeringUkraine.Controllers
             // создаем один claim
             var claims = new List<Claim>
             {
-                new Claim(ClaimsIdentity.DefaultNameClaimType, user.Login),
-                new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Role),
+                new Claim("Login", user.Login),
+                new Claim("Role", user.Role),
                 new Claim("FullName", user.Name + " " + user.Surname)
             };
             // создаем объект ClaimsIdentity
-            ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
+            ClaimsIdentity id = new ClaimsIdentity(claims, "Token", "Login", "Role");
             // установка аутентификационных куки
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
         }
 
-        public async Task<IActionResult> Logout()
+        public async Task<IActionResult> Logout(string returnUrl)
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return RedirectToAction("Login", "Account");
+            if (Url.IsLocalUrl(returnUrl))
+                return Redirect(returnUrl);
+            else
+                return RedirectToAction("Login", "Account");
         }
         public async Task<IActionResult> Profile(string login)
         {
