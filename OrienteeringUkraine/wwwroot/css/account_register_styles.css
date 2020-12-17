@@ -1,0 +1,107 @@
+﻿.input-validation-error {
+    border: 3px solid red;
+}
+
+input, select, option {
+    color: black;
+}
+
+.outter-wrapper {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+}
+
+.inner-wrapper {
+    border: 3px solid white;
+    border-radius: 15px;
+}
+
+    .inner-wrapper h1 {
+        font-size: 80%;
+        text-align: center;
+    }
+
+    .inner-wrapper .row .col-10 p {
+        font-size: 60%;
+        text-align: left;
+    }
+
+.form-group .col-2 label {
+    font-size: 60%;
+}
+
+.form-group .col-4 {
+    max-height: 30px;
+}
+
+    .form-group .col-4 input[type=text] {
+        width: 100%;
+        background: rgba(255, 255, 255, 0.6);
+        height: 30px;
+        font-size: 70%
+    }
+
+    .form-group .col-4 input[type=password] {
+        width: 100%;
+        background: rgba(255, 255, 255, 0.6);
+        height: 30px;
+        font-size: 70%
+    }
+
+    .form-group .col-4 input[type=date] {
+        width: 100%;
+        background: rgba(255, 255, 255, 0.6);
+        height: 30px;
+        font-size: 70%
+    }
+
+    .form-group .col-4 select {
+        width: 100%;
+        background: rgba(255, 255, 255, 0.6);
+        height: 30px;
+        font-size: 70%
+    }
+
+    .form-group .col-4 option {
+        width: 100%;
+        background: rgba(255, 255, 255, 0.6);
+        height: 30px;
+        font-size: 70%
+    }
+
+    .form-group .col-4 span {
+        width: 100%;
+        font-size: 70%;
+        color: red;
+        display: flex;
+        align-items: center;
+        justify-content: left;
+    }
+
+.button-class {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.submit-button {
+    width: 80%;
+    height: 40px;
+    background-color: rgb(51, 102, 0) !important;
+    font-size: 50%;
+    border-radius: 7px 5px 7px 5px;
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.validation-summary-errors ul {
+    list-style-type: none;
+    color: red;
+    padding: 0;
+}
+
+    .validation-summary-errors ul li {
+        text-align: center;
+        color: red;
+    }

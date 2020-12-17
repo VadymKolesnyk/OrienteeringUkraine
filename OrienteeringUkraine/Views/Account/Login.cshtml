@@ -4,38 +4,93 @@
     var returnUrl = Context.Request.Query["returnurl"];
 }
 
-<h2>Вход на сайт</h2>
 
-<a asp-action="Register" asp-controller="Account">Регистрация</a>
 
 <form asp-action="Login" asp-controller="Account" asp-anti-forgery="true" asp-route-returnurl="@returnUrl">
-    <div class="validation" asp-validation-summary="ModelOnly"></div>
-    <div>
-        <div class="form-group">
-            <label asp-for="Login">Введите Login</label>
-            <input type="text" asp-for="Login" />
-            <span asp-validation-for="Login" />
+     @*оставити*@
+<div class="container-xxl content-wrapper pt-4">
+
+    <div class="row mx-4">
+        <div class="col-2"></div>
+        <div class="col-8 p-0">
+            <div class="outter-wrapper p-4">
+                <div class="inner-wrapper">
+                    <h1 class="mt-2">Войти</h1>
+
+                    <div class="row">
+                        <div class="col-2"></div>
+                        <div class="col-10 p-0">
+                            <p class="p-0">* - обязательное поле</p>
+                        </div>
+                    </div>
+
+                  
+                    <div class="form-group row my-2">
+                        <div class="col-2"></div>
+                        <div class="col-2 p-0"><label asp-for="Login">Логин*</label></div>
+                        <div class="col-2"></div>
+                        <div class="col-4 p-0">
+                            <input type="text" asp-for="Login" />
+                        </div>
+                        <div class="col-2"></div>
+                    </div>
+
+                    <div class="form-group row my-2">
+                        <div class="col-2"></div>
+                        <div class="col-2"></div>
+                        <div class="col-2"></div>
+                        <div class="col-4 p-0">
+                            <span asp-validation-for="Login" />
+                        </div>
+                        <div class="col-2"></div>
+                    </div>
+
+                    <div class="form-group row my-2">
+                        <div class="col-2"></div>
+                        <div class="col-2 p-0"><label asp-for="Password">Пароль*</label></div>
+                        <div class="col-2"></div>
+                        <div class="col-4 p-0">
+                            <input type="password" asp-for="Password" />
+                        </div>
+                        <div class="col-2"></div>
+                    </div>
+
+                    <div class="form-group row my-2">
+                        <div class="col-2"></div>
+                        <div class="col-2"></div>
+                        <div class="col-2"></div>
+                        <div class="col-4 p-0">
+                            <span asp-validation-for="Password" />
+                        </div>
+                        <div class="col-2"></div>
+                    </div>
+
+
+                    <div class="form-group row my-2">
+                        <div class="col-2"></div>
+                        <div class="col-2"></div>
+                        <div class="col-2"></div>
+                        <div class="col-4 p-0 button-class">
+                            <input class="submit-button btn btn-outline-dark mb-1 p-0" type="submit" value="Подтвердить" />
+                        </div>
+                        <div class="col-2"></div>
+                    </div>
+                    <div class="validation" asp-validation-summary="ModelOnly"></div>
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-            <label asp-for="Password">Введите пароль</label>
-            <input asp-for="Password" />
-            <span asp-validation-for="Password" />
-        </div>
-        <div class="form-group">
-            <input type="submit" value="Войти" class="btn btn-outline-dark" />
-        </div>
+        <div class="col-2"></div>
     </div>
+    
+    
+</div>
 </form>
 
+@section scripts{
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}
 @section styles{
-    <style>
-        .input-validation-error {
-            background: crimson
-        }
-
-        input, select, option {
-            color: black;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="~/css/account_login_styles.css">
 }
 

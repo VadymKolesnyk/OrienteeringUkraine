@@ -195,7 +195,7 @@ namespace OrienteeringUkraine
         
         #endregion
 
-        #region Пользователи
+        #region Соревнования
  
         public int AddNewEvent(EventData data)
         {
@@ -370,12 +370,12 @@ namespace OrienteeringUkraine
             }
             return res;
         }
-        public void UpdateEvent(int id, EventData data)
+        public string UpdateEvent(int id, EventData data)
         {
             DataLayer.Tables.Event eventInDB = db.Events.FirstOrDefault(event_ => event_.Id == id);
 
             if (eventInDB == null)
-                return;
+                return null;
 
             IEnumerable<Group> temp = GetGroupsOnEvent(eventInDB.Id);
 
@@ -424,6 +424,7 @@ namespace OrienteeringUkraine
             }
 
             db.SaveChanges();
+            return null;
         }
         public IEnumerable<Group> GetGroupsOnEvent(int eventId)
         {
@@ -435,7 +436,10 @@ namespace OrienteeringUkraine
                                         select new Group { Id = groups_.Id, Name = groups_.Name };
             return groups;
         }
-
+        public void DeleteEvent(int id)
+        {
+            throw new NotImplementedException();
+        }
         #endregion
 
         #region Заявки
