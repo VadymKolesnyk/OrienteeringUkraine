@@ -47,6 +47,27 @@ input, select, option {
         font-size: 70%
     }
 
+    .form-group .col-4 input[type=date] {
+        width: 100%;
+        background: rgba(255, 255, 255, 0.6);
+        height: 30px;
+        font-size: 70%
+    }
+
+    .form-group .col-4 select {
+        width: 100%;
+        background: rgba(255, 255, 255, 0.6);
+        height: 30px;
+        font-size: 70%
+    }
+
+    .form-group .col-4 option {
+        width: 100%;
+        background: rgba(255, 255, 255, 0.6);
+        height: 30px;
+        font-size: 70%
+    }
+
     .form-group .col-4 span {
         width: 100%;
         font-size: 70%;
