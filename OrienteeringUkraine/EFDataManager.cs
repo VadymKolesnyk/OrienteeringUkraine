@@ -551,10 +551,7 @@ namespace OrienteeringUkraine
             if (user == null)
                 return;
 
-            DataLayer.Tables.Application userApplication = (from eventGroups in db.EventGroups
-                                                            where eventGroups.EventId == eventId
-                                                            join applications in db.Applications on eventGroups.Id equals applications.EventGroupId
-                                                            select applications).FirstOrDefault(application => application.UserId == user.Id);
+            DataLayer.Tables.Application userApplication = GetApplicationByUserId(eventId, user.Id);
 
             if (userApplication == null)
                 return;
@@ -572,12 +569,59 @@ namespace OrienteeringUkraine
 
         public void DeleteApplication(int eventId, string login)
         {
-            throw new NotImplementedException();
+            DataLayer.Tables.LoginData userLoginData = db.Logins.FirstOrDefault(user => user.Login == login);
+
+            if (userLoginData == null)
+                return;
+
+            DataLayer.Tables.User user = db.Users.FirstOrDefault(user => user.Id == userLoginData.UserId);
+
+            if (user == null)
+                return;
+
+            DataLayer.Tables.Application userApplication = GetApplicationByUserId(eventId, user.Id);
+
+            if (userApplication == null)
+                return;
+
+            db.Applications.Remove(userApplication);
+            db.SaveChanges();
         }
 
         public ApplicationData GetApplication(int eventId, string login)
         {
-            throw new NotImplementedException();
+            DataLayer.Tables.LoginData userLoginData = db.Logins.FirstOrDefault(user => user.Login == login);
+
+            if (userLoginData == null)
+                return null;
+
+            DataLayer.Tables.User user = db.Users.FirstOrDefault(user => user.Id == userLoginData.UserId);
+
+            if (user == null)
+                return null;
+
+            DataLayer.Tables.Application userApplication = GetApplicationByUserId(eventId, user.Id);
+
+            if (userApplication == null)
+                return null;
+
+            ApplicationData application = new ApplicationData
+            {
+                CurrentEvent = GetEventById(eventId),
+                Chip = userApplication.ChipId,
+                GroupId = (db.EventGroups.FirstOrDefault(eventGroup => eventGroup.Id == userApplication.EventGroupId)).Id
+            };
+
+            return application;
+        }
+
+        public DataLayer.Tables.Application GetApplicationByUserId(int eventId, int userId)
+        {
+            DataLayer.Tables.Application userApplication = (from eventGroups in db.EventGroups
+                                                            where eventGroups.EventId == eventId
+                                                            join applications in db.Applications on eventGroups.Id equals applications.EventGroupId
+                                                            select applications).FirstOrDefault(application => application.UserId == userId);
+            return userApplication;
         }
     }
 }
