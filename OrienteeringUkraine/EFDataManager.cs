@@ -492,7 +492,51 @@ namespace OrienteeringUkraine
 
         public void AddNewApplication(int eventId, string login, int groupId, int? chip)
         {
-            throw new NotImplementedException();
+            DataLayer.Tables.LoginData userLoginData = db.Logins.FirstOrDefault(user => user.Login == login);
+
+            if (userLoginData == null)
+                return;
+
+            DataLayer.Tables.User user = db.Users.FirstOrDefault(user => user.Id == userLoginData.UserId);
+
+            if (user == null)
+                return;
+
+            var userApplicationOnEvent = from eventGroups in db.EventGroups
+                                         where eventGroups.EventId == eventId && eventGroups.GroupId == groupId
+                                         join applications in db.Applications on eventGroups.Id equals applications.EventGroupId
+                                         select new { applications.UserId };
+
+            if (userApplicationOnEvent != null && userApplicationOnEvent.Any(x => x.UserId == user.Id))
+                return;
+
+            DataLayer.Tables.EventGroup eventGroupChain = db.EventGroups.FirstOrDefault(eventGroup => eventGroup.EventId == eventId && eventGroup.GroupId == groupId);
+
+            int eventGroupId = eventGroupChain.Id;
+
+            if (eventGroupChain == null)
+            {
+                DataLayer.Tables.EventGroup newEventGroupChain = new DataLayer.Tables.EventGroup
+                {
+                    GroupId = groupId,
+                    EventId = eventId
+                };
+
+                db.EventGroups.Add(newEventGroupChain);
+                db.SaveChanges();
+
+                eventGroupId = newEventGroupChain.Id;
+            }
+
+            db.Applications.Add(
+                new DataLayer.Tables.Application 
+                { 
+                    EventGroupId = eventGroupId,
+                    ChipId = chip,
+                    UserId = user.Id
+                });
+
+            db.SaveChanges();
         }
 
         public void UpdateApplication(int eventId, string login, int groupId, int? chip)

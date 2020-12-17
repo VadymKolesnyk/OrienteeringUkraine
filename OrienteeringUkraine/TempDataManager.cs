@@ -26,16 +26,7 @@ namespace OrienteeringUkraine
         public void UpdateEvent(int id, EventData data) => manager.UpdateEvent(id, data);
         public HomeIndexModel GetEventsInfo(HomeIndexData data) => manager.GetEventsInfo(data);
 
-        public IEnumerable<Group> GetGroupsOnEvent(int id)
-        {
-            return new List<Group>()
-            {
-                new Group() {Id = 1, Name = "Ж12"},
-                new Group() {Id = 2, Name = "Ж14"},
-                new Group() {Id = 10, Name = "М12"},
-                new Group() {Id = 11, Name = "М14"},
-            };
-        }
+        public IEnumerable<Group> GetGroupsOnEvent(int id) => manager.GetGroupsOnEvent(id);
 
 
         public bool IsApplied(int EventId, string login)
