@@ -478,14 +478,24 @@ namespace OrienteeringUkraine
             return true;
         }
 
-        public IEnumerable<Group> GetGroupsOnEvent(int id)
+        public IEnumerable<Group> GetGroupsOnEvent(int eventId)
         {
             throw new NotImplementedException();
         }
 
-        public bool IsApplied(int EventId, string login)
+        public bool IsApplied(int eventId, string login)
         {
-            throw new NotImplementedException();
+            var userApplications = from logins in db.Logins
+                                   where logins.Login == login
+                                   join applications in db.Applications on logins.UserId equals applications.UserId
+                                   join eventGroups in db.EventGroups on applications.EventGroupId equals eventGroups.Id
+                                   select new
+                                   {
+                                       eventGroups.EventId
+                                   };
+            if (userApplications != null)
+                return userApplications.Any(x => x.EventId == eventId);
+            return false;
         }
 
         public void AddNewApplication(int id, string login, int groupId, int? chip)
