@@ -541,7 +541,33 @@ namespace OrienteeringUkraine
 
         public void UpdateApplication(int eventId, string login, int groupId, int? chip)
         {
-            throw new NotImplementedException();
+            DataLayer.Tables.LoginData userLoginData = db.Logins.FirstOrDefault(user => user.Login == login);
+
+            if (userLoginData == null)
+                return;
+
+            DataLayer.Tables.User user = db.Users.FirstOrDefault(user => user.Id == userLoginData.UserId);
+
+            if (user == null)
+                return;
+
+            DataLayer.Tables.Application userApplication = (from eventGroups in db.EventGroups
+                                                            where eventGroups.EventId == eventId
+                                                            join applications in db.Applications on eventGroups.Id equals applications.EventGroupId
+                                                            select applications).FirstOrDefault(application => application.UserId == user.Id);
+
+            if (userApplication == null)
+                return;
+
+            DataLayer.Tables.EventGroup eventGroupChain = db.EventGroups.FirstOrDefault(eventGroup => eventGroup.EventId == eventId && eventGroup.GroupId == groupId);
+
+            if (userApplication.EventGroupId != eventGroupChain.Id)
+                userApplication.EventGroupId = eventGroupChain.Id;
+
+            if (userApplication.ChipId != chip)
+                userApplication.ChipId = chip;
+
+            db.SaveChanges();
         }
 
         public void DeleteApplication(int eventId, string login)
