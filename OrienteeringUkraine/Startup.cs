@@ -35,7 +35,6 @@ namespace OrienteeringUkraine
                     options.AccessDeniedPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
                 });
             services.AddDbContext<EFContext>(options => options.UseSqlServer(confString.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("OrienteeringUkraine")));
-            //services.AddScoped<EFDataManager>();
             services.AddScoped<IDataManager, EFDataManager>();
             services.AddMvc();
         }

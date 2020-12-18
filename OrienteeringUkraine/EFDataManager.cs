@@ -224,70 +224,6 @@ namespace OrienteeringUkraine
 
             return newEvent.Id;
         }
-        public EventApplicationsModel GetApplicationsById(int id)
-        {
-            EventApplicationsModel model = new EventApplicationsModel();
-
-            DataLayer.Tables.Event eventInDB = db.Events.FirstOrDefault(@event => @event.Id == id);
-
-            if (eventInDB == null)
-                return null;
-
-            DataLayer.Tables.User organizer = db.Users.FirstOrDefault(user => user.Id == eventInDB.OrganizerId);
-            DataLayer.Tables.LoginData organizerLoginData = db.Logins.FirstOrDefault(user => user.UserId == organizer.Id);
-            DataLayer.Tables.Region eventRegion = db.Regions.FirstOrDefault(region => region.Id == eventInDB.RegionId);
-
-            model.Title = eventInDB.Title;
-            model.Date = eventInDB.EventDate;
-            model.ResultsLink = eventInDB.ResultsLink;
-            model.InfoLink = eventInDB.InfoLink;
-            model.Id = eventInDB.Id;
-            model.Organizer = organizer.Name + " " + organizer.Surname;
-            model.OrganizerLogin = organizerLoginData.Login;
-            model.Region = eventRegion.Name;
-            model.Location = eventInDB.Location;
-
-            IEnumerable<Group> groups = GetGroupsOnEvent(eventInDB.Id);
-
-            model.Applications = new Dictionary<string, List<EventApplication>>();
-
-            var eventApplications = from events in db.Events
-                                    where events.Id == eventInDB.Id
-                                    join eventGroups in db.EventGroups on events.Id equals eventGroups.EventId
-                                    join applications in db.Applications on eventGroups.Id equals applications.EventGroupId
-                                    select new
-                                    {
-                                        eventGroups.GroupId,
-                                        applications.ChipId,
-                                        applications.UserId
-                                    };
-
-            foreach (Group group in groups)
-            {
-                List<EventApplication> applicationsPerGroup = new List<EventApplication>();
-                foreach (var application in eventApplications.Where(x => x.GroupId == group.Id))
-                {
-                    DataLayer.Tables.User user = db.Users.FirstOrDefault(user => user.Id == application.UserId);
-                    EventApplication userApplication = new EventApplication
-                    {
-                        Login = db.Logins.FirstOrDefault(user_ => user_.UserId == user.Id).Login,
-                        Name = user.Name + " " + user.Surname,
-                        Birthday = user.BirthDate,
-                        Club = db.Clubs.FirstOrDefault(club => club.Id == user.ClubId)?.Name,
-                        Region = db.Regions.FirstOrDefault(region => region.Id == user.RegionId).Name,
-                        Chip = application.ChipId,
-                        GroupId = group.Id
-                    };
-                    applicationsPerGroup.Add(userApplication);
-                }
-                model.Applications.Add(group.Name, applicationsPerGroup);
-            }
-
-            model.AmountOfPeople = eventApplications.Count();
-            model.AmountOfRentChips = eventApplications.Count(x => x.ChipId == null);
-
-            return model;
-        }
         public EventData GetEventById(int id)
         {
             DataLayer.Tables.Event eventInDB = db.Events.FirstOrDefault(event_ => event_.Id == id);
@@ -480,6 +416,70 @@ namespace OrienteeringUkraine
 
         #region Заявки
 
+        public EventApplicationsModel GetApplicationsById(int id)
+        {
+            EventApplicationsModel model = new EventApplicationsModel();
+
+            DataLayer.Tables.Event eventInDB = db.Events.FirstOrDefault(@event => @event.Id == id);
+
+            if (eventInDB == null)
+                return null;
+
+            DataLayer.Tables.User organizer = db.Users.FirstOrDefault(user => user.Id == eventInDB.OrganizerId);
+            DataLayer.Tables.LoginData organizerLoginData = db.Logins.FirstOrDefault(user => user.UserId == organizer.Id);
+            DataLayer.Tables.Region eventRegion = db.Regions.FirstOrDefault(region => region.Id == eventInDB.RegionId);
+
+            model.Title = eventInDB.Title;
+            model.Date = eventInDB.EventDate;
+            model.ResultsLink = eventInDB.ResultsLink;
+            model.InfoLink = eventInDB.InfoLink;
+            model.Id = eventInDB.Id;
+            model.Organizer = organizer.Name + " " + organizer.Surname;
+            model.OrganizerLogin = organizerLoginData.Login;
+            model.Region = eventRegion.Name;
+            model.Location = eventInDB.Location;
+
+            IEnumerable<Group> groups = GetGroupsOnEvent(eventInDB.Id);
+
+            model.Applications = new Dictionary<string, List<EventApplication>>();
+
+            var eventApplications = from events in db.Events
+                                    where events.Id == eventInDB.Id
+                                    join eventGroups in db.EventGroups on events.Id equals eventGroups.EventId
+                                    join applications in db.Applications on eventGroups.Id equals applications.EventGroupId
+                                    select new
+                                    {
+                                        eventGroups.GroupId,
+                                        applications.ChipId,
+                                        applications.UserId
+                                    };
+
+            foreach (Group group in groups)
+            {
+                List<EventApplication> applicationsPerGroup = new List<EventApplication>();
+                foreach (var application in eventApplications.Where(x => x.GroupId == group.Id))
+                {
+                    DataLayer.Tables.User user = db.Users.FirstOrDefault(user => user.Id == application.UserId);
+                    EventApplication userApplication = new EventApplication
+                    {
+                        Login = db.Logins.FirstOrDefault(user_ => user_.UserId == user.Id).Login,
+                        Name = user.Name + " " + user.Surname,
+                        Birthday = user.BirthDate,
+                        Club = db.Clubs.FirstOrDefault(club => club.Id == user.ClubId)?.Name,
+                        Region = db.Regions.FirstOrDefault(region => region.Id == user.RegionId).Name,
+                        Chip = application.ChipId,
+                        GroupId = group.Id
+                    };
+                    applicationsPerGroup.Add(userApplication);
+                }
+                model.Applications.Add(group.Name, applicationsPerGroup);
+            }
+
+            model.AmountOfPeople = eventApplications.Count();
+            model.AmountOfRentChips = eventApplications.Count(x => x.ChipId == null);
+
+            return model;
+        }
         private void AssociateEventAndGroup(DataLayer.Tables.Event curEvent, string group)
         {
             int groupId;
@@ -647,6 +647,26 @@ namespace OrienteeringUkraine
                 userApplication.ChipId = chip;
 
             db.SaveChanges();
+        }
+
+        #endregion
+
+        #region Администрирование 
+        public IEnumerable<Role> GetAllRoles()
+        {
+            throw new NotImplementedException();
+        }
+        public void DeleteUser(string login)
+        {
+            throw new NotImplementedException();
+        }
+        public ManageUsersModel GetAllUsers()
+        {
+            throw new NotImplementedException();
+        }
+        public void UpdateUserRole(ManageEditData data)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion
