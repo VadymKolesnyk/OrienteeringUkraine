@@ -453,7 +453,28 @@ namespace OrienteeringUkraine
         }
         public void DeleteEvent(int id)
         {
-            throw new NotImplementedException();
+            DataLayer.Tables.Event eventInDB = db.Events.FirstOrDefault(event_ => event_.Id == id);
+
+            if (eventInDB == null)
+                return;
+
+            var applications = from events in db.Events
+                               where events.Id == eventInDB.Id
+                               join eventGroups in db.EventGroups on events.Id equals eventGroups.EventId
+                               join applications_ in db.Applications on eventGroups.Id equals applications_.EventGroupId
+                               select applications_;
+
+            if (applications != null)
+                db.Applications.RemoveRange(applications);
+
+            var eventGroupChains = db.EventGroups.Where(chain => chain.EventId == eventInDB.Id);
+
+            if (eventGroupChains != null)
+                db.EventGroups.RemoveRange(eventGroupChains);
+
+            db.Events.Remove(eventInDB);
+
+            db.SaveChanges();
         }
         #endregion
 
