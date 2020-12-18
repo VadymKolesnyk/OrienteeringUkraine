@@ -5,37 +5,107 @@
     string login = Context.Request.Query["login"];
 }
 
-<h1>Profile</h1>
+<div class="container-xxl content-wrapper pt-4">
 
-<p>Login   = @Model.Login</p>
-<br />
-<p>Name    = @Model.Name</p>
-<br />
-<p>Surname = @Model.Surname</p>
-<br />
-<p>Role    = @Model.Role</p>
-<br />
-<p>ДР      = @Model.Birthday?.ToShortDateString()</p>
-<br />
-<p>Club    = @Model.Club</p>
-<br />
-<p>Region  = @Model.Region</p>
-<br />
-<div>
-    @if (User.Identity.Name == login)
-    {
-        @Html.ActionLink("Edit", "Edit", new { login = User.Identity.Name });
-    }
+    <div class="row mx-4">
+        <div class="col-2"></div>
+        <div class="col-8 p-0">
+            <div class="outter-wrapper p-4">
+                <div class="inner-wrapper">
+                    <h1 class="mt-2">Профиль</h1>
+
+                    <div class="form-group row my-2">
+                        <div class="col-2"></div>
+                        <div class="col-2 p-0"><span>Логин</span></div>
+                        <div class="col-2"></div>
+                        <div class="col-4 p-0">
+                            <span>@Model.Login</span>
+                        </div>
+                        <div class="col-2"></div>
+                    </div>
+
+                    <div class="form-group row my-2">
+                        <div class="col-2"></div>
+                        <div class="col-2 p-0"><span>Имя</span></div>
+                        <div class="col-2"></div>
+                        <div class="col-4 p-0">
+                            <span>@Model.Name</span>
+                        </div>
+                        <div class="col-2"></div>
+                    </div>
+
+                    <div class="form-group row my-2">
+                        <div class="col-2"></div>
+                        <div class="col-2 p-0"><span>Фамилия</span></div>
+                        <div class="col-2"></div>
+                        <div class="col-4 p-0">
+                            <span>@Model.Surname</span>
+                        </div>
+                        <div class="col-2"></div>
+                    </div>
+
+                    <div class="form-group row my-2">
+                        <div class="col-2"></div>
+                        <div class="col-2 p-0"><span>Дата рождения</span></div>
+                        <div class="col-2"></div>
+                        <div class="col-4 p-0">
+                            <span>@Model.Birthday?.ToShortDateString()</span>
+                        </div>
+                        <div class="col-2"></div>
+                    </div>
+
+                    <div class="form-group row my-2">
+                        <div class="col-2"></div>
+                        <div class="col-2 p-0"><span>Регион</span></div>
+                        <div class="col-2"></div>
+                        <div class="col-4 p-0">
+                            <span>@Model.Region</span>
+                        </div>
+                        <div class="col-2"></div>
+                    </div>
+
+                    <div class="form-group row my-2">
+                        <div class="col-2"></div>
+                        <div class="col-2 p-0"><span>Клуб</span></div>
+                        <div class="col-2"></div>
+                        <div class="col-4 p-0">
+                            <span>@Model.Club</span>
+                        </div>
+                        <div class="col-2"></div>
+                    </div>
+
+                    <div class="form-group row my-2">
+                        <div class="col-2"></div>
+                        <div class="col-2 p-0"><span>Роль</span></div>
+                        <div class="col-2"></div>
+                        <div class="col-4 p-0">
+                            <span>@Model.Role</span>
+                        </div>
+                        <div class="col-2"></div>
+                    </div>
+
+                    <div class="form-group row my-2">
+                        <div class="col-2"></div>
+                        <div class="col-2 p-0"></div>
+                        <div class="col-2"></div>
+                        <div class="col-4 p-0">
+                            <div class="profile-edit-button">
+                                @if (User.Identity.Name == login)
+                                {
+                                    <a asp-action="Edit">Редактировать</a>
+                                }
+                            </div>
+                        </div>
+                        <div class="col-2"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-2"></div>
+    </div>
 </div>
 
 @section styles{
-    <style>
-        .input-validation-error {
-            background: crimson
-        }
-
-        input, select, option {
-            color: black;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="~/css/account_profile_styles.css">
 }

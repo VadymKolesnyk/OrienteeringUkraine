@@ -1,0 +1,164 @@
+﻿@model EventApplicationsModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="container-xxl content-wrapper">
+
+    <div class="event-title"><h1>@Model.Title</h1></div>
+
+    <div class="event-info row">
+
+        <div class="col-2 p-1 event-date">@Model.Date.ToShortDateString()</div>
+
+        <div class="col-3 p-1 chip-info">
+
+            <div class="info-block">
+                <div class="row">   <span class="px-1 ">Всего заявилось:</span><span class="p-0"> @Model.AmountOfPeople</span>   </div>
+                <div class="row">   <span class="px-1 ">Арендных чипов:</span><span class="p-0"> @Model.AmountOfRentChips</span>  </div>
+            </div>
+
+        </div>
+
+        <div class="col-4 p-1 event-loc">
+
+            <div class="info-block">
+                <div class="row">   <span class="px-1 ">Регион:</span><span class="p-0">@Model.Region</span>   </div>
+                <div class="row">   <span class="px-1 ">Место:</span><span class="p-0">@Model.Location</span>  </div>
+                <div class="row">   <span class="px-1 ">Организатор:</span><span class="p-0">@Model.Organizer</span>  </div>
+            </div>
+        </div>
+
+        <div class="col-3 p-0">
+            <div class="row">
+                <div class="col-6 p-1 button-block"><a href="@Model.InfoLink">Информация>></a></div>
+                <div class="col-6 p-1 button-block"><a href="@Model.ResultsLink">Результаты>></a></div>
+            </div>
+        </div>
+
+
+    </div>
+    @if (ViewBag.ShowAdminModule)
+    {
+        <div class="row three-button-row">
+
+            <div class="col-2"></div>
+
+            <div class="col-10 p-0 row">
+
+                <div class="col-2 py-2 px-1"></div>
+
+                <div class="col-2 py-2 px-1">
+                    <div class="button-href"><a asp-action="Applications" asp-controller="Event" asp-route-id="@Model.Id">Назад</a></div>
+                </div>
+
+                <div class="col-1 py-2 px-1"></div>
+
+                <div class="col-2 py-2 px-1">
+                    <div class="button-href"><a asp-action="Edit" asp-controller="Event" asp-route-id="@Model.Id">Редакция соревнований</a></div>
+                </div>
+
+                <div class="col-1 py-2 px-1"></div>
+
+                <div class="col-2 py-2 px-1">
+                    <div class="button-href"><a asp-action="Export" asp-controller="Event" asp-route-id="@Model.Id">Экспорт баз</a></div>
+                </div>
+
+                <div class="col-2 py-2 px-1"></div>
+
+            </div>
+
+        </div>
+    }
+    <div class="main-content-block row">
+
+        <div class="col-1 p-0">
+        </div>
+
+        <div class="col-10">
+
+            <div class="table-fixed-row row p-0">
+                <div class="col-1 px-1 content-cell">Группа</div>
+                <div class="col-2 px-1 content-cell">Фамилия Имя</div>
+                <div class="col-2 px-1 content-cell">Дата рождения</div>
+                <div class="col-1 px-1 content-cell">Чип</div>
+                <div class="col-2 px-1 content-cell">Регион</div>
+                <div class="col-2 px-1 content-cell">Клуб</div>
+                <div class="col-1 px-1 content-cell">Сохранить</div>
+                <div class="col-1 px-1 content-cell">Удалить</div>
+            </div>
+            @foreach (var item in Model.Applications)
+            {
+                @foreach (var application in item.Value)
+                {
+
+                    <form asp-action="Edit" asp-antiforgery="true" asp-controller="Apply" asp-route-login="@application.Login" asp-route-id="@Model.Id">
+                        <div class="table-fixed-row row p-0">
+                            <div class="col-1 p-1 content-cell">
+                                <select name="GroupId">
+                                    @foreach (var group in ViewBag.Groups)
+                                    {
+                                        if (@group.Value == application.GroupId.ToString())
+                                        {
+                                            <option value="@group.Value" selected>@group.Text</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@group.Value">@group.Text</option>
+                                        }
+
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-2 p-1 content-cell">@application.Name</div>
+                            <div class="col-2 p-1 content-cell">@application.Birthday.ToShortDateString()</div>
+                            <div class="col-1 p-1 content-cell">
+                                <input type="number" min="1" max="999999999" name="Chip" value="@application.Chip" />
+                            </div>
+                            <div class="col-2 p-1 content-cell">@application.Region</div>
+                            <div class="col-2 p-1 content-cell">@application.Club</div>
+                            <div class="col-1 p-1 content-cell">
+                                <input type="submit" value="Сохранить" />
+                            </div>
+                            <div class="col-1 p-1 content-cell">
+                                <a asp-action="Delete" asp-route-id="@Model.Id" asp-route-login="@application.Login">Удалить</a>
+                            </div>
+                        </div>
+                    </form>
+                }
+
+            }
+
+        </div>
+        <div class="col-1 p-0">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+
+        </div>
+    </div>
+
+
+</div>
+
+
+
+
+
+
+
+@section styles
+{
+    <link rel="stylesheet" type="text/css" href="~/css/event_applications_styles.css">
+    <style>
+        .input-validation-error {
+            background: crimson
+        }
+
+        input, select, option {
+            color: black;
+        }
+    </style>
+}

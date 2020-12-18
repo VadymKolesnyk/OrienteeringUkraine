@@ -24,7 +24,7 @@ namespace OrienteeringUkraine.Controllers
             return View();
         }
 
-         private void SetSelectLists()
+        private void SetSelectLists()
         {
             ViewBag.Regions = new SelectList(dataManager.GetAllRegions(), "Id", "Name");
             ViewBag.Clubs = new SelectList(dataManager.GetAllClubs(), "Id", "Name");
@@ -78,29 +78,27 @@ namespace OrienteeringUkraine.Controllers
 
         private async Task Authenticate(AccountUserModel user)
         {
-            if(user.Login != null)
+            // создаем один claim
+            var claims = new List<Claim>
             {
-                // создаем один claim
-                var claims = new List<Claim>
-                    {
-                        new Claim(ClaimsIdentity.DefaultNameClaimType, user.Login),
-                        new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Role),
-                        new Claim("FullName", user.Name + " " + user.Surname)
-                    };
-                // создаем объект ClaimsIdentity
-                ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
-                // установка аутентификационных куки
-                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
-            }
-           
+                new Claim("Login", user.Login),
+                new Claim("Role", user.Role),
+                new Claim("FullName", user.Name + " " + user.Surname)
+            };
+            // создаем объект ClaimsIdentity
+            ClaimsIdentity id = new ClaimsIdentity(claims, "Token", "Login", "Role");
+            // установка аутентификационных куки
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
         }
 
-        public async Task<IActionResult> Logout()
+        public async Task<IActionResult> Logout(string returnUrl)
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return RedirectToAction("Login", "Account");
+            if (Url.IsLocalUrl(returnUrl))
+                return Redirect(returnUrl);
+            else
+                return RedirectToAction("Login", "Account");
         }
-
         public async Task<IActionResult> Profile(string login)
         {
             var user = await dataManager.GetUserAsync(login);
@@ -110,8 +108,6 @@ namespace OrienteeringUkraine.Controllers
             }
             return View(user);
         }
-
-
         [Authorize]
         [HttpGet]
         public async Task<IActionResult> Edit()
@@ -120,8 +116,6 @@ namespace OrienteeringUkraine.Controllers
             var user = await dataManager.GetUserAsync(User.Identity.Name);
             return View(user);
         }
-
-
         [Authorize]
         [HttpPost]
         public async Task<IActionResult> Edit(AccountUserModel data)

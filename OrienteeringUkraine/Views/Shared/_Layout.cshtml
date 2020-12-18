@@ -18,20 +18,30 @@
 
                     <div class="col-4"><a asp-controller="Home" asp-action="Index">OrienteeringUkraine</a></div>
 
-                    <div class="col-4"></div>
+                    <div class="col-3"></div>
 
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <div class="col-4 header-name">
+                        @if (User.IsInRole("admin") || User.IsInRole("moderator") || User.IsInRole("organizer"))
+                        {
+                            <div class="col-2 header-add-event">
+                                <a asp-controller="Event" asp-action="New">Добавить соревнование</a>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-2"></div>
+                        }
+                        <div class="col-3 header-name">
                             <div class="header-autorize">
-                                <span class="name-autorized px-3">@User.FindFirst("FullName").Value</span>
+                                <span class="name-autorized px-3">@User.FindFirst("FullName")?.Value</span>
                                 <ul class="name-submenu px-1 m-0">
                                     <li><a asp-controller="Account" asp-action="Profile" asp-route-login="@User.Identity.Name">Профиль</a></li>
                                     @if (User.IsInRole("admin") || User.IsInRole("moderator"))
                                     {
-                                        <li><a asp-controller="Manage" asp-action="Users">Редактирование</a></li>
+                                        <li><a asp-controller="Manage" asp-action="Users">Администрирование</a></li>
                                     }
-                                    <li><a asp-controller="Account" asp-action="Logout">Выход</a></li>
+                                    <li><a asp-controller="Account" asp-action="Logout" asp-route-returnUrl="@($"{Context.Request.Path}{Context.Request.QueryString}")">Выход</a></li>
                                 </ul>
                             </div>
                         </div>

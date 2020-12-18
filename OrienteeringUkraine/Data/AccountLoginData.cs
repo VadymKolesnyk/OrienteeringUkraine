@@ -4,7 +4,7 @@ namespace OrienteeringUkraine.Data
 {
     public class AccountLoginData
     {
-        [Required(ErrorMessage = "Не указан Email")]
+        [Required(ErrorMessage = "Не указан логин")]
         public string Login { get; set; }
 
         [Required(ErrorMessage = "Не указан пароль")]

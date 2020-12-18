@@ -19,11 +19,11 @@ namespace OrienteeringUkraine.Controllers
         }
         public IActionResult Applications(int id)
         {
-            if (!dataManager.IsExistsEvent(id))
+            var model = dataManager.GetApplicationsById(id);
+            if (model == null)
             {
                 return RedirectToAction("Index", "Home");
             }
-            var model = dataManager.GetApplicationsById(id);
             ViewBag.ShowAdminModule = (User.IsInRole("admin") || User.IsInRole("moderator") || User.Identity.Name == model.OrganizerLogin);
             return View(model);
         }
@@ -70,16 +70,31 @@ namespace OrienteeringUkraine.Controllers
             SetSelectLists();
             if (ModelState.IsValid)
             {
-                dataManager.UpdateEvent(id, data);
-                return RedirectToAction("Applications", new { Id = id });
+                string groups = dataManager.UpdateEvent(id, data);
+                if (groups != null)
+                {
+                    ModelState.AddModelError("", $"Не удалось удалить группы {groups}, по скольку в эти группы заявленны участники");
+                }
+                return View(data);
             }
-            ModelState.AddModelError("", "Недопустимые изменения");
+            ModelState.AddModelError("", "Некоректнные изменения");
             return View(data);
         }
         [Authorize(Roles = "admin, moderator, organizer")]
         public IActionResult Export(int id)
         {
             return RedirectToAction("Applications", new { Id = id });
+        }
+        [Authorize(Roles = "admin, moderator, organizer")]
+        public IActionResult Delete(int id)
+        {
+            var @event = dataManager.GetEventById(id);
+            if (User.IsInRole("organizer") && User.Identity.Name != @event?.OrganizerLogin)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            dataManager.DeleteEvent(id);
+            return RedirectToAction("Index", "Home");
         }
     }
 }
