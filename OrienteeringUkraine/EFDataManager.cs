@@ -377,9 +377,9 @@ namespace OrienteeringUkraine
             if (eventInDB == null)
                 return null;
 
-            IEnumerable<Group> temp = GetGroupsOnEvent(eventInDB.Id);
+            IEnumerable<Group> eventGroups = GetGroupsOnEvent(eventInDB.Id);
 
-            string eventInDBGroups = string.Join(";", temp.Select(x => x.Name)) + ";";
+            string eventInDBGroups = string.Join(";", eventGroups.Select(x => x.Name)) + ";";
 
             if (data.Title != eventInDB.Title)
                 eventInDB.Title = data.Title;
@@ -399,10 +399,13 @@ namespace OrienteeringUkraine
             if (data.Location != eventInDB.Location)
                 eventInDB.Location = data.Location;
 
+            string remainingGroups = "";
+
             if (data.Groups != eventInDBGroups)
             {
                 var groupsInDB = eventInDBGroups[..^1].Split(";");
                 var editedGroups = data.Groups[..^1].Split(";").Distinct().Select(g => g.Trim());
+
 
                 foreach (string group in groupsInDB)
                 {
@@ -410,7 +413,18 @@ namespace OrienteeringUkraine
                     {
                         int groupId = db.Groups.FirstOrDefault(group_ => group_.Name == group).Id;
                         DataLayer.Tables.EventGroup eventGroupToDelete = db.EventGroups.FirstOrDefault(eventGroup => eventGroup.EventId == eventInDB.Id && eventGroup.GroupId == groupId);
-                        db.EventGroups.Remove(eventGroupToDelete);
+
+                        DataLayer.Tables.Application existingApplication = db.Applications.FirstOrDefault(application => application.EventGroupId == eventGroupToDelete.Id);
+
+                        if (existingApplication == null)
+                        {
+                            db.EventGroups.Remove(eventGroupToDelete);
+                        }
+                        else
+                        {
+                            DataLayer.Tables.Group remainingGroup = db.Groups.FirstOrDefault(group => group.Id == eventGroupToDelete.GroupId);
+                            remainingGroups += (remainingGroup.Name + ";");
+                        }
                     }
                 }
 
@@ -424,7 +438,8 @@ namespace OrienteeringUkraine
             }
 
             db.SaveChanges();
-            return null;
+
+            return remainingGroups;
         }
         public IEnumerable<Group> GetGroupsOnEvent(int eventId)
         {
