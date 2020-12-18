@@ -12,6 +12,7 @@ namespace OrienteeringUkraine.Models
         public string Login { get; set; }
         public string Role { get; set; }
         [Required(ErrorMessage = "Не указано имя")]
+        public int RoleId { get; set; }
         public string Name { get; set; }
         [Required(ErrorMessage = "Не указана фамилия")]
         public string Surname { get; set; }

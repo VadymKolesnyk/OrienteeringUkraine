@@ -41,12 +41,27 @@ namespace OrienteeringUkraine
             throw new NotImplementedException();
         }
 
+        public void DeleteUser(string login)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<Club> GetAllClubs()
         {
             throw new NotImplementedException();
         }
 
         public IEnumerable<Region> GetAllRegions()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Role> GetAllRoles()
+        {
+            throw new NotImplementedException();
+        }
+
+        public ManageUsersModel GetAllUsers()
         {
             throw new NotImplementedException();
         }
@@ -102,6 +117,11 @@ namespace OrienteeringUkraine
         }
 
         public Task<AccountUserModel> UpdateUser(string login, AccountUserModel user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateUserRole(ManageEditData data)
         {
             throw new NotImplementedException();
         }

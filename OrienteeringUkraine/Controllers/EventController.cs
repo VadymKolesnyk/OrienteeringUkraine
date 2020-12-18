@@ -91,8 +91,9 @@ namespace OrienteeringUkraine.Controllers
             var @event = dataManager.GetEventById(id);
             if (User.IsInRole("organizer") && User.Identity.Name != @event?.OrganizerLogin)
             {
-                dataManager.DeleteEvent(id);
+                return RedirectToAction("Index", "Home");
             }
+            dataManager.DeleteEvent(id);
             return RedirectToAction("Index", "Home");
         }
     }
