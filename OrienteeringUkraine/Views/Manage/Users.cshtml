@@ -4,15 +4,109 @@
     ViewData["Title"] = "Users";
 }
 
-<h1>Users</h1>
 
-<div>
-    <h4>ManageUsersModel</h4>
-    <hr />
-    <dl class="row">
-    </dl>
+<div class="container-xxl content-wrapper">
+
+    <div class="event-title"><h1>Модуль администратора</h1></div>
+
+    <div class="main-content-block row">
+        <div class="row col-12">
+            <p>@Model.AmountOfUsers</p>
+            <p>@Model.AmountOfAdmins</p>
+            <p>@Model.AmountOfModerators</p>
+            <p>@Model.AmountOfOrganizers</p>
+            <p>@Model.AmountOfSportsmen</p>
+        </div>
+        <div class="col-1 p-0">
+        </div>
+
+        <div class="col-10">
+
+            <div class="table-fixed-row row p-0">
+                <div class="col-2 px-1 content-cell">Логин</div>
+                <div class="col-2 px-1 content-cell">Фамилия Имя</div>
+                <div class="col-2 px-1 content-cell">Права доступа</div>
+                <div class="col-2 px-1 content-cell">Регион</div>
+                <div class="col-2 px-1 content-cell">Клуб</div>
+                <div class="col-1 px-1 content-cell">Сохранить</div>
+                <div class="col-1 px-1 content-cell">Удалить</div>
+            </div>
+            @foreach (var user in Model.Users)
+            {
+                if (user.Role == "admin" || (user.Role == "moderator" && User.IsInRole("moderator")))
+                {
+                    <div class="table-fixed-row row p-0">
+                        <div class="col-2 p-1 content-cell">@user.Login</div>
+                        <div class="col-2 p-1 content-cell">@(user.Name + " " + user.Surname) </div>
+                        <div class="col-2 p-1 content-cell">@user.Role</div>
+                        <div class="col-2 p-1 content-cell">@user.Region</div>
+                        <div class="col-2 p-1 content-cell">@user.Club</div>
+                        <div class="col-2 p-1 content-cell">Не достаточно прав</div>
+                    </div>
+                }
+                else
+                {
+                    <form asp-action="Edit" asp-antiforgery="true" asp-controller="Manage" asp-route-login="@user.Login">
+                        <div class="table-fixed-row row p-0">
+                            <div class="col-2 p-1 content-cell">@user.Login</div>
+                            <div class="col-2 p-1 content-cell">@(user.Name + " " + user.Surname) </div>
+                            <div class="col-2 p-1 content-cell">
+                                <select name="RoleId">
+                                    @foreach (var role in ViewBag.Roles)
+                                    {
+                                        if (@role.Value == user.RoleId.ToString())
+                                        {
+                                            <option value="@role.Value" selected>@role.Text</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@role.Value">@role.Text</option>
+                                        }
+
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-2 p-1 content-cell">@user.Region</div>
+                            <div class="col-2 p-1 content-cell">@user.Club</div>
+                            <div class="col-1 p-1 content-cell">
+                                <input type="submit" value="Сохранить" />
+                            </div>
+                            <div class="col-1 p-1 content-cell">
+                                <a asp-action="Delete" asp-route-login="@user.Login">Удалить</a>
+                            </div>
+                        </div>
+                    </form>
+                }
+            }
+        </div>
+        <div class="col-1 p-0">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+
+        </div>
+    </div>
+
+
 </div>
-<div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index">Back to List</a>
-</div>
+
+
+
+
+
+
+
+@section styles
+{
+    <link rel="stylesheet" type="text/css" href="~/css/event_applications_styles.css">
+    <style>
+        .input-validation-error {
+            background: crimson
+        }
+
+        input, select, option {
+            color: black;
+        }
+    </style>
+}

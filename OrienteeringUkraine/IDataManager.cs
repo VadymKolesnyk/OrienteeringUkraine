@@ -17,6 +17,7 @@ namespace OrienteeringUkraine
         public Task AddNewUserAsync(AccountRegisterData data);
         public IEnumerable<Region> GetAllRegions();
         public IEnumerable<Club> GetAllClubs();
+        public IEnumerable<Role> GetAllRoles();
 
 
 
@@ -31,13 +32,18 @@ namespace OrienteeringUkraine
 
         public EventData GetEventById(int id);
         public string UpdateEvent(int id, EventData data);
-
+        void DeleteUser(string login);
         public int AddNewEvent(EventData data);
         void AppNewApplication(int id, string login, int groupId, int? chip);
         void UpdateApplication(int id, string login, int groupId, int? chip);
         void DeleteApplication(int id, string login);
         ApplicationData GetApplication(int id, string login);
 
+
+        public ManageUsersModel GetAllUsers();
         void DeleteEvent(int id);
+
+
+        void UpdateUserRole(ManageEditData data);
     }
 }
