@@ -6480,19 +6480,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\User\\.nuget\\packages\\": {}
+    "C:\\Users\\Катерина\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\OrienteeringUkraine\\OrienteeringUkraine\\OrienteeringUkraine.csproj",
+      "projectUniqueName": "K:\\3 курс 1 семестр\\ТРПЗ\\OrienteeringUkraine\\OrienteeringUkraine\\OrienteeringUkraine.csproj",
       "projectName": "OrienteeringUkraine",
-      "projectPath": "D:\\OrienteeringUkraine\\OrienteeringUkraine\\OrienteeringUkraine.csproj",
-      "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "D:\\OrienteeringUkraine\\OrienteeringUkraine\\obj\\",
+      "projectPath": "K:\\3 курс 1 семестр\\ТРПЗ\\OrienteeringUkraine\\OrienteeringUkraine\\OrienteeringUkraine.csproj",
+      "packagesPath": "C:\\Users\\Катерина\\.nuget\\packages\\",
+      "outputPath": "K:\\3 курс 1 семестр\\ТРПЗ\\OrienteeringUkraine\\OrienteeringUkraine\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Катерина\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -6506,8 +6506,8 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "D:\\OrienteeringUkraine\\DataLayer\\DataLayer.csproj": {
-              "projectPath": "D:\\OrienteeringUkraine\\DataLayer\\DataLayer.csproj"
+            "K:\\3 курс 1 семестр\\ТРПЗ\\OrienteeringUkraine\\DataLayer\\DataLayer.csproj": {
+              "projectPath": "K:\\3 курс 1 семестр\\ТРПЗ\\OrienteeringUkraine\\DataLayer\\DataLayer.csproj"
             }
           }
         }
@@ -6545,7 +6545,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }

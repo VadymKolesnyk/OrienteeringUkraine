@@ -60,6 +60,7 @@ namespace OrienteeringUkraine.Controllers
             model.RegionId = data.RegionId;
             model.Year = data.Year;
             model.Month = data.Month;
+
             return View(model);
         }
 
