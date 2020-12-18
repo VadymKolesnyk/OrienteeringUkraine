@@ -439,9 +439,55 @@ namespace OrienteeringUkraine
             throw new NotImplementedException();
         }
 
-        public void AddNewApplication(int id, string login, int groupId, int? chip)
+        public ManageUsersModel GetAllUsers()
         {
-            throw new NotImplementedException();
+            var users = new ManageUsersModel()
+            {
+                AmountOfAdmins = 1,
+                AmountOfModerators = 1,
+                AmountOfOrganizers = 1,
+                AmountOfSportsmen = 1,
+                AmountOfUsers = 4,
+            };
+            users.Users = logins.Select(l => new AccountUserModel()
+            {
+              Birthday = l.Birthday,
+              Club = clubs.FirstOrDefault(c => c.Id == l.ClubId)?.Name,
+              Region = regions.FirstOrDefault(r => r.Id == l.RegionId)?.Name,
+              Role = l.Role,
+              RoleId = l.Role switch
+              {
+                  "admin" => 1,
+                  "moderator" => 2,
+                  "organizer" => 3,
+                  "sportsman" => 4,
+                  _ => 0
+              },
+              Login = l.Login,
+              Name = l.Name,
+              Surname = l.Surname
+            });
+            return users;
+        }
+
+        public IEnumerable<Role> GetAllRoles()
+        {
+            return new List<Role>()
+            {
+                new Role() {Id = 1 , Name = "admin"},
+                new Role() {Id = 2 , Name = "moderator"},
+                new Role() {Id = 3 , Name = "organizer"},
+                new Role() {Id = 4 , Name = "sportsman"},
+            };
+        }
+
+        public void UpdateUserRole(ManageEditData data)
+        {
+            
+        }
+
+        public void DeleteUser(string login)
+        {
         }
     }
 }
