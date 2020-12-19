@@ -13,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography;
+using StackExchange.Redis;
 
 namespace OrienteeringUkraine
 {
@@ -37,6 +38,9 @@ namespace OrienteeringUkraine
             services.AddDbContext<EFContext>(options => options.UseSqlServer(confString.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("OrienteeringUkraine")));
             services.AddControllersWithViews();
             services.AddSingleton<IDataManager, TempDataManager>();
+
+            services.AddSingleton<IConnectionMultiplexer>(options => ConnectionMultiplexer.Connect(confString.GetConnectionString("RedisConnection")));
+            services.AddSingleton<ICacheManager, RedisCacheManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -113,10 +117,10 @@ namespace OrienteeringUkraine
                 if (!context.Roles.Any())
                 {
                     context.Roles.AddRange(
-                        new Role { Name = "admin" },
-                        new Role { Name = "moderator" },
-                        new Role { Name = "organizer" },
-                        new Role { Name = "sportsman" }
+                        new DataLayer.Tables.Role { Name = "admin" },
+                        new DataLayer.Tables.Role { Name = "moderator" },
+                        new DataLayer.Tables.Role { Name = "organizer" },
+                        new DataLayer.Tables.Role { Name = "sportsman" }
                         );
                 }
 

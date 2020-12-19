@@ -12,7 +12,7 @@ namespace OrienteeringUkraine.Controllers
     [Authorize(Roles = "admin, moderator")]
     public class ManageController : ControllerBase
     {
-        public ManageController(IDataManager dataManager) : base(dataManager) { }
+        public ManageController(IDataManager dataManager, ICacheManager cacheManager) : base(dataManager, cacheManager) { }
         private void SetSelectLists()
         {
             ViewBag.Roles = new SelectList(dataManager.GetAllRoles(), "Id", "Name");

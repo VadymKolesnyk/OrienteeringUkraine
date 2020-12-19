@@ -13,10 +13,23 @@ namespace OrienteeringUkraine.Controllers
 {
     public class HomeController : ControllerBase
     {
-        public HomeController(IDataManager dataManager) : base(dataManager) { }
+        public HomeController(IDataManager dataManager, ICacheManager cacheManager) : base(dataManager, cacheManager) { }
+        
+        private void SetSelectLists()
+        {
+            var regions = cacheManager.GetRegions();
+            if (regions == null)
+            {
+                regions = dataManager.GetAllRegions();
+                cacheManager.SetRegions(regions);
+            }
+            ViewBag.Regions = new SelectList(regions, "Id", "Name");
+
+        }
         public IActionResult Index(HomeIndexData data)
         {
-            var regions = new SelectList(dataManager.GetAllRegions(), "Id", "Name");
+            SetSelectLists();
+            var regions = ViewBag.Regions as SelectList;
             var selectedRegion = regions.FirstOrDefault(r => r.Value == data?.RegionId.ToString());
             if (selectedRegion != null)
             {

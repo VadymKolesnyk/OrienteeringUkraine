@@ -9,9 +9,11 @@ namespace OrienteeringUkraine.Controllers
     public abstract class ControllerBase : Controller
     {
         protected readonly IDataManager dataManager;
-        protected ControllerBase(IDataManager dataManager)
+        protected readonly ICacheManager cacheManager;
+        protected ControllerBase(IDataManager dataManager, ICacheManager cacheManager = null)
         {
             this.dataManager = dataManager;
+            this.cacheManager = cacheManager;
         }
 
     }
