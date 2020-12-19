@@ -13,10 +13,12 @@ namespace OrienteeringUkraine.Controllers
     public class EventController : ControllerBase
     {
         public EventController(IDataManager dataManager) : base(dataManager) { }
+
         private void SetSelectLists()
         {
             ViewBag.Regions = new SelectList(dataManager.GetAllRegions(), "Id", "Name");
         }
+
         public IActionResult Applications(int id)
         {
             var model = dataManager.GetApplicationsById(id);
@@ -27,6 +29,8 @@ namespace OrienteeringUkraine.Controllers
             ViewBag.ShowAdminModule = (User.IsInRole("admin") || User.IsInRole("moderator") || User.Identity.Name == model.OrganizerLogin);
             return View(model);
         }
+
+
         [Authorize(Roles = "admin, moderator, organizer")]
         [HttpGet]
         public IActionResult New()
@@ -34,6 +38,8 @@ namespace OrienteeringUkraine.Controllers
             SetSelectLists();
             return View();
         }
+
+
         [Authorize(Roles = "admin, moderator, organizer")]
         [HttpPost]
         public IActionResult New(EventData data)
@@ -47,6 +53,7 @@ namespace OrienteeringUkraine.Controllers
             }
             return View(data);
         }
+
         [Authorize(Roles = "admin, moderator, organizer")]
         [HttpGet]
         public IActionResult Edit(int id)
@@ -63,6 +70,8 @@ namespace OrienteeringUkraine.Controllers
             }
             return View(@event);
         }
+
+
         [Authorize(Roles = "admin, moderator, organizer")]
         [HttpPost]
         public IActionResult Edit(int id, EventData data)
