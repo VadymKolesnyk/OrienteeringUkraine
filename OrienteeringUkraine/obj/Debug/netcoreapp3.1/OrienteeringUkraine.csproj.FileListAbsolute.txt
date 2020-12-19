@@ -447,7 +447,6 @@ E:\OrienteeringUkraine\OrienteeringUkraine\obj\Debug\netcoreapp3.1\Razor\Views\E
 E:\OrienteeringUkraine\OrienteeringUkraine\obj\Debug\netcoreapp3.1\Razor\Views\Event\Edit.cshtml.g.cs
 E:\OrienteeringUkraine\OrienteeringUkraine\obj\Debug\netcoreapp3.1\Razor\Views\Event\New.cshtml.g.cs
 E:\OrienteeringUkraine\OrienteeringUkraine\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
-E:\OrienteeringUkraine\OrienteeringUkraine\obj\Debug\netcoreapp3.1\Razor\Views\Manage\Edit.cshtml.g.cs
 E:\OrienteeringUkraine\OrienteeringUkraine\obj\Debug\netcoreapp3.1\Razor\Views\Manage\Users.cshtml.g.cs
 E:\OrienteeringUkraine\OrienteeringUkraine\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Error.cshtml.g.cs
 E:\OrienteeringUkraine\OrienteeringUkraine\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout.cshtml.g.cs
