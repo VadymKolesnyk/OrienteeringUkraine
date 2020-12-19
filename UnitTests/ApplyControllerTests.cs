@@ -120,6 +120,37 @@ namespace UnitTests
                 Assert.IsNotNull(view.Model);
             }
         }
+
+
+        [TestMethod]
+        public void DeleteMethodRecievesEmptyLoginRedirectsToApplications()
+        {
+            var actual = controller.Delete(0);
+            if (actual is RedirectToActionResult redir)
+            {
+                Assert.AreEqual("Applications", redir.ActionName);
+                Assert.AreEqual("Event", redir.ControllerName);
+            }
+            else if (actual is ViewResult view)
+            {
+                Assert.IsNotNull(view.Model);
+            }
+        }
+
+        [TestMethod]
+        public void DeleteMethodRecievesTestLoginRedirectsToEdit()
+        {
+            var actual = controller.Delete(0, "testlogin");
+            if (actual is RedirectToActionResult redir)
+            {
+                Assert.AreEqual("Edit", redir.ActionName);
+                Assert.AreEqual("Apply", redir.ControllerName);
+            }
+            else if (actual is ViewResult view)
+            {
+                Assert.IsNotNull(view.Model);
+            }
+        }
     }
 }
 
