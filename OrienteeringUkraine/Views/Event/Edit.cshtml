@@ -8,83 +8,219 @@
         id = Context.Request.Path.Value.Split('/').Last();
     }
 }
-<h1>Редактирование соревнований</h1>
+
 <form asp-action="Edit" asp-controller="Event" asp-anti-forgery="true">
-    <div class="validation" asp-validation-summary="ModelOnly"></div>
-    <div class="col-5">
-        <div class="form-group">
-            <label asp-for="Title">Введите название соревнований</label><br />
-            <textarea class="input-note" rows="2" cols="100" asp-for="Title"></textarea>
-            <span asp-validation-for="Title" />
+    <div class="container-xxl content-wrapper py-4">
+
+        <div class="row p-0 three-button-row">
+
+            <div class="col-2 py-2 px-1"></div>
+
+            <div class="col-2 py-2 px-1">
+                <div class="button-href"><a asp-action="Applications" asp-route-id="@id">Назад к заявкам</a></div>
+            </div>
+
+            <div class="col-1 py-2 px-1"></div>
+
+            <div class="col-2 py-2 px-1">
+                <div class="button-href"><a asp-action="Edit" asp-controller="Apply" asp-route-mode="organizer" asp-route-id="@id">Редакция заявок</a></div>
+            </div>
+
+            <div class="col-1 py-2 px-1"></div>
+
+            <div class="col-2 py-2 px-1">
+                <div class="button-href"><a asp-action="Export" asp-route-id="@id">Экспорт баз</a></div>
+            </div>
+
+            <div class="col-2 py-2 px-1"></div>
+
         </div>
-        <div class="form-group">
-            <label asp-for="RegionId">Выберите регион</label><br />
-            <select asp-for="RegionId" asp-items="ViewBag.Regions"><option value=""></option></select>
-            <span asp-validation-for="RegionId" />
-        </div>
-        <div class="form-group">
-            <label asp-for="Date">Введите дату проведения</label><br />
-            <input type="date" asp-for="Date" />
-            <span asp-validation-for="Date" />
-        </div>
-        <div class="form-group">
-            <label asp-for="Location">Введите место проведения</label><br />
-            <input type="text" asp-for="Location" />
-        </div>
-        <div class="form-group">
-            <label asp-for="InfoLink">Вставте ссылку на информацию</label><br />
-            <input type="url" asp-for="InfoLink" />
-            <span asp-validation-for="InfoLink" />
-        </div>
-        <div class="form-group">
-            <label asp-for="ResultsLink">Вставте ссылку на результаты</label><br />
-            <input type="url" asp-for="ResultsLink" />
-            <span asp-validation-for="ResultsLink" />
-        </div>
-        <div class="form-group">
-            <label asp-for="Groups">Введите группы.</label><br />
-            <textarea class="input-note" rows="2" cols="100" asp-for="Groups"> Формат ввода : "[группа];[группа];" (пример: Ж12;Ж14;М12;М14;)</textarea>
-            <span asp-validation-for="Groups" />
-        </div>
-        <div class="form-group">
-            <input type="submit" value="Изменить" />
+
+        <div class="row mx-4">
+
+            <div class="col-1"></div>
+
+            <div class="col-10 p-0">
+
+                <div class="outter-wrapper p-4">
+
+                    <div class="inner-wrapper">
+
+                        <h1 class="mt-2">Редактирование соревнования</h1>
+
+                        <div class="row">
+                            <div class="col-2"></div>
+                            <div class="col-10 p-0">
+                                <p class="p-0 m-0">* - обязательное поле</p>
+                            </div>
+                        </div>
+
+                        <div class="validation" asp-validation-summary="ModelOnly"></div>
+                        @**************************************@
+                        <div class="form-group row my-2">
+                            <div class="col-1"></div>
+                            <div class="col-3 p-0"><label asp-for="Title">Название соревнования*</label></div>
+                            <div class="col-2"></div>
+                            <div class="col-5 p-0">
+                                <textarea class="input-note" rows="3" cols="100" asp-for="Title"></textarea>
+                            </div>
+                            <div class="col-1"></div>
+                        </div>
+
+                        <div class="form-group row my-2">
+                            <div class="col-1"></div>
+                            <div class="col-3"></div>
+                            <div class="col-2"></div>
+                            <div class="col-5 p-0">
+                                <span asp-validation-for="Title" />
+                            </div>
+                            <div class="col-1"></div>
+                        </div>
+
+                        @**************************************@
+                        <div class="form-group row my-2">
+                            <div class="col-1"></div>
+                            <div class="col-3 p-0"><label asp-for="Date">Дата соревнования*</label></div>
+                            <div class="col-2"></div>
+                            <div class="col-5 p-0">
+                                <input type="date" asp-for="Date" />
+                            </div>
+                            <div class="col-1"></div>
+                        </div>
+
+                        <div class="form-group row my-2">
+                            <div class="col-1"></div>
+                            <div class="col-3"></div>
+                            <div class="col-2"></div>
+                            <div class="col-5 p-0">
+                                <span asp-validation-for="Date" />
+                            </div>
+                            <div class="col-1"></div>
+                        </div>
+                        @**************************************@
+                        <div class="form-group row my-2">
+                            <div class="col-1"></div>
+                            <div class="col-3 p-0"><label asp-for="RegionId">Регион*</label></div>
+                            <div class="col-2"></div>
+                            <div class="col-5 p-0">
+                                <select asp-for="RegionId" asp-items="ViewBag.Regions"><option value=""></option></select>
+                            </div>
+                            <div class="col-1"></div>
+                        </div>
+
+                        <div class="form-group row my-2">
+                            <div class="col-1"></div>
+                            <div class="col-3"></div>
+                            <div class="col-2"></div>
+                            <div class="col-5 p-0">
+                                <span asp-validation-for="RegionId" />
+                            </div>
+                            <div class="col-1"></div>
+                        </div>
+                        @**************************************@
+                        <div class="form-group row my-2">
+                            <div class="col-1"></div>
+                            <div class="col-3 p-0"> <label asp-for="Location">Место проведения</label></div>
+                            <div class="col-2"></div>
+                            <div class="col-5 p-0">
+                                <input type="text" asp-for="Location" />
+                            </div>
+                            <div class="col-1"></div>
+                        </div>
+
+                        @**************************************@
+                        <div class="form-group row my-2">
+                            <div class="col-1"></div>
+                            <div class="col-3 p-0"><label asp-for="Groups">Группы*</label></div>
+                            <div class="col-2"></div>
+                            <div class="col-5 p-0">
+                                <textarea class="input-note" rows="3" cols="100" asp-for="Groups"> Формат ввода : "[группа];[группа];" (пример: Ж12;Ж14;М12;М14;)</textarea>
+                            </div>
+                            <div class="col-1"></div>
+                        </div>
+
+                        <div class="form-group row my-2">
+                            <div class="col-1"></div>
+                            <div class="col-3"></div>
+                            <div class="col-2"></div>
+                            <div class="col-5 p-0">
+                                <span asp-validation-for="Groups" />
+                            </div>
+                            <div class="col-1"></div>
+                        </div>
+                        @**************************************@
+                        <div class="form-group row my-2">
+                            <div class="col-1"></div>
+                            <div class="col-3 p-0"><label asp-for="InfoLink">Ссылка на информацию</label></div>
+                            <div class="col-2"></div>
+                            <div class="col-5 p-0">
+                                <input type="url" asp-for="InfoLink" />
+                            </div>
+                            <div class="col-1"></div>
+                        </div>
+
+                        <div class="form-group row my-2">
+                            <div class="col-1"></div>
+                            <div class="col-3"></div>
+                            <div class="col-2"></div>
+                            <div class="col-5 p-0">
+                                <span asp-validation-for="InfoLink" />
+                            </div>
+                            <div class="col-1"></div>
+                        </div>
+                        @**************************************@
+                        <div class="form-group row my-2">
+                            <div class="col-1"></div>
+                            <div class="col-3 p-0"><label asp-for="ResultsLink">Ссылка на результаты</label></div>
+                            <div class="col-2"></div>
+                            <div class="col-5 p-0">
+                                <input type="url" asp-for="ResultsLink" />
+                            </div>
+                            <div class="col-1"></div>
+                        </div>
+
+                        <div class="form-group row my-2">
+                            <div class="col-1"></div>
+                            <div class="col-3"></div>
+                            <div class="col-2"></div>
+                            <div class="col-5 p-0">
+                                <span asp-validation-for="ResultsLink" />
+                            </div>
+                            <div class="col-1"></div>
+                        </div>
+                        @**************************************@
+                        <div class="form-group row my-2">
+                            <div class="col-2"></div>
+                            <div class="col-4 p-0">
+                                <div class="edit-applic-delete-button p-0">
+                                    <a asp-action="Delete" asp-route-id="@id">Удалить</a>
+                                </div>
+                            </div>
+                            <div class="col-4 p-0 ">
+                                <div class="button-class p-0">
+                                    <input class="submit-button btn btn-outline-dark mb-1 p-0" type="submit" value="Сохранить" />
+                                </div>
+                            </div>
+                            <div class="col-2"></div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="col-1"></div>
         </div>
     </div>
+
 </form>
-<div>
-    <a asp-action="Delete" asp-route-id="@id">Delete</a>
-</div>
-<div>
-    <a asp-action="Applications" asp-route-id="@id">Back</a>
-</div>
 @section scripts{
+    <script src="~/js/text_edit_enter_script.js" asp-append-version="true"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
-    <script type="text/javascript"> 
-        // запрет нажатия ENTER в поле ввода
-        $('.input-note').on('keydown', function (e) {
-            if (e.keyCode === 13) {
-                e.preventDefault();
-                whenEnterPressed();
-            }
-        });
-    </script>
+}
 }
 @section styles{
-    <style>
-        .input-validation-error {
-            background: crimson
-        }
-
-        input, select, option {
-            color: black;
-        }
-
-        textarea {
-            color: black;
-            resize: both;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="~/css/event_edit_styles.css">
 }
 
 

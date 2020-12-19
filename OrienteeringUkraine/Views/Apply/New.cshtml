@@ -3,25 +3,105 @@
     ViewData["Title"] = "New";
 }
 
-<p>@Model.CurrentEvent?.Title</p>
-<p>@Model.CurrentEvent?.Region</p>
-<p>@Model.CurrentEvent?.Location</p>
-<p>@Model.CurrentEvent?.Date</p>
 <form asp-action="New" asp-controller="Apply" asp-anti-forgery="true">
-    <div class="validation" asp-validation-summary="ModelOnly"></div>
-    <div>
-        <div>
-            <label asp-for="Chip">Введите Чип</label><br />
-            <input type="number"  min="1" max="999999999" asp-for="Chip" />
-            <span asp-validation-for="Chip" />
+    <div class="container-xxl content-wrapper pb-4">
+
+        <div class="event-title"><h1>@Model.CurrentEvent?.Title</h1></div>
+
+        <div class="row mx-4">
+
+            <div class="col-1"></div>
+            <div class="row event-info col-10 p-0">
+                <div class="col-2 p-1 event-date">@Model.CurrentEvent?.Date.ToShortDateString()</div>
+
+                <div class="col-3 p-1">Регион:  @Model.CurrentEvent?.Region обл</div>
+
+                <div class="col-7 p-1">Локация: @Model.CurrentEvent?.Location</div>
+            </div>
+            <div class="col-1"></div>
         </div>
-        <div>
-            <label asp-for="GroupId">Выберите регион</label><br />
-            <select asp-for="GroupId" asp-items="ViewBag.Groups"><option value=""></option></select>
-            <span asp-validation-for="GroupId" />
-        </div>
-        <div>
-            <input type="submit" value="Заявиться" />
+
+        <div class="row mx-4">
+
+            <div class="col-1"></div>
+
+            <div class="col-10 p-0">
+
+                <div class="outter-wrapper p-4">
+
+                    <div class="inner-wrapper">
+
+                        <h1 class="mt-2">Подача заявки</h1>
+
+                        <div class="row">
+                            <div class="col-2"></div>
+                            <div class="col-10 p-0">
+                                <p class="p-0 m-0">* - обязательное поле</p>
+                            </div>
+                        </div>
+
+                        <div class="validation" asp-validation-summary="ModelOnly"></div>
+                        @**************************************@
+                        <div class="form-group row my-2">
+                            <div class="col-2"></div>
+                            <div class="col-3 p-0"><label asp-for="Chip">Введите Чип</label></div>
+                            <div class="col-1"></div>
+                            <div class="col-4 p-0">
+                                <input type="number" min="1" max="999999999" asp-for="Chip" />
+                            </div>
+                            <div class="col-2"></div>
+                        </div>
+
+                        <div class="form-group row my-2">
+                            <div class="col-2"></div>
+                            <div class="col-3"></div>
+                            <div class="col-1"></div>
+                            <div class="col-4 p-0">
+                                <span asp-validation-for="Chip" />
+                            </div>
+                            <div class="col-2"></div>
+                        </div>
+
+                        @**************************************@
+                        <div class="form-group row my-2">
+                            <div class="col-2"></div>
+                            <div class="col-3 p-0"> <label asp-for="GroupId">Выберите групу*</label></div>
+                            <div class="col-1"></div>
+                            <div class="col-4 p-0">
+                                <select asp-for="GroupId" asp-items="ViewBag.Groups"><option value=""></option></select>
+                            </div>
+                            <div class="col-2"></div>
+                        </div>
+
+                        <div class="form-group row my-2">
+                            <div class="col-2"></div>
+                            <div class="col-3"></div>
+                            <div class="col-1"></div>
+                            <div class="col-4 p-0">
+                                <span asp-validation-for="GroupId" />
+                            </div>
+                            <div class="col-2"></div>
+                        </div>
+
+                        @**************************************@
+                        <div class="form-group row my-2">
+                            <div class="col-2"></div>
+                            <div class="col-3"></div>
+                            <div class="col-1"></div>
+                            <div class="col-4 p-0">
+                                <div class="button-class p-0">
+                                    <input class="submit-button btn btn-outline-dark mb-1 p-0" type="submit" value="Сохранить" />
+                                </div>
+                            </div>
+                            <div class="col-2"></div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="col-1"></div>
         </div>
     </div>
 </form>
@@ -51,14 +131,7 @@
     </script>
 }
 @section styles{
-    <style>
-        .input-validation-error {
-            background: crimson
-        }
-
-        input, select, option {
-            color: black;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="~/css/apply_new_styles.css">
+        
 }
 

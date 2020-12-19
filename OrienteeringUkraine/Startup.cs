@@ -28,7 +28,7 @@ namespace OrienteeringUkraine
                 .AddCookie(options => //CookieAuthenticationOptions
                 {
                     options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
-                    options.AccessDeniedPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
+                    options.AccessDeniedPath = new Microsoft.AspNetCore.Http.PathString("/Home/Index");
                 });
             services.AddControllersWithViews();
             services.AddSingleton<IDataManager, TempDataManager>();

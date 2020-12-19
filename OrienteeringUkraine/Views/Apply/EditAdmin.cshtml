@@ -95,8 +95,8 @@
 
                     <form asp-action="Edit" asp-antiforgery="true" asp-controller="Apply" asp-route-login="@application.Login" asp-route-id="@Model.Id">
                         <div class="table-fixed-row row p-0">
-                            <div class="col-1 p-1 content-cell">
-                                <select name="GroupId">
+                            <div class="col-1 p-0 content-cell">
+                                <select class="group-select" name="GroupId">
                                     @foreach (var group in ViewBag.Groups)
                                     {
                                         if (@group.Value == application.GroupId.ToString())
@@ -113,16 +113,20 @@
                             </div>
                             <div class="col-2 p-1 content-cell">@application.Name</div>
                             <div class="col-2 p-1 content-cell">@application.Birthday.ToShortDateString()</div>
-                            <div class="col-1 p-1 content-cell">
-                                <input type="number" min="1" max="999999999" name="Chip" value="@application.Chip" />
+                            <div class="col-1 p-0 content-cell">
+                                <input class="chip-number" type="number" min="1" max="999999999" name="Chip" value="@application.Chip" />
                             </div>
                             <div class="col-2 p-1 content-cell">@application.Region</div>
                             <div class="col-2 p-1 content-cell">@application.Club</div>
-                            <div class="col-1 p-1 content-cell">
-                                <input type="submit" value="Сохранить" />
+                            <div class="col-1 p-0 content-cell">
+                                <div class="save-button p-0">
+                                    <input type="submit" value="Сохранить" />
+                                </div>
                             </div>
-                            <div class="col-1 p-1 content-cell">
-                                <a asp-action="Delete" asp-route-id="@Model.Id" asp-route-login="@application.Login">Удалить</a>
+                            <div class="col-1 p-0 content-cell">
+                                <div class="dell-button p-0">
+                                    <a asp-action="Delete" asp-route-id="@Model.Id" asp-route-login="@application.Login">Удалить</a>
+                                </div>
                             </div>
                         </div>
                     </form>
@@ -151,14 +155,5 @@
 
 @section styles
 {
-    <link rel="stylesheet" type="text/css" href="~/css/event_applications_styles.css">
-    <style>
-        .input-validation-error {
-            background: crimson
-        }
-
-        input, select, option {
-            color: black;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="~/css/apply_editAdmin_styles.css">
 }

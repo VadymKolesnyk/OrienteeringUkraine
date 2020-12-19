@@ -1,0 +1,207 @@
+﻿.event-title {
+    text-align: center;
+    width: 100%;
+}
+
+h1 {
+    font-size: 100% !important;
+}
+
+.event-info {
+    width: 100%;
+    background-color: #8b623e;
+}
+
+
+.event-date {
+    font-size: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.chip-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.info-block .row span {
+    font-size: 50%;
+    display: inline;
+    width: fit-content;
+}
+
+.event-info .col-3 .row {
+    height: 100%;
+}
+
+.button-block {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+    .button-block a {
+        text-decoration: none;
+        font-size: 50%;
+        color: white;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.three-button-row {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+}
+
+.button-href {
+    width: 100%;
+}
+
+    .button-href a {
+        text-decoration: none;
+        font-size: 44%;
+        color: white;
+        background-color: rgb(51, 102, 0);
+        border-radius: 15px;
+        padding: 4px 0;
+        display: block;
+        width: 100%;
+        text-align: center;
+    }
+
+.row .col-10 .col-2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.main-content-block {
+    min-height: calc(100vh - 225px - 50px - 30px);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+}
+
+
+.group-select {
+    width: 100%;
+    height: 100%;
+    background-color: #8b623e;
+}
+
+    .group-select option {
+        width: 100%;
+        height: 100%;
+        background-color: #8b623e;
+        font-size: 100%;
+    }
+
+.chip-number {
+    width: 100%;
+    height: 100%;
+    background-color: #8b623e;
+    border: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+
+
+
+.save-button {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+    .save-button input[type=submit] {
+        width: 100%;
+        height: 100%;
+        background-color: rgb(51, 102, 0);
+        font-size: 45%;
+        color: white;
+        text-align: center;
+        border: none;
+    }
+
+
+.dell-button {
+    width: 100%;
+    height: 100%;
+}
+
+    .dell-button a {
+        width: 100%;
+        height: 100%;
+        text-decoration: none;
+        color: white;
+        text-align: center;
+        font-size: 45%;
+        background-color: rgb(155,17,30);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+
+.col-10 .table-title {
+    font-size: 80%;
+    text-align: center;
+}
+
+.col-10 {
+    padding: 0 0 20px 0;
+}
+
+.table-fixed-row .col-1, .table-fixed-row .col-2 {
+    font-size: 55%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.content-cell {
+    border: 3px solid gray;
+}
+
+
+.table-content-row .content-cell {
+    font-size: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
