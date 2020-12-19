@@ -87,6 +87,7 @@ namespace OrienteeringUkraine.Controllers
             };
             // создаем объект ClaimsIdentity
             ClaimsIdentity id = new ClaimsIdentity(claims, "Token", "Login", "Role");
+            
             // установка аутентификационных куки
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
         }
@@ -108,6 +109,7 @@ namespace OrienteeringUkraine.Controllers
             }
             return View(user);
         }
+
         [Authorize]
         [HttpGet]
         public async Task<IActionResult> Edit()

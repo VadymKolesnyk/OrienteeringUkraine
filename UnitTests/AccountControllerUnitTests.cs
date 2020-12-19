@@ -11,63 +11,49 @@ using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.Authentication;
 using OrienteeringUkraine.Models;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Mvc.Controllers;
+using OrienteeringUkraine.Data;
 
 namespace UnitTests
 {
-
-
     [TestClass]
     public class AccountControllerUnitTests
     {
         private IDataManager myManager = new TempDataManager();
+        AccountController control;
+       [TestInitialize]
+        public void Initial()
+        {
+
+            var httpContext = new Mock<HttpContext>();
+            var claims = new List<Claim>
+            {
+                new Claim("Login", "testlogin"),
+                new Claim("Role", "admin"),
+                new Claim("FullName", "test user")
+            };
+            ClaimsIdentity id = new ClaimsIdentity(claims, "Token", "Login", "Role");
+            ClaimsPrincipal user = new ClaimsPrincipal(id);
+            httpContext.Setup(h => h.User).Returns(user);
+            
+            var provider = new Mock<IServiceProvider>();
+            
+           
+            var context = new ControllerContext(new ActionContext(httpContext.Object, new RouteData(), new ControllerActionDescriptor()));
+            var db = new Mock<IDataManager>();
+            control = new AccountController(db.Object);
+            control.ControllerContext = context;
+      
+        }
 
         [TestMethod]
         public void RegisterReturnsViewResultTypeSuccess()
         {
-
-            var mock = new Mock<IDataManager>();
-            AccountController control = new AccountController(mock.Object);
             var result = control.Register();
             Assert.IsInstanceOfType(result, typeof(ViewResult));
         }
 
-        [TestMethod]
-        public async Task ReturnsNotNullOrRedirectToIndex()
-        {
-            var mock = new Mock<IDataManager>();
-            AccountController control = new AccountController(mock.Object);
-           // var context = new Mock<HttpContext>();
-
-            //var request = new Mock<HttpRequest>();
-            //var provider = new Mock<IServiceProvider>();
-            //context
-            //    .Setup(c => c.Request)
-            //    .Returns(request.Object);
-            //context
-            //    .Setup(c => c.RequestServices)
-            //    .Returns(provider.Object);
-           
-            //var moq = new Mock<ControllerContext>();
-            //moq.SetupGet(x => x.HttpContext.Request.Path).Returns("/foo.com");
-
-            //var controllerContext = new ControllerContext(/*new ActionContext(context.Object, new RouteData(), control)*/);
-            //controllerContext.HttpContext = context.Object;
-            //control.ControllerContext = controllerContext;
-
-            var result = await control.Register(new OrienteeringUkraine.Data.AccountRegisterData()
-            {
-                Login = "testlogin",
-                Name = "TestName",
-                Surname = "TestSurname",  
-            });
-            if(result is RedirectToActionResult redir)
-            {
-                Assert.AreEqual("Index", redir.ActionName);
-                Assert.AreEqual("Home", redir.ControllerName);
-            }
-            //Assert.IsNotNull(result);
-            //Assert.IsInstanceOfType(result, typeof(IActionResult));
-        }
+      
 
         [TestMethod]
         public void LoginReturnsViewResult()
@@ -106,44 +92,16 @@ namespace UnitTests
             var mock = new Mock<IDataManager>();
             AccountController control = new AccountController(mock.Object);
             var actual = await control.Edit();
-            if(actual is ViewResult view)
-            {
-                Assert.IsNotNull(view.Model);
-            } 
-            else if(actual is RedirectToActionResult redirect)
-            {
-                Assert.AreEqual("Login", redirect.ActionName);
-                Assert.AreEqual("Account", redirect.ControllerName);
-            }
-        }
-
-        [TestMethod]
-        public async Task EditRedirectsNullUserToProfile()
-        {
-            var mock = new Mock<IDataManager>();
-            AccountController control = new AccountController(mock.Object);
-            var user = new Mock<ClaimsPrincipal>();
-            var identity = new Mock<ClaimsIdentity>();
-            identity.Setup(i => i.Name).Returns("testlogin");
-            user.Setup(u => u.Identity).Returns(identity.Object);
-           // controller useerr  !!!!
-            AccountUserModel usermod = new AccountUserModel()
-            {
-                Login = "testlogin",
-                Name = "TestName",
-                Role = "admin",
-                Surname = "TestSurname",
-            };
-            var actual = await control.Edit(usermod);
             if (actual is ViewResult view)
             {
                 Assert.IsNotNull(view.Model);
             }
             else if (actual is RedirectToActionResult redirect)
             {
-                Assert.AreEqual("Profile", redirect.ActionName);
+                Assert.AreEqual("Login", redirect.ActionName);
                 Assert.AreEqual("Account", redirect.ControllerName);
             }
         }
+ 
     }
 }
