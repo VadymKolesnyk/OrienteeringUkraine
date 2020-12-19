@@ -60,8 +60,10 @@ namespace OrienteeringUkraine
         public async Task<AccountUserModel> GetUserAsync(string login)
         {
             DataLayer.Tables.LoginData userLoginData = await db.Logins.FirstOrDefaultAsync(@user => @user.Login == login);
+
             if (userLoginData == null)
                 return null;
+
             DataLayer.Tables.User userInDB = await db.Users.FirstOrDefaultAsync(@user => @user.Id == userLoginData.UserId);
 
             if (userInDB == null)
@@ -654,19 +656,93 @@ namespace OrienteeringUkraine
         #region Администрирование 
         public IEnumerable<Role> GetAllRoles()
         {
-            throw new NotImplementedException();
+            IEnumerable<Role> allRoles = from roles in db.Roles 
+                                         select new Role
+                                         {
+                                             Id = roles.Id,
+                                             Name = roles.Name
+                                         };
+            return allRoles;
         }
         public void DeleteUser(string login)
         {
-            throw new NotImplementedException();
+            DataLayer.Tables.LoginData userLoginData = db.Logins.FirstOrDefault(user_ => user_.Login == login);
+
+            if (userLoginData == null)
+                return;
+
+            DataLayer.Tables.User userInDB = db.Users.FirstOrDefault(user_ => user_.Id == userLoginData.UserId);
+
+            if (userInDB == null)
+                return;
+
+            var userApplications = db.Applications.Where(application => application.UserId == userInDB.Id);
+
+            if (userApplications != null)
+                db.Applications.RemoveRange(userApplications);
+
+            db.Logins.Remove(userLoginData);
+            db.Users.Remove(userInDB);
+            db.SaveChanges();
         }
         public ManageUsersModel GetAllUsers()
         {
-            throw new NotImplementedException();
+            int adminRoleId = db.Roles.FirstOrDefault(role => role.Name == "admin").Id;
+            int moderatorRoleId = db.Roles.FirstOrDefault(role => role.Name == "moderator").Id;
+            int organizerRoleId = db.Roles.FirstOrDefault(role => role.Name == "organizer").Id;
+            int sportsmanRoleId = db.Roles.FirstOrDefault(role => role.Name == "sportsman").Id;
+
+            int totalUsers = db.Users.Count();
+            int totalAdmins = db.Users.Where(user => user.RoleId == adminRoleId).Count();
+            int totalModerators = db.Users.Where(user => user.RoleId == moderatorRoleId).Count();
+            int totalOrganizers = db.Users.Where(user => user.RoleId == organizerRoleId).Count();
+            int totalSportsmen = db.Users.Where(user => user.RoleId == sportsmanRoleId).Count();
+
+            ManageUsersModel model = new ManageUsersModel
+            {
+                AmountOfUsers = totalUsers,
+                AmountOfAdmins = totalAdmins,
+                AmountOfModerators = totalModerators,
+                AmountOfOrganizers = totalOrganizers,
+                AmountOfSportsmen = totalSportsmen
+            };
+
+            model.Users = from users in db.Users
+                          join logins in db.Logins on users.Id equals logins.UserId
+                          join roles in db.Roles on users.RoleId equals roles.Id
+                          join regions in db.Regions on users.RegionId equals regions.Id
+                          join clubs in db.Clubs on users.ClubId equals clubs.Id
+                          select new AccountUserModel
+                          {
+                              Login = logins.Login,
+                              Role = roles.Name,
+                              RoleId = roles.Id,
+                              Name = users.Name,
+                              Surname = users.Surname,
+                              Birthday = users.BirthDate,
+                              RegionId = regions.Id,
+                              Region = regions.Name,
+                              ClubId = clubs.Id,
+                              Club = clubs.Name
+                          };
+
+            return model;
         }
         public void UpdateUserRole(ManageEditData data)
         {
-            throw new NotImplementedException();
+            DataLayer.Tables.LoginData userLoginData = db.Logins.FirstOrDefault(user => user.Login == data.Login);
+
+            if (userLoginData == null)
+                return;
+
+            DataLayer.Tables.User userInDB = db.Users.FirstOrDefault(user => user.Id == userLoginData.UserId);
+
+            if (userInDB == null)
+                return;
+
+            userInDB.RoleId = data.RoleId;
+
+            db.SaveChanges();
         }
 
         #endregion
