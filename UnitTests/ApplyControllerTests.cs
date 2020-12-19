@@ -42,7 +42,7 @@ namespace UnitTests
        
 
         [TestMethod]
-        public void EmptyEventRedirectsToHomePage()
+        public void MethodNewEmptyEventRedirectsToHomePage()
         {
             var actual = controller.New(0);
             if(actual is RedirectToActionResult redir)
@@ -54,9 +54,71 @@ namespace UnitTests
 
 
         [TestMethod]
-        public void Method2()
+        public void NewMethodReturnsRedirectionToHomePage()
+        {
+            var actual = controller.New(0,new OrienteeringUkraine.Data.ApplicationData());
+            if (actual is RedirectToActionResult redir)
+            {
+                Assert.AreEqual("Index", redir.ActionName);
+                Assert.AreEqual("Home", redir.ControllerName);
+            }
+        }
+        [TestMethod]
+        public void ModeOrganizerEditMetodRedirectsToHomePage()
+        {
+            
+            var actual = controller.Edit(0,"organizer");
+            if (actual is RedirectToActionResult redir)
+            {
+                Assert.AreEqual("Index", redir.ActionName);
+                Assert.AreEqual("Home", redir.ControllerName);
+            }
+            else if(actual is ViewResult view)
+            {
+                Assert.IsNotNull(view.Model);
+            }
+        }
+
+        [TestMethod]
+        public void WithoutModeOrganizerRedirectsToNew()
         {
 
+            var actual = controller.Edit(0, "");
+            if (actual is RedirectToActionResult redir)
+            {
+                Assert.AreEqual("New", redir.ActionName);
+                Assert.AreEqual("Apply", redir.ControllerName);
+            }
+            else if (actual is ViewResult view)
+            {
+                Assert.IsNotNull(view.Model);
+            }
+        }
+
+        [TestMethod]
+        public void EmptyLoginMethodRedirectsToApplications()
+        {
+            var actual = controller.Edit(0, new OrienteeringUkraine.Data.ApplicationData());
+            if (actual is RedirectToActionResult redir)
+            {
+                Assert.AreEqual("Applications", redir.ActionName);
+                Assert.AreEqual("Event", redir.ControllerName);
+            }
+        }
+
+        [TestMethod]
+        public void MethodReceivesLoginAndRedirectsToEditApplication()
+        {
+            var actual = controller.Edit(0, new OrienteeringUkraine.Data.ApplicationData(), "testlogin");
+            if (actual is RedirectToActionResult redir)
+            {
+                Assert.AreEqual("Edit", redir.ActionName);
+                Assert.AreEqual("Apply", redir.ControllerName);
+            }
+            else if (actual is ViewResult view)
+            {
+                Assert.IsNotNull(view.Model);
+            }
         }
     }
 }
