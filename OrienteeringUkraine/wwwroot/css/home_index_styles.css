@@ -125,7 +125,7 @@
     font-size: 50%;
     background-color: #8b623e;
     display: flex;
-    justify-content: right;
+    justify-content:center;
     align-items: center;
 }
 
@@ -189,6 +189,7 @@
         margin: 0 !important;
     }
 
+/* Style the pagination */
 .page-link {
     background-color: #a78769 !important;
     text-decoration: none !important;

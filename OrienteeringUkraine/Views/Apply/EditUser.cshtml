@@ -8,66 +8,119 @@
     }
 }
 
-<p>@Model.CurrentEvent?.Title</p>
-<p>@Model.CurrentEvent?.Region</p>
-<p>@Model.CurrentEvent?.Location</p>
-<p>@Model.CurrentEvent?.Date</p>
 <form asp-action="Edit" asp-controller="Apply" asp-anti-forgery="true">
-    <div class="validation" asp-validation-summary="ModelOnly"></div>
-    <div>
-        <div>
-            <label asp-for="Chip">Чип</label><br />
-            <input type="number" min="1" max="999999999" asp-for="Chip"/>
-            <span asp-validation-for="Chip" />
+    <div class="container-xxl content-wrapper pb-4">
+
+        <div class="event-title"><h1>@Model.CurrentEvent?.Title</h1></div>
+
+        <div class="row mx-4">
+
+            <div class="col-1"></div>
+            <div class="row event-info col-10 p-0">
+                <div class="col-2 p-1 event-date">@Model.CurrentEvent?.Date.ToShortDateString()</div>
+
+                <div class="col-3 p-1">Регион:  @Model.CurrentEvent?.Region</div>
+
+                <div class="col-7 p-1">Локация: @Model.CurrentEvent?.Location</div>
+            </div>
+            <div class="col-1"></div>
         </div>
-        <div>
-            <label asp-for="GroupId">Группа</label><br />
-            <select asp-for="GroupId" asp-items="ViewBag.Groups"><option value=""></option></select>
-            <span asp-validation-for="GroupId" />
-        </div>
-        <div>
-            <input type="submit" value="Изменить" />
+
+        <div class="row mx-4">
+
+            <div class="col-1"></div>
+
+            <div class="col-10 p-0">
+
+                <div class="outter-wrapper p-4">
+
+                    <div class="inner-wrapper">
+
+                        <h1 class="mt-2">Редактирование заявки</h1>
+
+                        <div class="row">
+                            <div class="col-2"></div>
+                            <div class="col-10 p-0">
+                                <p class="p-0 m-0">* - обязательное поле</p>
+                            </div>
+                        </div>
+
+                        <div class="validation" asp-validation-summary="ModelOnly"></div>
+                        @**************************************@
+                        <div class="form-group row my-2">
+                            <div class="col-2"></div>
+                            <div class="col-3 p-0"><label asp-for="Chip">Введите Чип</label></div>
+                            <div class="col-1"></div>
+                            <div class="col-4 p-0">
+                                <input type="number" min="1" max="999999999" asp-for="Chip" />
+                            </div>
+                            <div class="col-2"></div>
+                        </div>
+
+                        <div class="form-group row my-2">
+                            <div class="col-2"></div>
+                            <div class="col-3"></div>
+                            <div class="col-1"></div>
+                            <div class="col-4 p-0">
+                                <span asp-validation-for="Chip" />
+                            </div>
+                            <div class="col-2"></div>
+                        </div>
+
+                        @**************************************@
+                        <div class="form-group row my-2">
+                            <div class="col-2"></div>
+                            <div class="col-3 p-0"> <label asp-for="GroupId">Выберите групу*</label></div>
+                            <div class="col-1"></div>
+                            <div class="col-4 p-0">
+                                <select asp-for="GroupId" asp-items="ViewBag.Groups"><option value=""></option></select>
+                            </div>
+                            <div class="col-2"></div>
+                        </div>
+
+                        <div class="form-group row my-2">
+                            <div class="col-2"></div>
+                            <div class="col-3"></div>
+                            <div class="col-1"></div>
+                            <div class="col-4 p-0">
+                                <span asp-validation-for="GroupId" />
+                            </div>
+                            <div class="col-2"></div>
+                        </div>
+
+                        @**************************************@
+                        <div class="form-group row my-2">
+                            <div class="col-2"></div>
+                            <div class="col-3">
+                                <div class="applic-delete-button p-0">
+                                    <a asp-action="Delete" asp-route-id="@id">Удалить заявку</a>
+                                </div>
+                            </div>
+                            <div class="col-1"></div>
+                            <div class="col-4 p-0">
+                                <div class="button-class p-0">
+                                    <input class="submit-button btn btn-outline-dark mb-1 p-0" type="submit" value="Сохранить" />
+                                </div>
+                            </div>
+                            <div class="col-2"></div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="col-1"></div>
         </div>
     </div>
 </form>
-<div>
-    <a asp-action="Delete" asp-route-id="@id">Удалить заявку</a>
-</div>
 @section scripts{
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
-    <script type="text/javascript">
-        jQuery.extend(jQuery.validator.messages, {
-            required: "This field is required.",
-            remote: "Please fix this field.",
-            email: "Please enter a valid email address.",
-            url: "Please enter a valid URL.",
-            date: "Please enter a valid date.",
-            dateISO: "Please enter a valid date (ISO).",
-            number: "Введите коректное число",
-            digits: "Please enter only digits.",
-            creditcard: "Please enter a valid credit card number.",
-            equalTo: "Please enter the same value again.",
-            accept: "Please enter a value with a valid extension.",
-            maxlength: jQuery.validator.format("Please enter no more than {0} characters."),
-            minlength: jQuery.validator.format("Please enter at least {0} characters."),
-            rangelength: jQuery.validator.format("Please enter a value between {0} and {1} characters long."),
-            range: jQuery.validator.format("Please enter a value between {0} and {1}."),
-            max: jQuery.validator.format("Введите число большее или равное {0}."),
-            min: jQuery.validator.format("Введите число меньнее или равное {0}.")
-        });
-    </script>
+    <script src="~/js/jQuery_text_script.js" asp-append-version="true"></script>
 }
 @section styles{
-    <style>
-        .input-validation-error {
-            background: crimson
-        }
-
-        input, select, option {
-            color: black;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="~/css/apply_editUser_styles.css">
 }
 
 

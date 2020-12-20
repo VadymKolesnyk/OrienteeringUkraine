@@ -10,12 +10,12 @@
     <div class="event-title"><h1>Модуль администратора</h1></div>
 
     <div class="main-content-block row">
-        <div class="row col-12">
-            <p>@Model.AmountOfUsers</p>
-            <p>@Model.AmountOfAdmins</p>
-            <p>@Model.AmountOfModerators</p>
-            <p>@Model.AmountOfOrganizers</p>
-            <p>@Model.AmountOfSportsmen</p>
+        <div class="amount-info px-2 col-12">
+            <p>Общее количество пользователей: @Model.AmountOfUsers</p>
+            <p>Количество администраторов: @Model.AmountOfAdmins</p>
+            <p>Количество модераторов: @Model.AmountOfModerators</p>
+            <p>Количество организаторов: @Model.AmountOfOrganizers</p>
+            <p>Количество спортсменов: @Model.AmountOfSportsmen</p>
         </div>
         <div class="col-1 p-0">
         </div>
@@ -50,15 +50,15 @@
                         <div class="table-fixed-row row p-0">
                             <div class="col-2 p-1 content-cell">@user.Login</div>
                             <div class="col-2 p-1 content-cell">@(user.Name + " " + user.Surname) </div>
-                            <div class="col-2 p-1 content-cell">
-                                <select name="RoleId">
+                            <div class="col-2 p-0 content-cell">
+                                <select class="role-select" name="RoleId">
                                     @foreach (var role in ViewBag.Roles)
                                     {
-                                        if (@role.Value == user.RoleId.ToString())
+                                        if (role.Value == user.RoleId.ToString())
                                         {
                                             <option value="@role.Value" selected>@role.Text</option>
                                         }
-                                        else
+                                        else if (!(role.Text == "admin" || (role.Text == "moderator" && User.IsInRole("moderator"))))
                                         {
                                             <option value="@role.Value">@role.Text</option>
                                         }
@@ -68,11 +68,15 @@
                             </div>
                             <div class="col-2 p-1 content-cell">@user.Region</div>
                             <div class="col-2 p-1 content-cell">@user.Club</div>
-                            <div class="col-1 p-1 content-cell">
-                                <input type="submit" value="Сохранить" />
+                            <div class="col-1 p-0 content-cell">
+                                <div class="save-button p-0">
+                                    <input type="submit" value="Сохранить" />
+                                </div>
                             </div>
-                            <div class="col-1 p-1 content-cell">
-                                <a asp-action="Delete" asp-route-login="@user.Login">Удалить</a>
+                            <div class="col-1 p-0 content-cell">
+                                <div class="dell-button p-0">
+                                    <a asp-action="Delete" asp-route-login="@user.Login">Удалить</a>
+                                </div>
                             </div>
                         </div>
                     </form>
@@ -99,14 +103,5 @@
 
 @section styles
 {
-    <link rel="stylesheet" type="text/css" href="~/css/event_applications_styles.css">
-    <style>
-        .input-validation-error {
-            background: crimson
-        }
-
-        input, select, option {
-            color: black;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="~/css/manage_users_styles.css">
 }

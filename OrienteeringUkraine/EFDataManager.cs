@@ -215,7 +215,7 @@ namespace OrienteeringUkraine
             db.Events.Add(newEvent);
             db.SaveChanges();
 
-            var groups = data.Groups[..^1].Split(";").Distinct().Select(gr => gr.Trim());
+            var groups = data.Groups[..^1].Split(";").Select(gr => gr.Trim()).Distinct();
 
             foreach (string group in groups)
             {
@@ -270,6 +270,7 @@ namespace OrienteeringUkraine
                 InfoLink = eventInDB.InfoLink,
                 OrganizerLogin = db.Logins.First(organizer => organizer.UserId == eventInDB.OrganizerId).Login,
                 RegionId = eventInDB.RegionId,
+                Region = db.Regions.FirstOrDefault(region => region.Id == eventInDB.RegionId).Name,
                 Location = eventInDB.Location,
                 Groups = joinedGroups
             };
@@ -367,7 +368,7 @@ namespace OrienteeringUkraine
             if (data.Groups != eventInDBGroups)
             {
                 var groupsInDB = eventInDBGroups[..^1].Split(";");
-                var editedGroups = data.Groups[..^1].Split(";").Distinct().Select(g => g.Trim());
+                var editedGroups = data.Groups[..^1].Split(";").Select(g => g.Trim()).Distinct();
 
 
                 foreach (string group in groupsInDB)

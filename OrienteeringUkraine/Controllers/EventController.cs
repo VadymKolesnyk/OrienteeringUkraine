@@ -77,9 +77,9 @@ namespace OrienteeringUkraine.Controllers
             if (ModelState.IsValid)
             {
                 string groups = dataManager.UpdateEvent(id, data);
-                if (groups != null)
+                if (groups != "" && groups != null)
                 {
-                    ModelState.AddModelError("", $"Не удалось удалить группы {groups}, по скольку в эти группы заявленны участники");
+                    ModelState.AddModelError("", $"Не удалось удалить группы \"{groups}\", по скольку в эти группы заявленны участники");
                 }
                 return View(data);
             }
