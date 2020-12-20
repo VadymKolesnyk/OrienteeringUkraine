@@ -17,7 +17,7 @@ namespace UnitTests
         ManageController controller;
 
         [TestInitialize]
-        public void Method1()
+        public void Initializate()
         {
             var httpContext = new Mock<HttpContext>();
             var claims = new List<Claim>
