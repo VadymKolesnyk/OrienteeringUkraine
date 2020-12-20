@@ -13,7 +13,7 @@ namespace OrienteeringUkraine.Controllers
     [Authorize]
     public class ApplyController : ControllerBase
     {
-        public ApplyController(IDataManager dataManager) : base(dataManager) { }
+        public ApplyController(IDataManager dataManager, ICacheManager cacheManager) : base(dataManager, cacheManager) { }
         private void SetSelectLists(int id)
         {
             ViewBag.Groups = new SelectList(dataManager.GetGroupsOnEvent(id), "Id", "Name");

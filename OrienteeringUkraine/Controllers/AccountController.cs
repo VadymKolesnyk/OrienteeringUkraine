@@ -15,7 +15,7 @@ namespace OrienteeringUkraine.Controllers
 {
     public class AccountController : ControllerBase
     {
-        public AccountController(IDataManager dataManager) : base(dataManager) { }
+        public AccountController(IDataManager dataManager, ICacheManager cacheManager) : base(dataManager, cacheManager) { }
 
         [HttpGet]
         public IActionResult Register()
@@ -26,8 +26,22 @@ namespace OrienteeringUkraine.Controllers
 
         private void SetSelectLists()
         {
-            ViewBag.Regions = new SelectList(dataManager.GetAllRegions(), "Id", "Name");
-            ViewBag.Clubs = new SelectList(dataManager.GetAllClubs(), "Id", "Name");
+            var regions = cacheManager.GetRegions();
+            if (regions == null)
+            {
+                regions = dataManager.GetAllRegions();
+                cacheManager.SetRegions(regions);
+            }
+            ViewBag.Regions = new SelectList(regions, "Id", "Name");
+
+            var clubs = cacheManager.GetClubs();
+            if (clubs == null)
+            {
+                clubs = dataManager.GetAllClubs();
+                cacheManager.SetClubs(clubs);
+            }
+
+            ViewBag.Clubs = new SelectList(clubs, "Id", "Name");
         }
 
         [HttpPost]

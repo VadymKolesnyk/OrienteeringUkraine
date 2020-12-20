@@ -12,10 +12,16 @@ namespace OrienteeringUkraine.Controllers
 {
     public class EventController : ControllerBase
     {
-        public EventController(IDataManager dataManager) : base(dataManager) { }
+        public EventController(IDataManager dataManager, ICacheManager cacheManager) : base(dataManager, cacheManager) { }
         private void SetSelectLists()
         {
-            ViewBag.Regions = new SelectList(dataManager.GetAllRegions(), "Id", "Name");
+            var regions = cacheManager.GetRegions();
+            if (regions == null)
+            {
+                regions = dataManager.GetAllRegions();
+                cacheManager.SetRegions(regions);
+            }
+            ViewBag.Regions = new SelectList(regions, "Id", "Name");
         }
         public IActionResult Applications(int id)
         {

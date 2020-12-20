@@ -13,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography;
+using StackExchange.Redis;
 
 namespace OrienteeringUkraine
 {
@@ -36,6 +37,9 @@ namespace OrienteeringUkraine
                 });
             services.AddDbContext<EFContext>(options => options.UseSqlServer(confString.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("OrienteeringUkraine")));
             services.AddScoped<IDataManager, EFDataManager>();
+            services.AddSingleton<IConnectionMultiplexer>(options => ConnectionMultiplexer.Connect(confString.GetConnectionString("RedisConnection")));
+            services.AddSingleton<ICacheManager, RedisCacheManager>();
+
             services.AddMvc();
         }
 
