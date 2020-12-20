@@ -1,6 +1,11 @@
 ﻿@model ApplicationData
 @{
     ViewData["Title"] = "New";
+    var id = Context.Request.Query["id"].ToString();
+    if (id == "")
+    {
+        id = Context.Request.Path.Value.Split('/').Last();
+    }
 }
 
 <form asp-action="New" asp-controller="Apply" asp-anti-forgery="true">
@@ -86,7 +91,11 @@
                         @**************************************@
                         <div class="form-group row my-2">
                             <div class="col-2"></div>
-                            <div class="col-3"></div>
+                            <div class="col-3">
+                                <div class="applic-back-button p-0">
+                                    <a asp-action="Applications" asp-controller="Event" asp-route-id="@id">Назад</a>
+                                </div>
+                            </div>
                             <div class="col-1"></div>
                             <div class="col-4 p-0">
                                 <div class="button-class p-0">
