@@ -5,7 +5,6 @@ using Moq;
 using OrienteeringUkraine.Controllers;
 using System.Collections.Generic;
 using System.Security.Claims;
-using System.Security.Principal;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Routing;
