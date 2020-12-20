@@ -713,6 +713,7 @@ namespace OrienteeringUkraine
                           join regions in db.Regions on users.RegionId equals regions.Id
                           join clubs in db.Clubs on users.ClubId equals clubs.Id into leftJoin
                           from clubs in leftJoin.DefaultIfEmpty()
+                          orderby roles.Name, users.Surname
                           select new AccountUserModel
                           {
                               Login = logins.Login,
