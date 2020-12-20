@@ -78,5 +78,29 @@ namespace UnitTests
             }
         }
 
+
+        [TestMethod]
+        public void UpdateEventIsNullShouldReturnNotNullView()
+        {
+            var result = controller.Edit(0, new OrienteeringUkraine.Data.EventData());
+            Assert.IsInstanceOfType(result, typeof(ViewResult));
+            if(result is ViewResult view)
+            {
+                Assert.IsNotNull(view.Model);
+            }
+        }
+
+        [TestMethod]
+        public void OrganizerShouldBeRedirectedToIndex()
+        {
+            // organizer may delete events
+            var result = controller.Delete(3);
+            Assert.IsInstanceOfType(result, typeof(RedirectToActionResult));
+            if (result is RedirectToActionResult redir)
+            {
+                Assert.AreEqual("Index", redir.ActionName);
+                Assert.AreEqual("Home", redir.ControllerName);
+            }
+        }
     }
 }

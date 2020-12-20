@@ -89,11 +89,14 @@ namespace OrienteeringUkraine.Controllers
             ModelState.AddModelError("", "Некоректнные изменения");
             return View(data);
         }
+
+
         [Authorize(Roles = "admin, moderator, organizer")]
         public IActionResult Export(int id)
         {
             return RedirectToAction("Applications", new { Id = id });
         }
+
         [Authorize(Roles = "admin, moderator, organizer")]
         public IActionResult Delete(int id)
         {
