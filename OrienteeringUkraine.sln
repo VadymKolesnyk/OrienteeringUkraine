@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrienteeringUkraine", "Orie
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataLayer", "DataLayer\DataLayer.csproj", "{7BAEA7EA-0E3C-431C-A81E-B33D7B361B96}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{3793A797-CF33-47CD-A473-D57C59503A4A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{7BAEA7EA-0E3C-431C-A81E-B33D7B361B96}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7BAEA7EA-0E3C-431C-A81E-B33D7B361B96}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7BAEA7EA-0E3C-431C-A81E-B33D7B361B96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3793A797-CF33-47CD-A473-D57C59503A4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3793A797-CF33-47CD-A473-D57C59503A4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3793A797-CF33-47CD-A473-D57C59503A4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3793A797-CF33-47CD-A473-D57C59503A4A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

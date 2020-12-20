@@ -23,18 +23,21 @@ namespace OrienteeringUkraine.Controllers
             }
             ViewBag.Roles = new SelectList(roles, "Id", "Name");
         }
+
         public IActionResult Users()
         {
             SetSelectLists();
             var model = dataManager.GetAllUsers();
             return View(model);
         }
+
         [HttpPost]
         public IActionResult Edit(ManageEditData data)
         {
             dataManager.UpdateUserRole(data);
             return RedirectToAction("Users");
         }
+
         public IActionResult Delete(string login)
         {
             dataManager.DeleteUser(login);

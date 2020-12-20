@@ -19,6 +19,8 @@ namespace OrienteeringUkraine.Controllers
             ViewBag.Groups = new SelectList(dataManager.GetGroupsOnEvent(id), "Id", "Name");
         }
         [HttpGet]
+
+
         public IActionResult New(int id)
         {
             if (dataManager.IsApplied(id, User.Identity.Name))
@@ -33,6 +35,8 @@ namespace OrienteeringUkraine.Controllers
             SetSelectLists(id);
             return View(new ApplicationData() { CurrentEvent = @event });
         }
+
+
         [HttpPost]
         public IActionResult New(int id, ApplicationData data)
         {
@@ -55,6 +59,8 @@ namespace OrienteeringUkraine.Controllers
             data.CurrentEvent = @event;
             return View(data);
         }
+        
+        
         [HttpGet]
         public IActionResult Edit(int id, string mode)
         {
