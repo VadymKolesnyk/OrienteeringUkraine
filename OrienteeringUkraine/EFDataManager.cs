@@ -226,6 +226,31 @@ namespace OrienteeringUkraine
 
             return newEvent.Id;
         }
+        private void AssociateEventAndGroup(DataLayer.Tables.Event curEvent, string group)
+        {
+            int groupId;
+
+            DataLayer.Tables.Group groupInDB = db.Groups.FirstOrDefault(group_ => group_.Name == group);
+
+            if (groupInDB == null)
+            {
+                DataLayer.Tables.Group newGroup = new DataLayer.Tables.Group { Name = group };
+                db.Groups.Add(newGroup);
+                db.SaveChanges();
+                groupId = newGroup.Id;
+            }
+            else
+            {
+                groupId = groupInDB.Id;
+            }
+
+            db.EventGroups.Add(
+                new DataLayer.Tables.EventGroup
+                {
+                    GroupId = groupId,
+                    EventId = curEvent.Id
+                });
+        }
         public EventData GetEventById(int id)
         {
             DataLayer.Tables.Event eventInDB = db.Events.FirstOrDefault(event_ => event_.Id == id);
@@ -481,31 +506,6 @@ namespace OrienteeringUkraine
             model.AmountOfRentChips = eventApplications.Count(x => x.ChipId == null);
 
             return model;
-        }
-        private void AssociateEventAndGroup(DataLayer.Tables.Event curEvent, string group)
-        {
-            int groupId;
-
-            DataLayer.Tables.Group groupInDB = db.Groups.FirstOrDefault(group_ => group_.Name == group);
-
-            if (groupInDB == null)
-            {
-                DataLayer.Tables.Group newGroup = new DataLayer.Tables.Group { Name = group };
-                db.Groups.Add(newGroup);
-                db.SaveChanges();
-                groupId = newGroup.Id;
-            }
-            else
-            {
-                groupId = groupInDB.Id;
-            }
-
-            db.EventGroups.Add(
-                new DataLayer.Tables.EventGroup
-                {
-                    GroupId = groupId,
-                    EventId = curEvent.Id
-                });
         }
         public bool IsApplied(int eventId, string login)
         {
