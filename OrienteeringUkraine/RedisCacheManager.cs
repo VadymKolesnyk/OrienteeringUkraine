@@ -45,5 +45,18 @@ namespace OrienteeringUkraine
                 return null;
             return JsonSerializer.Deserialize<IEnumerable<Club>>(clubs);
         }
+
+        public void SetRoles(IEnumerable<Models.Role> list)
+        {
+            redis.GetDatabase().StringSet("roles", JsonSerializer.Serialize(list), lifeTime);
+        }
+
+        public IEnumerable<Models.Role> GetRoles()
+        {
+            string roles = redis.GetDatabase().StringGet("roles");
+            if (roles == null)
+                return null;
+            return JsonSerializer.Deserialize<IEnumerable<Models.Role>>(roles);
+        }
     }
 }

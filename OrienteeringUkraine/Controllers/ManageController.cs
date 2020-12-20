@@ -15,7 +15,13 @@ namespace OrienteeringUkraine.Controllers
         public ManageController(IDataManager dataManager, ICacheManager cacheManager) : base(dataManager, cacheManager) { }
         private void SetSelectLists()
         {
-            ViewBag.Roles = new SelectList(dataManager.GetAllRoles(), "Id", "Name");
+            var roles = cacheManager.GetRoles();
+            if (roles == null)
+            {
+                roles = dataManager.GetAllRoles();
+                cacheManager.SetRoles(roles);
+            }
+            ViewBag.Roles = new SelectList(roles, "Id", "Name");
         }
         public IActionResult Users()
         {

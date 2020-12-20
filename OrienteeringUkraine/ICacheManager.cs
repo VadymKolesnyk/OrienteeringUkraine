@@ -32,5 +32,15 @@ namespace OrienteeringUkraine
         /// </summary>
         /// <returns>Список клубов</returns>
         public IEnumerable<Club> GetClubs();
+        /// <summary>
+        /// Кеширование списка ролей
+        /// </summary>
+        /// <param name="list">Список ролей</param>
+        public void SetRoles(IEnumerable<Role> list);
+        /// <summary>
+        /// Получить список ролей из кеша
+        /// </summary>
+        /// <returns>Список ролей</returns>
+        public IEnumerable<Role> GetRoles();
     }
 }
