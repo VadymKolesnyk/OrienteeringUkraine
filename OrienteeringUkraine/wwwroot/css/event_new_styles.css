@@ -1,50 +1,16 @@
-﻿.event-title {
-    text-align: center;
-    width: 100%;
+﻿.input-validation-error {
+    border: 3px solid red;
 }
 
-h1 {
-    font-size: 100% !important;
+input, select, option {
+    color: black;
 }
 
-.event-info {
-    background-color: #8b623e;
-}
-
-
-.event-date {
-    font-size: 80%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.info-block .row span {
-    font-size: 50%;
-    display: inline;
-    width: fit-content;
-}
-
-.event-info .col-2, .event-info .col-3, .event-info .col-7 {
-    font-size: 70%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.inner-wrapper .row .col-10 p {
-    font-size: 60%;
-    text-align: left;
-}
-
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+.content-wrapper {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
 }
 
 .outter-wrapper {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
 }
 
 .inner-wrapper {
@@ -57,41 +23,60 @@ input::-webkit-inner-spin-button {
         text-align: center;
     }
 
+    .inner-wrapper .row .col-10 p {
+        font-size: 60%;
+        text-align: left;
+    }
 
 .form-group .col-3 label {
     font-size: 60%;
 }
 
-.form-group .col-4 span {
-    display: flex;
-    align-items: center;
-    justify-content: left;
-}
-
-
-.form-group .col-4 input[type=number] {
+.form-group .col-5 textarea {
     width: 100%;
     background: rgba(255, 255, 255, 0.6);
+    font-size: 50%;
+    max-height: fit-content;
+    resize: vertical;
+    color: black;
+}
+
+.form-group .col-5 input[type=url] {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.6);
+    max-height: fit-content;
+    font-size: 50%
+}
+
+.form-group .col-5 input[type=text] {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.6);
+    height: 30px;
     max-height: fit-content;
     font-size: 50%;
     color: black;
 }
 
-.form-group .col-4 select {
+.form-group .col-5 input[type=date] {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.6);
+    max-height: fit-content;
+    font-size: 50%
+}
+
+.form-group .col-5 select {
     width: 100%;
     background: rgba(255, 255, 255, 0.6);
     height: 30px;
-    font-size: 50%;
-    color: black;
+    font-size: 50%
 }
 
-    .form-group .col-4 select option {
+    .form-group .col-5 select option {
         width: 100%;
         font-size: 100%;
-        color: black;
     }
 
-.form-group .col-4 span {
+.form-group .col-5 span {
     width: 100%;
     font-size: 70%;
     color: red;
