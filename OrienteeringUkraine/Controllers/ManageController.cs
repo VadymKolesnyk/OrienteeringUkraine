@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using OrienteeringUkraine.Data;
+using OrienteeringUkraine.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +28,7 @@ namespace OrienteeringUkraine.Controllers
         public IActionResult Users()
         {
             SetSelectLists();
-            var model = dataManager.GetAllUsers();
+            var model = dataManager.GetAllUsers() ?? new ManageUsersModel();
             return View(model);
         }
 

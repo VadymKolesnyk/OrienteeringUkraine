@@ -69,7 +69,7 @@ namespace OrienteeringUkraine.Controllers
             }
             ViewBag.Months = months;
 
-            var model = dataManager.GetEventsInfo(data);
+            var model = dataManager.GetEventsInfo(data) ?? new HomeIndexModel();
             model.RegionId = data.RegionId;
             model.Year = data.Year;
             model.Month = data.Month;

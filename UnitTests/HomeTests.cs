@@ -26,7 +26,7 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void DbReturnsNullTest() // positive test
+        public void DbReturnsNullTest() 
         {
             var mock = new Mock<IDataManager>();
             var cache = new Mock<ICacheManager>();

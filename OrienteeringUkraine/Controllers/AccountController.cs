@@ -130,6 +130,10 @@ namespace OrienteeringUkraine.Controllers
         {
             SetSelectLists();
             var user = await dataManager.GetUserAsync(User.Identity.Name);
+            if (user == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
             return View(user);
         }
         [Authorize]
