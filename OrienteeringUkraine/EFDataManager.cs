@@ -303,7 +303,8 @@ namespace OrienteeringUkraine
             else
             {
                 IEnumerable<Event> homeEvents = from e in events
-                                                join u in db.Users on e.OrganizerId equals u.Id
+                                                join u in db.Users on e.OrganizerId equals u.Id into leftJoin
+                                                from u in leftJoin.DefaultIfEmpty()
                                                 join r in db.Regions on e.RegionId equals r.Id
                                                 orderby e.EventDate ascending
                                                 select new Event
@@ -314,7 +315,7 @@ namespace OrienteeringUkraine
                                                     ResultsLink = e.ResultsLink,
                                                     Location = e.Location,
                                                     Title = e.Title,
-                                                    Organizer = u.Name + " " + u.Surname,
+                                                    Organizer = u?.Name + " " + u?.Surname,
                                                     Region = r.Name
                                                 };
                 int amountOfPages = (homeEvents.Count() - 1) / numberOfEventsOnPage + 1;
@@ -665,7 +666,7 @@ namespace OrienteeringUkraine
                                          };
             return allRoles;
         }
-        public void DeleteUser(string login)
+        public void DeleteUser(string login, string adminLogin)
         {
             DataLayer.Tables.LoginData userLoginData = db.Logins.FirstOrDefault(user_ => user_.Login == login);
 
@@ -681,6 +682,14 @@ namespace OrienteeringUkraine
 
             if (userApplications != null)
                 db.Applications.RemoveRange(userApplications);
+
+            var admin = db.Logins.FirstOrDefault(l => l.Login == adminLogin);
+
+            var userEvents = db.Events.Where(e => e.OrganizerId == userInDB.Id);
+            foreach (var @event in userEvents)
+            {
+                @event.OrganizerId = admin.UserId;
+            }
 
             db.Logins.Remove(userLoginData);
             db.Users.Remove(userInDB);

@@ -141,7 +141,8 @@ namespace OrienteeringUkraine
         /// Удалить пользователя из базы данных
         /// </summary>
         /// <param name="login">Логин пользователя</param>
-        public void DeleteUser(string login);
+        /// <param name="adminLogin">Логин того, кто удалил</param>
+        public void DeleteUser(string login, string adminLogin);
         /// <summary>
         /// Получить всех пользователей
         /// </summary>

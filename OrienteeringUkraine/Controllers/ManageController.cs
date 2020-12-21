@@ -41,7 +41,7 @@ namespace OrienteeringUkraine.Controllers
 
         public IActionResult Delete(string login)
         {
-            dataManager.DeleteUser(login);
+            dataManager.DeleteUser(login, User.Identity.Name);
             return RedirectToAction("Users");
         }
     }
