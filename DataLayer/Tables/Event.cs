@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace DataLayer.Tables
@@ -14,5 +15,8 @@ namespace DataLayer.Tables
         public string Location { get; set; }
         public int RegionId { get; set; }
         public int OrganizerId { get; set; }
+        public List<EventGroup> EventGroup { get; set; }
+        [ForeignKey("RegionId")]
+        public Region Region { get; set; }
     }
 }

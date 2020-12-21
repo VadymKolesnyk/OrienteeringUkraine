@@ -26,7 +26,7 @@ namespace OrienteeringUkraine.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<int>("ChipId")
+                    b.Property<int?>("ChipId")
                         .HasColumnType("int");
 
                     b.Property<int>("EventGroupId")
@@ -36,6 +36,8 @@ namespace OrienteeringUkraine.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Applications");
                 });
@@ -85,6 +87,8 @@ namespace OrienteeringUkraine.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("RegionId");
+
                     b.ToTable("Events");
                 });
 
@@ -102,6 +106,10 @@ namespace OrienteeringUkraine.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("EventId");
+
+                    b.HasIndex("GroupId");
 
                     b.ToTable("EventGroups");
                 });
@@ -133,6 +141,9 @@ namespace OrienteeringUkraine.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Login");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
                     b.ToTable("Logins");
                 });
@@ -194,7 +205,124 @@ namespace OrienteeringUkraine.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ClubId");
+
+                    b.HasIndex("RegionId");
+
+                    b.HasIndex("RoleId");
+
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("DataLayer.Tables.Application", b =>
+                {
+                    b.HasOne("DataLayer.Tables.User", "User")
+                        .WithMany("Application")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("DataLayer.Tables.Event", b =>
+                {
+                    b.HasOne("DataLayer.Tables.Region", "Region")
+                        .WithMany("Event")
+                        .HasForeignKey("RegionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Region");
+                });
+
+            modelBuilder.Entity("DataLayer.Tables.EventGroup", b =>
+                {
+                    b.HasOne("DataLayer.Tables.Event", "Event")
+                        .WithMany("EventGroup")
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DataLayer.Tables.Group", "Group")
+                        .WithMany("EventGroup")
+                        .HasForeignKey("GroupId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Event");
+
+                    b.Navigation("Group");
+                });
+
+            modelBuilder.Entity("DataLayer.Tables.LoginData", b =>
+                {
+                    b.HasOne("DataLayer.Tables.User", "User")
+                        .WithOne("LoginData")
+                        .HasForeignKey("DataLayer.Tables.LoginData", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("DataLayer.Tables.User", b =>
+                {
+                    b.HasOne("DataLayer.Tables.Club", "Club")
+                        .WithMany("User")
+                        .HasForeignKey("ClubId");
+
+                    b.HasOne("DataLayer.Tables.Region", "Region")
+                        .WithMany("User")
+                        .HasForeignKey("RegionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DataLayer.Tables.Role", "Role")
+                        .WithMany("User")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Club");
+
+                    b.Navigation("Region");
+
+                    b.Navigation("Role");
+                });
+
+            modelBuilder.Entity("DataLayer.Tables.Club", b =>
+                {
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("DataLayer.Tables.Event", b =>
+                {
+                    b.Navigation("EventGroup");
+                });
+
+            modelBuilder.Entity("DataLayer.Tables.Group", b =>
+                {
+                    b.Navigation("EventGroup");
+                });
+
+            modelBuilder.Entity("DataLayer.Tables.Region", b =>
+                {
+                    b.Navigation("Event");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("DataLayer.Tables.Role", b =>
+                {
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("DataLayer.Tables.User", b =>
+                {
+                    b.Navigation("Application");
+
+                    b.Navigation("LoginData");
                 });
 #pragma warning restore 612, 618
         }
